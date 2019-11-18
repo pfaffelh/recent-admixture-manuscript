@@ -77,17 +77,12 @@
 \begin{document}
 \title{\LARGE Inference of recent admixture using genotype data}
 
-\author{\sc Peter Pfaffelhuber, Elisabeth Huss, Denise
-  Syndercombe Court, \\ \sc Franz Baumdicker, Fabian Staubach}
+\author{\sc Peter Pfaffelhuber, Elisabeth Huss, Franz Baumdicker, \\
+  \sc Denise Syndercombe Court, Fabian Staubach}
 
 \date{\today}
 
 \maketitle
-
-FROG-kB
-
-
-
 
 \begin{abstract}
   For inference of individual genetic histories, admixture barplots
@@ -261,8 +256,8 @@ $f(q,q') = (f_k(q, q'))_{k=1,...,K}$ with (see
     \displaystyle\frac{(1-p_{mk})}{1-\beta_m(q')}, & \text{ if }g=0. \end{cases}
 \end{align}
 In our implementation, we iteratively compute
-$q_{n+1}^F = f(q_n^M, q_n^F)$ and
-$q_{n+1}^M = f(\tilde q_{n+1}^F, q_n^M)$ until convergence.
+$q_{n+1}^P = f(q_n^M, q_n^P)$ and
+$q_{n+1}^M = f(\tilde q_{n+1}^P, q_n^M)$ until convergence.
 
 \subsection{Obtaining admixed individuals in silico}
 \label{S:insilico}
@@ -316,7 +311,7 @@ marker $m$ in population $k$), we can estimate $q$ from the admixture
 model as well as $q^M,q^P$ from the recent-admixture model, as
 described in \eqref{eq:fixed} and \eqref{eq:fixedRecent}. In order to
 compare the results from the admixture and recent-admixture model, we
-compute $q_k^{MF} := \tfrac 12 (q_k^M + q_k^F)$ for $k=1,...,K$, which
+compute $q_k^{MP} := \tfrac 12 (q_k^M + q_k^P)$ for $k=1,...,K$, which
 give the fractions of the genome coming from populations
 $1,...,K$. Then, for a non-admixed individual, we have
 $q_k^{\text{\sc true}} = 1$ for some $k$, and for an admixed
@@ -327,11 +322,11 @@ populations. Computing the estimation error, i.e.\ the distance to the
 true IA for the admixture model, results in
 \begin{align}
   \label{eq:error}
-  \sum_k |q_k - q_k^{\text{\sc true}}| \text{  and }\sum_k |q_k^{MF} - q_k^{\text{\sc true}}|
+  \sum_k |q_k - q_k^{\text{\sc true}}| \text{  and }\sum_k |q_k^{MP} - q_k^{\text{\sc true}}|
 \end{align}
 for the recent-admixture model. We stress that in the recent-admixture
 model, we in fact obtain results for $q^M$ and $q^P$ separately, such
-that even more information than $q^{MF}$ is contained in the estimates
+that even more information than $q^{MP}$ is contained in the estimates
 for this model.
 
 \subsection{A likelihood-ratio test for recent admixture}
@@ -481,7 +476,7 @@ admixture is recent.
 \begin{itemize}
 \item NA20278: Giving the most significant results for both datasets,
   this male has most probably parents of African and European
-  ancestry. Note also that $q^{MF}$ and $q$ are very similar for both
+  ancestry. Note also that $q^{MP}$ and $q$ are very similar for both
   AIMsets.
 \item NA20342, NA19625, NA20355: Clearly, one parent has African
   ancestry. The other parent is most likely partly European.
@@ -508,7 +503,7 @@ individuals, we examined local ancestry in the genome. xxx
     terms of a signal for recent admixture. For all individuals, we
     give IA from the admixture model (ad), given by $q$, the
     recent-admixture model (r-ad)
-    $q^M, q^P, q^{MF} = \tfrac 12 (q^M + q^P)$, for the analysis with
+    $q^M, q^P, q^{MP} = \tfrac 12 (q^M + q^P)$, for the analysis with
     the EUROFORGEN and Kidd AIMset. Difference in log-likelihoods for
     both models is given by $\Delta\ell$. Colors are AFR
     \crule[red]{.5cm}{.3cm}, EAS \crule[blue]{.5cm}{.3cm}, EUR
@@ -752,7 +747,7 @@ $q^M=(q^M_{k})_{k=1,...,K}, q^P=(q^P_{k})_{k=1,...,K}$, where
 $q^M_{k}$ and $q^P_k$ are the fractions of the genomes of the mother
 and father, respectively, which come from population $k$.  This
 assumption implies that the log-likelihood changes to
-$$ \ell(q^M, q^P|G) = \sum_{m=1}^M  \log\Big(\sum_{k,l=1}^K \alpha_{mkl}q_{k}^M q_l^F\Big),$$
+$$ \ell(q^M, q^P|G) = \sum_{m=1}^M  \log\Big(\sum_{k,l=1}^K \alpha_{mkl}q_{k}^M q_l^P\Big),$$
 where $\alpha_{mkl}$ is given as in \eqref{eq:amkl}.
 
 As is apparent from the log-Likelihood function, the recent-admixture
@@ -775,10 +770,10 @@ We note that again, the log-likelihood can be written differently,
 
 \begin{lemma}\label{l1}
   The maximum of $q\mapsto \ell(q^P, q^M,G)$ under the constraint
-  $\sum_{k=1}^K q_k^M = \sum_{k=1}^K q_k^F = 1$ solves
+  $\sum_{k=1}^K q_k^M = \sum_{k=1}^K q_k^P = 1$ solves
   \begin{align}\label{eq:0recent}\tag{$\ast$}
     \frac{1}{M}\sum_{m=1}^M \sum_{l=1}^K  \frac{\alpha_{mkl}q_l^M}{\sum_{k',l'=1}^K \alpha_{mk'l'}q^M_{k'}q^P_{l'}}
-    = \frac{1}{M}\sum_{m=1}^M \sum_{l=1}^K\frac{\alpha_{mkl}q_l^F}{\sum_{k',l'=1}^K \alpha_{mk'l'}q^P_{k'}q^M_{l'}} = 1, \qquad k=1,...,K.
+    = \frac{1}{M}\sum_{m=1}^M \sum_{l=1}^K\frac{\alpha_{mkl}q_l^P}{\sum_{k',l'=1}^K \alpha_{mk'l'}q^P_{k'}q^M_{l'}} = 1, \qquad k=1,...,K.
   \end{align}
 \end{lemma}
 
@@ -836,12 +831,12 @@ $G_m=2$
     & = \sum_{m=1}^M \sum_l \frac{\alpha_{mak}q_l^M}{\sum_{k',l'} \alpha_{mk'l'}q^P_{k'}q^M_{k'}},
     \\
     \frac{\partial \ell(q^P, q^M|G)}{\partial q^M_k}
-    & = \sum_{m=1}^M \sum_l \frac{\alpha_{mak}q_l^F}{\sum_{k',l'} \alpha_{mk'l'}q^P_{k'}q^M_{k'}},
+    & = \sum_{m=1}^M \sum_l \frac{\alpha_{mak}q_l^P}{\sum_{k',l'} \alpha_{mk'l'}q^P_{k'}q^M_{k'}},
   \end{align*}
   we have to solve the system of equations
   \begin{align}\label{eq:1}
     \lambda & = \sum_{m=1}^M \sum_l \frac{\alpha_{mak}q_l^M}{\sum_{k',l'} \alpha_{mk'l'}q^P_{k'}q^M_{k'}}, \qquad k=1,...,K,\\
-    \rho & = \sum_{m=1}^M \sum_l \frac{\alpha_{mak}q_l^F}{\sum_{k',l'} \alpha_{mk'l'}q^P_{k'}q^M_{k'}}, \qquad k=1,...,K,
+    \rho & = \sum_{m=1}^M \sum_l \frac{\alpha_{mak}q_l^P}{\sum_{k',l'} \alpha_{mk'l'}q^P_{k'}q^M_{k'}}, \qquad k=1,...,K,
     \\\label{eq:2}
     1 & = \sum_{k=1}^K q^P_k = \sum_{k=1}^K q^M_k.
   \end{align}
@@ -855,7 +850,7 @@ $G_m=2$
   \end{align*}
   So, we are left with finding $q^P$ and $q^M$ such that
   \begin{align}\label{eq:1}
-    \frac{1}{M}\sum_{m=1}^M \frac{\alpha_{mkl}q_l^F}{\sum_{k',l'}^K \alpha_{mk'l'}q^P_{k'} q^M_{l'}} & = 1, \qquad k=1,...,K,
+    \frac{1}{M}\sum_{m=1}^M \frac{\alpha_{mkl}q_l^P}{\sum_{k',l'}^K \alpha_{mk'l'}q^P_{k'} q^M_{l'}} & = 1, \qquad k=1,...,K,
     \\ \frac{1}{M}\sum_{m=1}^M \frac{\alpha_{mkl}q_l^M}{\sum_{k',l'}^K \alpha_{mk'l'}q^P_{k'} q^M_{l'}} & = 1, \qquad k=1,...,K.
   \end{align}
 \end{proof}
