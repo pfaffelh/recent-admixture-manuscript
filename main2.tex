@@ -56,8 +56,6 @@
 %\usepackage{a4}
 \usepackage[normalem]{ulem}
 \usepackage{color}
-\newcommand\crule[3][black]{\textcolor{#1}{\rule{#2}{#3}}}
-
 \newcommand{\dirk}[3]{\textcolor{red}{\sout{#1}\textcolor{blue}{#2}}{\begin{marginpar}{\raggedright\color{red} Dirk:\tiny {#3}}\end{marginpar}}}
 \newcommand{\peter}[3]{\textcolor{red}{\sout{#1}\textcolor{blue}{#2}}{\begin{marginpar}{\raggedright\color{green} Peter:\tiny {#3}}\end{marginpar}}}
 
@@ -87,31 +85,32 @@
 \maketitle
 
 \begin{abstract}
-  \noindent
   For inference of individual genetic histories, admixture barplots
-  are being used abundantly in forensic genetics. These plots
-  visualize parameters for individual ancestry (IA), as inferred from
-  the admixture-model, as e.g.\ implemented in the software {\sc
-    structure} and {\sc admixture}. In this model, it is assumed that
-  every allele in the individual's genome originates in one of several
-  ancestral populations with the same probability. We will showcase
-  that estimates of IA might be inaccurate in cases of recent
-  adxmixture. As a way out, we introduce the recent-admixture model,
-  which makes use of the excess of heterozygotes observed in recently
-  admixed individuals. In this model, we assume that the two
-  homologous copies of each allele originate from the ancestral
-  populations independently for the mother's and the father's
-  copy. Estimates for IA in absence of recent admixture are almost
-  identical for the admixture and recent admixture model. However,
-  they are more accurate for the recent-admixture model in individuals
-  which are in fact recently admixed. Moreover, we develop a
-  likelihood ratio test for recent admixture, which has a high power
-  to find recently admixed individuals. We analyse data from the 1000
-  genomes dataset with our methods and find some recently admixed
-  individuals.
+  are being used abundantly in forensic genetics. The underlying
+  admixture-model (as e.g.\ implemented in the software {\sc
+    structure} and {\sc admixture}) assumes parameters for individual
+  ancestry (IA). Further, every allele in the individual's genome
+  originates in one of several ancestral populations with the same
+  probability. Here, we introduce the recent-admixture model. In this
+  model, we assume that the two homologous copies of each allele
+  originate from the ancestral populations independently for the
+  mother's and the father's copy. Estimates for IA in absence of
+  recent admixture are almost identical for the admixture and recent
+  admixture model. However, they are more accurate for the
+  recent-admixture model in individuals which are in fact recently
+  admixed.  Moreover, we develop a likelihood ratio test for recent
+  admixture, which has a high power to find recently admixed
+  individuals. We analyse data from the 1000 genomes dataset with our
+  methods and find some recently admixed individuals.
 \end{abstract}
 
 \section{Introduction}
+Cite \cite{Hanis1986}
+
+xxx Start with forensics
+
+xxx Make a good case, e.g. Philippino and Italian located in
+Afghanistan
 
 Inference of the geographical ancestry of a trace using genetic
 markers is today a well-established research field in forensic
@@ -123,80 +122,59 @@ or it is assumed that it consists of a mixture of ancestral genetic
 material originating in several groups. For this task, {\sc structure}
 \cite{Pritchard2000} has become the de-facto standard to estimate
 individual ancestry (IA) proportions of a trace among several
-continental groups. This Bayesian approach using MCMC was complemented
-by the faster, likelihood based approach, implemented in the software
-{\sc admixture} \cite{Alexander2009}; see also \cite{Tang2005} for the
-same model.
+continental groups. (This Bayesian approach using MCMC was
+complemented by the faster, likelihood based approach, implemented in
+the software {\sc admixture} \cite{Alexander2009}; see also
+\cite{Tang2005} for the same model.).
 
 When using {\sc structure} or {\sc admixture} for estimating
 continental (or other scales of geography) IA of a trace, allelic
 frequencies for all continents from a reference database must be
 used. A main assumption for estimating IAs is that all allelic states
-have the same independent chance to share a copy from some continent.
-When using a (small) set of ancestry informative markers, the large
-genomic distance makes loci almost independent by recombination,
-resulting in independence of markers across loci. However,
-independence of the two copies at the same marker, usually denoted by
-Hardy-Weinberg equilibrium, may not always hold. For example, consider
-an individual whose parents have different continental backgrounds,
-$A$ and $B$, say, and an allele which separates perfectly between the
-two continents. Then, the individual will certainly be a heterozygote
-at this marker. This increase in frequency for heterozygotes under
-admixture is known for a long time and usually called the Wahlund
-effect \cite{Wahlund1928}.  However, {\sc structure} and {\sc
-  admixture} will estimate that the chance for some allele to come
-from $A$ and $B$ to be 50\%, which is then also be the estimated
-probability for a heterozygote at the locus (due to the assumption of
-independence of allelic states in the admixture model).
+have the same independent chance to share a copy from some continent,
+implying Hardy-Weinberg equilibrium at each site. When using a (small)
+set of ancestry informative markers, this assumption is justified by
+the large genomic distance which makes loci almost independent by
+recombination. However, the assumption that homologous alleles at the
+same locus have the same probability for carrying some allele -- also
+known as Hardy-Weinberg equilibrium -- may not always hold. For
+example, consider an individual whose parents have different
+continental backgrounds, and an allele which separates perfectly
+between the two continents. Then, the individual will certainly be a
+heterozygote at this marker.  This increase in frequency for
+heterozygotes under admixture is known for a long time and usually
+called the Wahlund effect \cite{Wahlund1928}.  However, {\sc
+  structure} and {\sc admixture} will estimate that the chance for
+some allele to come from one of the two continents to be 50\%, which
+is then also be the estimate for a heterozygote at the locus (due to
+the assumption of independence of allelic states in the admixture
+model).
 
-In general, {\sc structure} (and {\sc admixture}) are able to give
-accurate estimates of IA also in the case of recent-admixture.  As
-observed in \cite{Cheung2018}, a newly developed Genetic Distance
-Algorithm preforms better than {\sc structure} for recently admixed
-individuals up to second generation only if all four grand-parents
-come from different populations. However, {\sc structure} may lead to
-wrong conclusions in some situations. E.g., it might happen that a
-individual, recently admixed from two distant populations, is
-estimated to come mainly from some intermediate location.
-{\color{blue} xxx Make a good case, e.g. Philippino and Italian
-  located in Afghanistan.}
+Inference of recent admixture is often based on an excess of
+heterozygotes. For example, \cite{McNevin2019} uses a statistical test
+by simply counting the number of heterozygous positions in an
+individual in order to infer recent admixture. Extending work of
+\cite{Tvedebrink2018a}, a likelihood-ratio test for first-order admixed
+individuals versus outside-of-reference-database is given in
+\cite{Tvedebrink2019}. Here, we extend the likelihood-model behind
+{\sc structure} or {\sc admixture} in order to account for recent
+admixture. In our approach, IA consists of two vectors, one for each
+parent. As a result, we obtain estimates of IA for the two parents and
+can give a likelihood ratio test for recent admixture versus
+non-admixture of a trace.
 
-Our goal is to make use of the Wahlund effect for (i) improving
-estimates of IA and (ii) detecting recent admixture.  In particular,
-we extend the likelihood-model behind {\sc structure} or {\sc
-  admixture} in order to account for recent admixture. In the
-resulting recent-admixture-model, IA consists of two vectors, one for
-each parent. We will call this pair of vectors Parental Individual
-Admixture, PIA. So, in the above example, the recent-admixture-model
-would estimate father and mother to have IAs as 100\% $A$ and 100\%
-$B$, respectively, due to the excess of heterozygotes.  Since we are
-using only autosomal markers, we cannot distinguish which of the
-parents comes from $A$ and $B$, though. Then, with the estimate of
-PIA, the estimated probability for a heterozygote is~1 in the example.
+xxx some more detail for our approach
 
-The excess of heterozygotes was recently used to detect recent
-admixture using statistical tests. For example, \cite{McNevin2019}
-uses a statistical test by simply counting the number of heterozygous
-positions in an individual in order to infer recent admixture. A
-different approach is used by \cite{Tvedebrink2018a,
-  Tvedebrink2018a}. Here, likelihood-ratio tests were developed which
-test the null-hypothesis of non-admixture and recent (first
-generation) admixture versus the alternative that the studied sample
-is not represented in the reference database. We complement this test
-by observing that the adxmixture model is a special case of the
-recent-admixture model, if the IA of both parents is the same. This
-paves the way to give a likelihood-ratio-test for recent admixture,
-with equality of the parental IAs as null-hypothesis. The alternative
-hypothesis, however, is that the studied sample shows recent admixture
-of populations within the reference database.
+xxx Mention Tvedebrink2019, Cheung2018.
 
-
-xxx Tvedebrink assigns first generation admixed individuals wrongly to admixed populations (FS)
+xxx explain exchangeability of $q^M, q^P$.
 
 xxx $p$-value when our error is better (admixture, recent-admixture);
 
 xxx Figure in Supplement: AFR, EAS, EUR, SAS not worse in
 recent-admixture
+
+
 
 \section{Materials and Methods}
 \sloppy More details on the derivations in the admixture and
@@ -204,9 +182,6 @@ recent-admiture model can be found in the SI. Moreover, the
 implementation of our methods can be downloaded from \url{
   https://github.com/pfaffelh/recent-admixture}, and is described in
 detail in the SI.
-
-xxx Cite \cite{Hanis1986}
-
 
 \subsection{The admixture model}
 We briefly recall the admixture model, which is the basis for the
@@ -243,7 +218,7 @@ $|q_{n+1} - q_n|< 10^{-6}$.) We note that this approach is essentially
 the same as in the EM-algorithm from \cite{Tang2005}, but combining
 the expectation and maximization steps. In addition, although
 maximizing \eqref{eq:logLadmixture} could also be handled using a
-Newton method as in \cite{Alexander2009}, this approach has the
+Newton method as in \cite{Alexander2006}, this approach has the
 advantage that $q_n$'s are positive in all steps, and the sum of all
 entries in $q_n$ is always~1. Moreover, the iteration is
 computationally fast if only a small or moderat number of alleles is
@@ -343,8 +318,8 @@ $q_k^{\text{\sc true}} = 1$ for some $k$, and for an admixed
 individual with parents from populations $k$ and $k'$ we have
 $q_k^{\text{\sc true}} =q_{k'}^{\text{\sc true}} = 0.5$, and similarly
 for individuals with grandparents from three or four different
-populations. Computing the estimation error, i.e.\ the {\em distance
-  to the true IA} for the admixture model, results in
+populations. Computing the estimation error, i.e.\ the distance to the
+true IA for the admixture model, results in
 \begin{align}
   \label{eq:error}
   \sum_k |q_k - q_k^{\text{\sc true}}| \text{  and }\sum_k |q_k^{MP} - q_k^{\text{\sc true}}|
@@ -387,8 +362,8 @@ well as information on the sampling locations from
 xxx Explain why we use EUROFORGEN, Kidd
 
 The dataset comes with approximately 80 million SNPs.  However, we use
-only a few of them known as the EUROFORGEN AIMset \cite{Phillips2014}
-and Kidd AIMset \cite{Kidd2014}, respectively. The EUROFORGEN AIMset
+only a few of them known as the EUROFORGENE AIMset \cite{Phillips2014}
+and Kidd AIMset \cite{Kidd2014}, respectively. The EUROFORGENE AIMset
 comes with 128 SNPs able to distinguish between continental
 groups. Here, we ignore tri-allelic SNPs (rs17287498, rs2069945,
 rs2184030, rs433342, rs4540055, rs5030240), as well as rs12402499,
@@ -398,163 +373,6 @@ genomes dataset.
 
 \section{Results}
 
-\subsection{Some showcases from simulations}
-We simulated genome-wide data from a sample, taken from a population
-genetic model with three islands, $A$, $B$ and $C$, using
-\cite{Kelleher2016}. Migration is such that only $A, B$ and $A, C$ are
-connected, but not $A, C$. We used a migration rate of 10 diploid
-individuals per connection per generation. More precisely, we simulate
-400 individuals per island, each with 20~recombining chromosomes, each
-with about 2.5$\cdot 10^4$ SNPs. From these $5\cdot 10^5$ SNPs, we use
-the step-wise approach from \cite{Pfaffelhuber2019} to look for~10
-Ancestry Informative Markers (AIMs). When using a naive Bayes
-approach, this AIMset gives a vanishing misclassification error for
-the task of classifying the 3$\times$400 simulated, non-admixed
-individuals.
-
-Subsequently, we used the admixture and recent-admixture model to
-estimate IA (and PIA) for both, non-admixed and recently admixed
-individuals. The latter were obtained as described in
-Section~\ref{S:insilico}. We observe that the admixture model fails to
-give accurate estimates for IA in $A/C$-recently-admixed individuals
-for two reasons; see Figure~\ref{fig:sim1}. First, it correctly
-predicts that the individual is $A/C$-admixed, but overestimates one
-of the two ancestral proportions. Second, and more severely, it
-confounds the signal for recent admixture with an ancestral proportion
-from island $B$. In both cases, the recent-admixture model frequently
-gives better estimates for IA. In Figure~\ref{Sfig:sim2}, we give
-structure barplots for all $A/C$-admixed individuals. Moreover,
-Figure~\ref{Sfig:sim3} displays errors for the admixture-model and the
-recent-admixture model, in all cases including non-admixed
-individuals, and all three cases of recent-admixture. Interestingly,
-binomial tests with the alternative that the recent-admixture model
-gives smaller errors show significant results in all but one case
-($A, B, C$: $<0.002$, $A/B, A/C$: $<0.004$, $B/C$: $0.23$). At least,
-this indicates that the recent-admixture model does not perform worse
-than the admixture model, even on non-admixed samples.
-
-
-\begin{figure}
-  \centering
-  % mixed A/C 177
-  \begin{tabular}{l|l|r|}\cline{2-3}
-    \rule[-3ex]{0cm}{7ex} & \parbox{1.8cm}{true}
-    \hspace{0cm} \parbox{1cm}{\hfill $q^{MP}$ \ $q^M, q^P$}
-    & \parbox{2cm}{\begin{tikzpicture} 
-        \draw[fill=blue] (0cm, 0cm) rectangle (1cm, .4cm);
-        \draw[fill=green] (1cm, 0cm) rectangle (1cm, .4cm);
-        \draw[fill=yellow] (1cm, 0cm) rectangle (2cm, .4cm);
-        \draw[fill=black] (2cm, 0cm) rectangle (2cm, .4cm);
-      \end{tikzpicture}
-    \\[-1.3ex]\begin{tikzpicture} 
-      \draw[fill=blue] (0cm, 0cm) rectangle (2cm, .2cm);
-      \draw[fill=green] (2cm, 0cm) rectangle (2cm, .2cm);
-      \draw[fill=yellow] (2cm, 0cm) rectangle (2cm, .2cm);
-      \draw[fill=black] (2cm, 0cm) rectangle (2cm, .2cm);
-    \end{tikzpicture}
-    \\[-2ex]\begin{tikzpicture} 
-      \draw[fill=blue] (0cm, 0cm) rectangle (0cm, .2cm);
-      \draw[fill=green] (0cm, 0cm) rectangle (0cm, .2cm);
-      \draw[fill=yellow] (0cm, 0cm) rectangle (2cm, .2cm);
-      \draw[fill=black] (2cm, 0cm) rectangle (2cm, .2cm);
-    \end{tikzpicture}
-    }
-    \\ \hline\hline
-    \parbox{.3cm}{
-    \begin{sideways}
-      \phantom{a}1
-    \end{sideways}}
-    \rule[-1ex]{0cm}{4ex} & admixture \hspace{1cm} \parbox{.5cm}{$\hat q$ \\[-1.3ex] \mbox{}}
-    &  \begin{tikzpicture} 
-      \draw[fill=blue] (0cm, 0cm) rectangle (0.428cm, .4cm);
-      \draw[fill=green] (0.428cm, 0cm) rectangle (0.428cm, .4cm);
-      \draw[fill=yellow] (0.428cm, 0cm) rectangle (2cm, .4cm);
-      \draw[fill=black] (2cm, 0cm) rectangle (2cm, .4cm);
-    \end{tikzpicture}
-    \\ \cline{2-3}
-    \parbox{.3cm}{
-    \begin{sideways}
-      \phantom{a}Individual
-    \end{sideways}}
-    \rule[-3ex]{0cm}{7ex} & \parbox{1.8cm}{recent-\\admixture}
-    \hspace{0cm} \parbox{1cm}{\hfill $\hat q^{MP}$ \\[1ex]  $\hat q^M, \hat q^P$}
-    & \parbox{2cm}{\begin{tikzpicture} 
-        \draw[fill=blue] (0cm, 0cm) rectangle (0.998cm, .4cm);
-        \draw[fill=green] (0.998cm, 0cm) rectangle (1cm, .4cm);
-        \draw[fill=yellow] (1cm, 0cm) rectangle (2cm, .4cm);
-        \draw[fill=black] (2cm, 0cm) rectangle (2cm, .4cm);
-      \end{tikzpicture}
-    \\[-1.3ex]\begin{tikzpicture} 
-      \draw[fill=blue] (0cm, 0cm) rectangle (1.998cm, .2cm);
-      \draw[fill=green] (1.998cm, 0cm) rectangle (2cm, .2cm);
-      \draw[fill=yellow] (2cm, 0cm) rectangle (2cm, .2cm);
-      \draw[fill=black] (2cm, 0cm) rectangle (2cm, .2cm);
-    \end{tikzpicture}
-    \\[-2ex]\begin{tikzpicture} 
-      \draw[fill=blue] (0cm, 0cm) rectangle (0cm, .2cm);
-      \draw[fill=green] (0cm, 0cm) rectangle (0cm, .2cm);
-      \draw[fill=yellow] (0cm, 0cm) rectangle (2cm, .2cm);
-      \draw[fill=black] (2cm, 0cm) rectangle (2cm, .2cm);
-    \end{tikzpicture}
-    }\\ \hline
-    \hline
-    \parbox{.3cm}{
-    \begin{sideways}
-      \phantom{a}2
-    \end{sideways}}
-    \rule[-1ex]{0cm}{4ex} & admixture \hspace{1cm} \parbox{.5cm}{$\hat q$ \\[-1.3ex] \mbox{}}
-    & \begin{tikzpicture} 
-      \draw[fill=blue] (0cm, 0cm) rectangle (0.342cm, .4cm);
-      \draw[fill=green] (0.342cm, 0cm) rectangle (1.114cm, .4cm);
-      \draw[fill=yellow] (1.114cm, 0cm) rectangle (2cm, .4cm);
-      \draw[fill=black] (2cm, 0cm) rectangle (2cm, .4cm);
-    \end{tikzpicture}
-    \\ \cline{2-3}
-    \rule[-3ex]{0cm}{7ex}
-    \parbox{.3cm}{
-    \begin{sideways}
-      \phantom{a}Individual
-    \end{sideways}} & \parbox{1.8cm}{recent-\\admixture} \hspace{0cm}
-  \parbox{1cm}{\hfill $\hat q^{MP}$ \\[1ex] $\hat q^M, \hat q^P$} &
-  \parbox{2cm}{\begin{tikzpicture} \draw[fill=blue] (0cm, 0cm)
-      rectangle (0.882cm, .4cm); \draw[fill=green] (0.882cm, 0cm)
-      rectangle (1cm, .4cm); \draw[fill=yellow] (1cm, 0cm) rectangle
-      (2cm, .4cm); \draw[fill=black] (2cm, 0cm) rectangle (2cm, .4cm);
-    \end{tikzpicture}
-    \\[-1.3ex]\begin{tikzpicture} 
-      \draw[fill=blue] (0cm, 0cm) rectangle (1.764cm, .2cm);
-      \draw[fill=green] (1.764cm, 0cm) rectangle (2cm, .2cm);
-      \draw[fill=yellow] (2cm, 0cm) rectangle (2cm, .2cm);
-      \draw[fill=black] (2cm, 0cm) rectangle (2cm, .2cm);
-    \end{tikzpicture}
-    \\[-2ex]\begin{tikzpicture} 
-      \draw[fill=blue] (0cm, 0cm) rectangle (0cm, .2cm);
-      \draw[fill=green] (0cm, 0cm) rectangle (0cm, .2cm);
-      \draw[fill=yellow] (0cm, 0cm) rectangle (2cm, .2cm);
-      \draw[fill=black] (2cm, 0cm) rectangle (2cm, .2cm);
-    \end{tikzpicture}
-    }\\ \hline 
-  \end{tabular}
-  \caption{Colors indicate IA from islands A \crule[blue]{.5cm}{.3cm},
-    B \crule[green]{.5cm}{.3cm} and C
-    \crule[yellow]{.5cm}{.3cm}. Here, in the model where only $A/B$
-    and $B/C$ exchange migrants (but not $A/C$), admixture has two
-    sources of errors when estimating IA for a recently admixed
-    individual from $A/C$. In individual~1, $C$ is overrepresented in
-    the IA-vector $q$. In individual~2, admixture gives the greatest
-    fraction of ancestry to island $B$, since allele frequencies in
-    $B$ are between $A$ and $C$. In both cases, the IA in terms of the
-    combined vector $q^{MP} = (q^M + q^P)/2$ from the recent-admixture
-    model gives more accurate estimates.}
-  \label{fig:sim1}
-\end{figure}
-
-
-
-
-
-
-
 xxx compare runtimes
 
 \subsection{Estimation accuracy}
@@ -562,7 +380,7 @@ Both, the admixture model and the recent-admixture model give
 estimates of IA. Using data from the 1000 genomes, but excluding all
 Admixed Americans (AMRs) since they are known to have an admixed
 background \cite{Eduardoff2016, Pfaffelhuber2019}, we use the SNPs
-from the EUROFORGEN and Kidd AIMsets. We use the continental origins
+from the EUROFORGENE and Kidd AIMsets. We use the continental origins
 as described in the dataset, i.e.\ we have AFR (African), EAS
 (East-Asia), EUR (European) and SAS (South-Asian) samples. As
 described in MM, we average estimates $\hat q^M$ and $\hat q^P$ from
@@ -678,6 +496,7 @@ In order to get a clearer picture about {\em true} ancestries in these
 individuals, we examined local ancestry in the genome. xxx
 
 
+\newcommand\crule[3][black]{\textcolor{#1}{\rule{#2}{#3}}}
 \begin{figure}[p]
   \input{outlier.tex}
   \caption{The most extreme individuals in the 1000 genomes dataset in
@@ -755,7 +574,6 @@ frequencies.
 \newpage
 \setcounter{page}{1}
 \setcounter{section}{0}
-\setcounter{figure}{0}
 \thispagestyle{empty}
 
 \begin{center}
@@ -764,8 +582,8 @@ frequencies.
 
 ~~
 
-\author{\sc Peter Pfaffelhuber, Elisabeth Huss, Franz Baumdicker, \\
-  \sc Denise Syndercombe Court, Fabian Staubach}
+\author{\sc Franz Baumdicker, Elisabeth Huss, Peter Pfaffelhuber,\\
+  \sc Fabian Staubach, Denise Syndercomb-Court}
 
 ~
 
@@ -1046,26 +864,6 @@ xxx
 
 \section{Additional results}
 
-\subsection{Some showcases from simulations}
-
-\begin{figure*}[htb]
-  \begin{center}
-    \parbox[b]{0.95\textwidth}{\includegraphics[width=0.95\textwidth]{abc_StructurePlot.pdf}\vspace{2cm}}
-  \end{center}
-  \caption{\label{Sfig:sim2} Structure barplot for all 400 recently
-    $A/C$-admixed individuals. Arrows indicate the two individuals
-    from Figure~\ref{fig:sim1}.}
-\end{figure*}
-
-\begin{figure*}[htb]
-  \begin{center}
-    \parbox[b]{0.65\textwidth}{\includegraphics[width=0.65\textwidth]{deviations_abc.pdf}\vspace{2cm}}
-  \end{center}
-  \caption{\label{Sfig:sim3} For all 3$\times$400 non-admixed samples,
-    and 3$\times$400 admixed samples, we compute the errors by the
-    distance to the true IA as given in \eqref{eq:error}.}
-\end{figure*}
-
 \subsection{Estimation accuracy}
 For first generation admixed individuals, all cases (non-admixed and
 parents come from different continents) are described in the main
@@ -1157,50 +955,3 @@ and~\ref{fig:mixed_allcases_Kidd}.
 
 \end{document}
 
-
-
-\documentclass{article}
-\usepackage{tikz}
-\usetikzlibrary{shapes,arrows,positioning}
-\tikzstyle{line}=[draw]
-
-\begin{document}
-
-\begin{center}
-\begin{tikzpicture}
-%U = unaffected 
-%A = affected 
-%C = carrier 
-%M = male 
-%F = female 
-[scale=1,every node/.style={transform shape},
-  UM/.style={rectangle, draw=black,very thick, minimum size=5mm,minimum width = 5mm,minimum height = 5mm},
-  UF/.style={circle,draw = black, very thick, minimum size=5mm,minimum width = 5mm,minimum height = 5mm},
-  AM/.style={rectangle, fill=black,very thick, minimum size=5mm,minimum width = 5mm},
-  AF/.style={circle,fill=black,very thick, minimum size=5mm,minimum width = 5mm},
-  CM/.style={rectangle, left color = white, right color = black, draw=black,very thick, minimum size=5mm,minimum width = 5mm,minimum height = 5mm},
-  CF/.style={circle, left color = white, right color = black,draw = black, very thick, minimum size=5mm,minimum width = 5mm,minimum height = 5mm}
-]
-
-%parents
-\node[UM](dad){};
-\node[CF,xshift = 30pt](mom) at (dad.east){};
-\draw[line] (dad) -- (mom);
-
-%kids
-\node[AM,yshift=-30pt](kid1) at (dad.south) {};
-\node[UF,yshift=-30pt](kid2) at (mom.south) {};
-\node[UM,xshift=30pt](kid3) at (kid2.east){};
-\node[UF,xshift=-30pt](kid4) at (kid1.west){};
-\draw[line] (kid1) --(kid2);
-\draw[line] (kid2) --(kid3);
-\draw[line] (kid1) --(kid4);
-
-
-%connect parents to kids
-\path[draw = black] (0.75,0) -- (0.75,-1.35);
-
-\end{tikzpicture}
-\end{center}
-
-\end{document}

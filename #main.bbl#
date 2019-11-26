@@ -34,21 +34,6 @@ Eduardoff, M., T.~E. Gross, C.~Santos, M.~de~la Puente, D.~Ballard, C.~Strobl,
   PGM™}.
 \newblock {\em Forensic Science International. Genetics\/}~{\em 23}, 178--189.
 
-\bibitem[\protect\citeauthoryear{Hanis, Chakraborty, Ferrell, and Schull}{Hanis
-  et~al.}{1986}]{Hanis1986}
-Hanis, C.~L., R.~Chakraborty, R.~E. Ferrell, and W.~J. Schull (1986).
-\newblock {Individual Admixture Estimates: Disease Associations and Individual
-  Risk of Diabetes and Gallbladder Disease Among Mexican-Americans in Starr
-  County, Texas}.
-\newblock {\em American Journal of Physical Anthropology\/}~{\em 70}, 433--441.
-
-\bibitem[\protect\citeauthoryear{Kelleher, Etheridge, and McVean}{Kelleher
-  et~al.}{2016}]{Kelleher2016}
-Kelleher, J., A.~M. Etheridge, and G.~McVean (2016).
-\newblock Efficient coalescent simulation and genealogical analysis for large
-  sample sizes.
-\newblock {\em PLoS Computational Biology\/}~{\em 12\/}(5), e1004842.
-
 \bibitem[\protect\citeauthoryear{Kidd, Soundararajana, Rajeevana, Pakstisa,
   Moorec, and Ropero-Millerc}{Kidd et~al.}{2017}]{Kidd2017}
 Kidd, K., U.~Soundararajana, H.~Rajeevana, A.~J. Pakstisa, K.~N. Moorec, and
@@ -128,6 +113,12 @@ Tang, H., J.~Peng, P.~Wang, and N.~Risch (2005).
 \newblock Estimation of individual admixture: Analytical and study design
   considerations.
 \newblock {\em Genet Epidemiol.\/}~{\em 28}, 289--301.
+
+\bibitem[\protect\citeauthoryear{Tvedebrink and Eriksen}{Tvedebrink and
+  Eriksen}{2019}]{Tvedebrink2019}
+Tvedebrink, T. and P.~S. Eriksen (2019).
+\newblock Inference of admixed ancestry with ancestry informative markers.
+\newblock {\em Forensic Science International. Genetics\/}~{\em 42}, 147--153.
 
 \bibitem[\protect\citeauthoryear{Tvedebrink, Eriksen, Mogensen, and
   Morling}{Tvedebrink et~al.}{018a}]{Tvedebrink2018a}
