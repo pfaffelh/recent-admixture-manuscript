@@ -3,15 +3,18 @@
 \usepackage{chapterbib}
 \usepackage[sectionbib,numbers]{natbib}
 \usepackage{eurosym}
+\usepackage{float}
 \usepackage{amstext,amsthm}
 \usepackage{amsmath}
 \usepackage{amssymb,mathtools}
 \usepackage[nointegrals]{wasysym} % enthaelt iint-Def die aber auch in amsmath definiert sind
 \usepackage{mathrsfs}
 \usepackage{hyperref}
-%\usepackage{refcheck}
+\usepackage{refcheck}
 \usepackage{graphicx}
 \usepackage[figuresleft]{rotating}
+\usepackage{rotating, float, caption}
+
 
 \usepackage{tikz}
 %\usepackage{enumerate}
@@ -193,11 +196,6 @@ of populations within the reference database.
 
 xxx Tvedebrink assigns first generation admixed individuals wrongly to admixed populations (FS)
 
-xxx $p$-value when our error is better (admixture, recent-admixture);
-
-xxx Figure in Supplement: AFR, EAS, EUR, SAS not worse in
-recent-admixture
-
 \section{Materials and Methods}
 \sloppy More details on the derivations in the admixture and
 recent-admiture model can be found in the SI. Moreover, the
@@ -301,28 +299,28 @@ second-order admixed individuals etc.\ in silico.
 Using AFR, EAS, EUR, SAS as population labels (as in the 1000 genomes
 dataset), all cases for second generation admixed individuals fall
 into one of seven categories. Writing up the ancestries of the four
-grand-parents (Mother of mother, father of mother / mother of father,
-father of father), we have the following cases for second generation
-admixed individuals (the full list of all resulting 55 cases is given
-in the SI; note that \cite{Cheung2018} come up with only 35 cases,
-since they do not distinguish between maternal and paternal ancestry,
-e.g.\ they count AFR, AFR / EAS, EAS and AFR, EAS / AFR, EAS as one
-case):
+grand-parents {\it Mother of mother/father of mother$\times$mother of
+  father/father of father}, we have the following distinguishable
+cases for second generation admixed individuals (the full list of all
+resulting 55 cases is given in the SI; note that \cite{Cheung2018}
+come up with only 35 cases, since they do not distinguish between
+maternal and paternal ancestry, e.g.\ they count
+AFR/AFR$\times$EAS/EAS and AFR/EAS$\times$AFR/EAS as one case):
 
 \begin{itemize}
-\item[(A)] 4 non-admixed cases, e.g.\ AFR, AFR/ AFR, AFR;
+\item[(A)] 4 non-admixed cases, e.g.\ AFR/AFR$\times$AFR/AFR;
 \item[(B)] 6 admixed cases with admixture ratio 50:50, where both
-  parents are non-admixed, e.g. AFR, AFR/ EAS, EAS;
+  parents are non-admixed, e.g. AFR/AFR$\times$EAS/EAS;
 \item[(C)] 6 admixed cases with admixture ratio 50:50, where both
-  parents are admixed, e.g.\ AFR, EAS/ AFR, EAS;
-\item[(D)] 12 admixed cases with admixture ratio 75:25, e.g.\ AFR,
-  AFR/ AFR, EAS;
+  parents are admixed, e.g.\ AFR/EAS$\times$AFR/EAS;
+\item[(D)] 12 admixed cases with admixture ratio 75:25, e.g.\
+  AFR/AFR$\times$AFR/EAS;
 \item[(E)] 12 admixed cases with admixture ratio 50:25:25, where one
-  parent is non-admixed, e.g.\ AFR, AFR/ EAS, EUR;
+  parent is non-admixed, e.g.\ AFR/AFR$\times$EAS/EUR;
 \item[(F)] 12 admixed with admixture ratio 50:25:25, where both
-  parents are admixed, e.g.\ AFR, EAS/ AFR, EUR;
-\item[(G)] 3 admixed with admixture ratio 25:25:25:25, e.g.\ AFR, EAS/
-  EUR, SAS;
+  parents are admixed, e.g.\ AFR/EAS$\times$AFR/EUR;
+\item[(G)] 3 admixed with admixture ratio 25:25:25:25, e.g.\
+  AFR/EAS$\times$EUR/SAS;
 \end{itemize}
 For each of the other 55 cases, we simulated 500 individuals in silico
 by picking four grand-parents at random from the populations, creating
@@ -382,57 +380,63 @@ well as information on the sampling locations from
 \url{ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/release/20130502/integrated_call_samples_v3.20130502.ALL.panel}
 \cite{Auton2015}. This is data from 661 individuals from Africa (AFR),
 347 Admixed Americans (AMR), 504 East Asians (EAS), 503 Europeans
-(EUR) and 489 South-East Asians (SAS).
-
-xxx Explain why we use EUROFORGEN, Kidd
-
-The dataset comes with approximately 80 million SNPs.  However, we use
-only a few of them known as the EUROFORGEN AIMset \cite{Phillips2014}
-and Kidd AIMset \cite{Kidd2014}, respectively. The EUROFORGEN AIMset
-comes with 128 SNPs able to distinguish between continental
-groups. Here, we ignore tri-allelic SNPs (rs17287498, rs2069945,
-rs2184030, rs433342, rs4540055, rs5030240), as well as rs12402499,
-which is not available in the 1000 genomes dataset. The Kidd AIMset
-consists of 55 bi-allelic SNPs, all of which are available in the 1000
-genomes dataset.
+(EUR) and 489 South Asians (SAS). The dataset comes with approximately
+80 million SNPs. However, we use only a few of them known as the
+EUROFORGEN AIMset \cite{Phillips2014} and Kidd AIMset \cite{Kidd2014},
+respectively. The former comes with 128 SNPs, and we ignore seven
+tri-allelic SNPs (rs17287498, rs2069945, rs2184030, rs433342,
+rs4540055, rs5030240, rs12402499), since our methods currently rely on
+bi-allelic SNPs. It was designed to distinguish Africa, Europe, East
+Asia, Native America, and Oceania, but was shown to perform well on
+the 1000 genomes dataset, also for distinguishing South Asia, even
+when ignoring the tri-allelic SNPs \cite{Pfaffelhuber2019}.  The
+latter comes with 55 bi-allelic SNPs and was introduced as a global
+AIMset differentiating between 73 populations. We note that this
+AIMset is part of the Verogen MiSeq FGx™ Forensic Genomics Solution.
 
 \section{Results}
 
 \subsection{Some showcases from simulations}
 We simulated genome-wide data from a sample, taken from a population
 genetic model with three islands, $A$, $B$ and $C$, using
-\cite{Kelleher2016}. Migration is such that only $A, B$ and $A, C$ are
+\cite{Kelleher2016}. Migration is such that only $A, B$ and $B, C$ are
 connected, but not $A, C$. We used a migration rate of 10 diploid
-individuals per connection per generation. More precisely, we simulate
-400 individuals per island, each with 20~recombining chromosomes, each
-with about 2.5$\cdot 10^4$ SNPs. From these $5\cdot 10^5$ SNPs, we use
-the step-wise approach from \cite{Pfaffelhuber2019} to look for~10
-Ancestry Informative Markers (AIMs). When using a naive Bayes
-approach, this AIMset gives a vanishing misclassification error for
-the task of classifying the 3$\times$400 simulated, non-admixed
-individuals.
+individuals per connected islands (in both directions) per
+generation. More precisely, we simulate a sample of 400 individuals
+per island, each with 20~recombining chromosomes, each with about
+2.5$\cdot 10^4$ SNPs. From these $\sim 5\cdot 10^5$ SNPs, we use the
+step-wise approach from \cite{Pfaffelhuber2019} to look for~10
+Ancestry Informative Markers (AIMs). When using a naive Bayes approach
+as in {\sc snipper} \cite{Snipper2007}, this AIMset gives a vanishing
+misclassification error for the task of classifying the 3$\times$400
+simulated, non-admixed individuals.
 
 Subsequently, we used the admixture and recent-admixture model to
 estimate IA (and PIA) for both, non-admixed and recently admixed
 individuals. The latter were obtained as described in
 Section~\ref{S:insilico}. We observe that the admixture model fails to
-give accurate estimates for IA in $A/C$-recently-admixed individuals
-for two reasons; see Figure~\ref{fig:sim1}. First, it correctly
-predicts that the individual is $A/C$-admixed, but overestimates one
-of the two ancestral proportions. Second, and more severely, it
-confounds the signal for recent admixture with an ancestral proportion
-from island $B$. In both cases, the recent-admixture model frequently
-gives better estimates for IA. In Figure~\ref{Sfig:sim2}, we give
-structure barplots for all $A/C$-admixed individuals. Moreover,
-Figure~\ref{Sfig:sim3} displays errors for the admixture-model and the
-recent-admixture model, in all cases including non-admixed
-individuals, and all three cases of recent-admixture. Interestingly,
-binomial tests with the alternative that the recent-admixture model
-gives smaller errors show significant results in all but one case
-($A, B, C$: $<0.002$, $A/B, A/C$: $<0.004$, $B/C$: $0.23$). At least,
-this indicates that the recent-admixture model does not perform worse
-than the admixture model, even on non-admixed samples.
+give accurate estimates for IA in $A\times C$-recently-admixed
+individuals for two reasons. First, it correctly predicts that the
+individual is $A\times C$-admixed, but overestimates one of the two
+ancestral proportions. Second, and more severely, it confounds the
+signal for recent admixture with an ancestral proportion from island
+$B$. In both cases, the recent-admixture model frequently gives better
+estimates for IA. Figure~\ref{fig:sim1} shows examples for these two
+cases, which are taken from all $A\times C$-admixed individuals as
+displayed in Figure~\ref{Sfig:sim2}.
 
+To get an overall picture, we computed errors for estimating IA as
+given in \eqref{eq:error} for the admixture and recent-admixture
+model. As described in MM, we average estimates $\hat q^M$ and
+$\hat q^P$ from the recent-admixture model, in order to compare to the
+true IAs. Figure~\ref{Sfig:sim3} displays these errors in all cases
+including non-admixed individuals, and all three cases of
+recent-admixture. Interestingly, binomial tests with the alternative
+that the recent-admixture model gives smaller errors show significant
+results in all but one case ($A, B, C$: $<0.002$,
+$A\times B, A\times C$: $<0.004$, $B\times C$: $0.23$). This shows
+that on average the recent-admixture model performs better thatn the
+admixture model, even on non-admixed samples.
 
 \begin{figure}
   \centering
@@ -537,61 +541,68 @@ than the admixture model, even on non-admixed samples.
   \end{tabular}
   \caption{Colors indicate IA from islands A \crule[blue]{.5cm}{.3cm},
     B \crule[green]{.5cm}{.3cm} and C
-    \crule[yellow]{.5cm}{.3cm}. Here, in the model where only $A/B$
-    and $B/C$ exchange migrants (but not $A/C$), admixture has two
-    sources of errors when estimating IA for a recently admixed
-    individual from $A/C$. In individual~1, $C$ is overrepresented in
-    the IA-vector $q$. In individual~2, admixture gives the greatest
-    fraction of ancestry to island $B$, since allele frequencies in
-    $B$ are between $A$ and $C$. In both cases, the IA in terms of the
+    \crule[yellow]{.5cm}{.3cm}. Here, in the model where only
+    $A\leftrightarrow B$ and $B\leftrightarrow C$ exchange migrants
+    (but not $A\not\leftrightarrow C$), admixture has two sources of
+    errors when estimating IA for a recently admixed individual from
+    $A\times /C$. In individual~1, $C$ is overrepresented in the IA-vector
+    $q$. In individual~2, admixture gives the greatest fraction of
+    ancestry to island $B$, since allele frequencies in $B$ are
+    between $A$ and $C$. In both cases, the IA in terms of the
     combined vector $q^{MP} = (q^M + q^P)/2$ from the recent-admixture
     model gives more accurate estimates.}
   \label{fig:sim1}
 \end{figure}
 
-
-
-
-
-
-
-xxx compare runtimes
-
 \subsection{Estimation accuracy}
-Both, the admixture model and the recent-admixture model give
-estimates of IA. Using data from the 1000 genomes, but excluding all
-Admixed Americans (AMRs) since they are known to have an admixed
-background \cite{Eduardoff2016, Pfaffelhuber2019}, we use the SNPs
-from the EUROFORGEN and Kidd AIMsets. We use the continental origins
-as described in the dataset, i.e.\ we have AFR (African), EAS
-(East-Asia), EUR (European) and SAS (South-Asian) samples. As
-described in MM, we average estimates $\hat q^M$ and $\hat q^P$ from
-the recent-admixture model, in order to compare to the true IAs. As
-can be seen in Figure~\ref{fig:mixed_cases}.A, the recent-admixture
-estimates outperform admixture estimates in all cases (which were
-created in silico as described in MM) for first generation admixed
-individuals. For second generation admixed individuals, the situation
-is similar, but depending on the type of admixture; see cases (B)--(G)
-as defined in Section~\ref{S:insilico} above. (A full list of~55 cases
-is displayed in Figure~\ref{fig:mixed_allcases} in the SI.) In
-Figure~\ref{fig:mixed_cases}.B, note that column~A gives non-admixed
-samples, and we see that estimates of IA are essentially as accurate
-in the admixture model and the recent-admixture model. All results for
-the Kidd AIMset are similar and found in the SI.
+For comparing the accuracy of the admixture and recent-admixture
+model, we extended our analysis of the simuated data to the 1000
+genomes dataset. We excluded all Admixed Americans (AMRs) since they
+are known to have an admixed background \cite{Eduardoff2016,
+  Pfaffelhuber2019} and do not form a well-defined own group. As the
+true IA, we use the continental origins as described in the dataset,
+i.e.\ we have AFR (African), EAS (East-Asia), EUR (European) and SAS
+(South Asian) samples. This means e.g.\ that we set
+$q^{\text{\sc true}}_{\text{EUR}}=1$ for a European sample.
+
+We ran three kinds of analyses. First, on the non-admixed samples,
+i.e.\ the original 1000 genomes data (denoted AFR,...). Second, we
+produced in silico recently admixed individuals with parents from the
+non-admixed samples (denoted AFR$\times$EAS etc.) and ran the analysis
+on these samples. Third, the analysis was performed on
+second-generation admixed samples, i.e.\ grand-parents were taken from
+the non-admixed samples (denoted AFR/EAS$\times$EUR/SAS etc). In the
+first case, Figure~\ref{fig:nonmixed_EUROFORGEN} shows that the
+resulting errors for the admixture and recent-admixture model are
+almost identical. Overall, recent-admixture has a smaller error in
+1364 out of 2157 cases, i.e.\ th hypothesis that the error for
+recent-admixture is at least as large as for admixture can be rejected
+(binomial test, $p<10^{-34}$). In the second case,
+Figure~\ref{fig:mixed_cases_EUROFORGEN}(A) shows clearly that errors
+for recent-admixture are smaller for all pairs of continents. More
+precisely, in 2279 out of 3000 individuals, recent-admixture is more
+accurate ($p<10^{-186}$). Third, for second-generation admixed
+individuals, Figure~\ref{fig:mixed_cases_EUROFORGEN}(B) displays
+errors in the cases (A)--(G), and shows that again, recent-admixture
+is more accurate. Here, recent-admixture outperforms admixture in
+15761 out of 27500 cases (resulting in $p<10^{-130}$). A full list
+of~55 cases is displayed in Figure~\ref{fig:mixed_allcases_EUROFORGEN}
+in the SI. The corresponding results for the Kidd AIMset are similar
+and found in the SI.
 
 \begin{figure*}[htb]
   \hspace{3cm} (A) \hspace{8cm} (B)
   \begin{center}
-    \parbox[b]{0.45\textwidth}{\includegraphics[width=0.45\textwidth]{deviations_mixed.pdf}\vspace{2cm}}
+    \parbox[b]{0.45\textwidth}{\includegraphics[width=0.45\textwidth]{deviations_mixed_EUROFORGEN.pdf}\vspace{2cm}}
     \hspace{1cm}
-    \parbox[b]{0.45\textwidth}{\includegraphics[width=0.45\textwidth]{deviations_mixed_cases.pdf}}
+    \parbox[b]{0.45\textwidth}{\includegraphics[width=0.45\textwidth]{deviations_mixed_cases_EUROFORGEN.pdf}}
   \end{center}
-  \caption{\label{fig:mixed_cases} For all first generation admixed
-    samples (A) and second generation admixed samples (B), we computed
-    IA from the admixture and recent-admixture model. The distance to
-    the true IA is computed as in \eqref{eq:error}. The cases in (B)
-    are as described above. xxx add $p$-values xxx put a figure for
-    the non-admixed scenario in the SI.}
+  \caption{\label{fig:mixed_cases_EUROFORGEN} For all first generation
+    admixed samples (A) and second generation admixed samples (B), we
+    computed IA from the admixture and recent-admixture model. The
+    distance to the true IA is computed as in \eqref{eq:error}. The
+    cases in (B) are as described above. xxx add $p$-values xxx put a
+    figure for the non-admixed scenario in the SI.}
 \end{figure*}
 
 \subsection{Power of the Likelihood-ratio test for recent admixture}
@@ -603,21 +614,21 @@ non-admixed) against true positives (i.e.\ positively tested admixed)
 in cases (B)--(G) for all possible values of $p$, we obtain the
 Receiver-Operation-Characteristic (ROC) curve (xxx ref). The optimal
 curve nearly hits~0 false positives with~100\% true positives and has
-an AUC (Area Under the Curve) of~1. As we see in Figure~\ref{fig:ROC},
-the power of the test differs with the kind of admixture. For first
-generation admixed (case (B)), one non-admixed parent (case (E)) and
-all grand-parents from different continents (case (G)), the test is
-nearly perfect in distinguishing recent-admixture from admixture. If
-only half of the genome has two different ancestries (cases (D) and
-(F)), the power is reduced. If the individual is not recently-admixed
-in first generation, but both parents are (case (C)), power drops even
-more. In fact, the latter case is not recent-admixture as in our
-definition, since $q^M = q^P$ should technically hold. For the overall
-performance of the test, we give some examples in
-Table~\ref{tab:power}, in particular the power at $p=1\%$ and AUC in
-all cases. Results for the EUROFORGEN AIMset are marginalle better
-than for the Kidd AIMset, which are given in the SI in
-Figure~\ref{fig:ROC_Kidd} and Table~\ref{tab:power_Kidd}.
+an AUC (Area Under the Curve) of~1. As we see in
+Figure~\ref{fig:ROC_EUROFORGEN}, the power of the test differs with
+the kind of admixture. For first generation admixed (case (B)), one
+non-admixed parent (case (E)) and all grand-parents from different
+continents (case (G)), the test is nearly perfect in distinguishing
+recent-admixture from admixture. If only half of the genome has two
+different ancestries (cases (D) and (F)), the power is reduced. If the
+individual is not recently-admixed in first generation, but both
+parents are (case (C)), power drops even more. In fact, the latter
+case is not recent-admixture as in our definition, since $q^M = q^P$
+should technically hold. For the overall performance of the test, we
+give some examples in Table~\ref{tab:power}, in particular the power
+at $p=1\%$ and AUC in all cases. Results for the EUROFORGEN AIMset are
+marginalle better than for the Kidd AIMset, which are given in the SI
+in Figure~\ref{fig:ROC_Kidd} and Table~\ref{tab:power_Kidd}.
 
 \begin{figure*}[htb]
   \begin{center}
@@ -626,15 +637,15 @@ Figure~\ref{fig:ROC_Kidd} and Table~\ref{tab:power_Kidd}.
   \caption{Using the EUROFORGEN AIMset, we plot false positives (i.e.\
     positive non-admixed individuals, as in case (A) above, againts
     positives for all cases of admixture in second generation.}
-  \label{fig:ROC} 
+  \label{fig:ROC_EUROFORGEN}
 \end{figure*}
 
 \begin{table}
   \centering
   \input{power_table_EUROFORGEN.tex}
-  \caption{Using the same data as in Figure~\ref{fig:ROC}, we e.g.\
-    see that the test for recent admixture turns out to have a
-    $p$-value below~1\% in 94\% cases of first generation admixed
+  \caption{Using the same data as in Figure~\ref{fig:ROC_EUROFORGEN},
+    we e.g.\ see that the test for recent admixture turns out to have
+    a $p$-value below~1\% in 94\% cases of first generation admixed
     individuals. xxx add false positives to x-axis, add true positives
     to y-axis.}
   \label{tab:power}
@@ -666,11 +677,11 @@ admixture is recent.
   one mostly African, the other mostly East-Asian.
 \item NA20299: Interestingly, the results for both AIMsets differ in
   this example. One parent has most likely African ancestry, the other
-  is European according to the EUROFORGEN AIMset and South-Asian
+  is European according to the EUROFORGEN AIMset and South Asian
   according to the Kidd AIMset.
-\item HG03803: Most likely, one parent is of South-Asian, the other
+\item HG03803: Most likely, one parent is of South Asian, the other
   has East-Esian ancestry.
-\item NA20864: Most likely, one parent is of South-Asian, the other
+\item NA20864: Most likely, one parent is of South Asian, the other
   has European ancestry.
 \end{itemize}
 
@@ -692,6 +703,13 @@ individuals, we examined local ancestry in the genome. xxx
     explain $\Delta\ell$, order recent-admixture barplots.}
   \label{fig:1000r-ad}
 \end{figure}
+
+\subsection{Runtimes} 
+The result is that the analysis is fast. E.g.\ the
+$500\cdot 55 = 27500$ individuals which need to be analysed for
+Figure~\ref{fig:mixed_cases_EUROFORGEN}, and which are created in
+silico, takes about five hours on a standard laptop computer using the
+statistical language R.
 
 
 \section{Discussion}
@@ -735,9 +753,9 @@ easier way and take allele frequencies for ancestral populations as
 fixed, and only change the IAs of the new traces during the
 runtime. The result is that the analysis is fast. E.g.\ the
 $500\cdot 55 = 27500$ individuals which need to be analysed for
-Figure~\ref{fig:mixed_cases}, and which are created in silico, takes
-about five hours on a standard laptop computer using the statistical
-language R.
+Figure~\ref{fig:mixed_cases_EUROFORGEN}, and which are created in
+silico, takes about five hours on a standard laptop computer using the
+statistical language R.
 
 
 
@@ -1043,28 +1061,31 @@ Our methods are based on R-scripts and are available via \url{
 
 xxx
 
+\newpage
 
 \section{Additional results}
 
 \subsection{Some showcases from simulations}
-
-\begin{figure*}[htb]
+\enlargethispage{0cm}
+\begin{figure}[H]
   \begin{center}
-    \parbox[b]{0.95\textwidth}{\includegraphics[width=0.95\textwidth]{abc_StructurePlot.pdf}\vspace{2cm}}
+    \parbox[b]{0.9\textwidth}{\includegraphics[width=0.95\textwidth]{abc_StructurePlot.pdf}\vspace{-2cm}}
   \end{center}
   \caption{\label{Sfig:sim2} Structure barplot for all 400 recently
-    $A/C$-admixed individuals. Arrows indicate the two individuals
-    from Figure~\ref{fig:sim1}.}
-\end{figure*}
+    $A\times C$-admixed individuals. Arrows indicate the two
+    individuals from Figure~\ref{fig:sim1}.}
+\end{figure}
 
-\begin{figure*}[htb]
+\begin{figure}[H]
   \begin{center}
-    \parbox[b]{0.65\textwidth}{\includegraphics[width=0.65\textwidth]{deviations_abc.pdf}\vspace{2cm}}
+    \parbox[b]{0.5\textwidth}{\includegraphics[width=0.65\textwidth]{deviations_abc.pdf}\vspace{0cm}}
   \end{center}
   \caption{\label{Sfig:sim3} For all 3$\times$400 non-admixed samples,
     and 3$\times$400 admixed samples, we compute the errors by the
     distance to the true IA as given in \eqref{eq:error}.}
-\end{figure*}
+\end{figure}
+
+\newpage
 
 \subsection{Estimation accuracy}
 For first generation admixed individuals, all cases (non-admixed and
@@ -1074,53 +1095,99 @@ cases, depending on the origin of the grand-parents.  When data from
 four populations (AFR, EAS, EUR, SAS; see below) is available, we have
 the following cases:
 \begin{itemize}
-\item[(A)] 4 non-admixed cases (with IA 100:0): (AFR, AFR/ AFR, AFR),
-  (EAS, EAS/ EAS, EAS), (EUR, EUR/ EUR, EUR), (SAS, SAS/ SAS, SAS);
-\item[(B)] 6 admixed cases with admixture ratio 50:50, where both parents
-  are non-admixed: (AFR, AFR/ EAS, EAS), (AFR, AFR/ EUR, EUR), (AFR,
-  AFR/ SAS, SAS), (EAS, EAS/ EUR, EUR), (EAS, EAS/ SAS, SAS), (EUR,
-  EUR/ SAS, SAS);
-\item[(C)] 6 admixed cases with admixture ratio 50:50, where both parents
-  are admixed: (AFR, EAS/ AFR, EAS), (AFR, EUR/ AFR, EUR), (AFR, SAS/
-  AFR, SAS), (EAS, EUR/ EAS, EUR), (EAS, SAS/ EAS, SAS), (EUR, SAS/
-  EUR, SAS);
-\item[(D)] 12 admixed cases with admixture ratio 75:25: (AFR, AFR/ AFR,
-  EAS), (AFR, AFR/ AFR, EUR), (AFR, AFR/ AFR, SAS), (EAS, EAS/ EAS,
-  AFR), (EAS, EAS/ EAS, EUR), (EAS, EAS/ EAS, SAS), (EUR, EUR/ EUR,
-  AFR), (EUR, EUR/ EUR, EAS), (EUR, EUR/ EUR, SAS), (SAS, SAS/ SAS,
-  AFR), (SAS, SAS/ SAS, EAS), (SAS, SAS/ SAS, EUR);
+\item[(A)] 4 non-admixed cases with IA 100:0: AFR/AFR$\times$AFR/AFR,
+  EAS/EAS$\times$EAS/EAS, \\ EUR/EUR$\times$EUR/EUR,
+  SAS/SAS$\times$SAS/SAS;
+\item[(B)] 6 admixed cases with admixture ratio 50:50, where both
+  parents are non-admixed: AFR/AFR$\times$EAS/EAS,
+  AFR/AFR$\times$EUR/EUR, AFR/AFR$\times$SAS/SAS/EAS,
+  EAS$\times$EUR/EUR, EAS/EAS$\times$SAS/SAS, EUR/EUR$\times$SAS/SAS;
+\item[(C)] 6 admixed cases with admixture ratio 50:50, where both
+  parents are admixed: AFR/EAS$\times$AFR/EAS, AFR/EUR$\times$AFR/EUR,
+  AFR/SAS$\times$AFR/SAS, EAS/EUR$\times$EAS/EUR,
+  EAS/SAS$\times$EAS/SAS, EUR/SAS/ EUR/SAS;
+\item[(D)] 12 admixed cases with admixture ratio 75:25:
+  AFR/AFR$\times$AFR/EAS, AFR/AFR$\times$AFR/EUR,
+  AFR/AFR$\times$AFR/SAS, EAS/EAS$\times$EAS/AFR,
+  EAS/EAS$\times$EAS/EUR, EAS/EAS$\times$EAS/SAS,
+  EUR/EUR$\times$EUR/AFR, EUR/EUR$\times$EUR/EAS,
+  EUR/EUR$\times$EUR/SAS, SAS/SAS$\times$SAS/AFR,
+  SAS/SAS$\times$SAS/EAS, SAS/SAS$\times$SAS/EUR;
 \item[(E)] 12 second generation admixed with admixture ratio 50:25:25,
-  where one parent is non-admixed: (AFR, AFR/ EAS, EUR), (AFR, AFR/
-  EAS, SAS), (AFR, AFR/ EUR, SAS), (EAS, EAS/ AFR, EUR), (EAS, EAS/
-  AFR, SAS), (EAS, EAS/ EUR, SAS), (EUR, EUR/ AFR, EAS), (EUR, EUR/
-  AFR, SAS), (EUR, EUR/ EAS, SAS), (SAS, SAS/ AFR, EAS), (SAS, SAS/ AFR,
-  EUR), (SAS, SAS/ EAS, EUR);
+  where one parent is non-admixed: AFR/AFR$\times$EAS/EUR,
+  AFR/AFR$\times$EAS/SAS, AFR/AFR$\times$EUR/SAS,
+  EAS/EAS$\times$AFR/EUR, EAS/EAS$\times$AFR/SAS,
+  EAS/EAS$\times$EUR/SAS, EUR/EUR$\times$AFR/EAS,
+  EUR/EUR$\times$AFR/SAS, EUR/EUR$\times$EAS/SAS,
+  SAS/SAS$\times$AFR/EAS, SAS/SAS$\times$AFR/EUR,
+  SAS/SAS$\times$EAS/EUR;
 \item[(F)] 12 second generation admixed with admixture ratio 50:25:25,
-  where both parents are admixed: (AFR, EAS/ AFR, EUR), (AFR, EAS/
-  AFR, SAS), (AFR, EUR/ AFR, SAS), (EAS, AFR/ EAS, EUR), (EAS, AFR/
-  EAS, SAS), (EAS, EUR/ EAS, SAS), (EUR, AFR/ EUR, EAS), (EUR, AFR/
-  EUR, SAS), (EUR, EAS/ EUR, SAS), (SAS, AFR/ SAS, EAS), (SAS, AFR/
-  SAS, EUR), (SAS, EAS/ SAS, EUR);
+  where both parents are admixed: AFR/EAS$\times$AFR/EUR,
+  AFR/EAS$\times$AFR/SAS, AFR/EUR$\times$AFR/SAS,
+  EAS/AFR$\times$EAS/EUR, EAS/AFR$\times$EAS/SAS,
+  EAS/EUR$\times$EAS/SAS, EUR/AFR$\times$EUR/EAS,
+  EUR/AFR$\times$EUR/SAS, EUR/EAS$\times$EUR/SAS,
+  SAS/AFR$\times$SAS/EAS, SAS/AFR$\times$SAS/EUR,
+  SAS/EAS$\times$SAS/EUR;
 \item[(G)] 3 second generation admixed with admixture ratio
-  25:25:25:25: (AFR, EAS/ EUR, SAS), (AFR, EUR/ EAS, SAS), (AFR, SAS/
-  EAS, EUR);
+  25:25:25:25: AFR/EAS$\times$EUR/SAS, AFR/EUR$\times$EAS/SAS,
+  AFR/SAS$\times$EAS/EUR;
 \end{itemize}
-As can be seen in Figure~\ref{fig:mixed_allcases}, the
+As can be seen in Figure~\ref{fig:mixed_allcases_EUROFORGEN}, the
 recent-admixture model never gives worse estimates than the admixture
 model, and outperforms the admixture-model in several cases; see also
-Figure~\ref{fig:mixed_cases} in the main text.  For the Kidd AIMset,
-see Figures~\ref{fig:mixed_cases_Kidd}
+Figure~\ref{fig:mixed_cases_EUROFORGEN} in the main text.  For the
+Kidd AIMset, see Figures~\ref{fig:mixed_cases_Kidd}
 and~\ref{fig:mixed_allcases_Kidd}.
 
-\begin{sidewaysfigure}
-  \centering
-  \includegraphics[width=\textwidth]{deviations_mixed_allcases.pdf}
-  \caption{For all cases of second generation admixed individuals, we
-    compare estimation accuracy of IA using the EUROFORGEN AIMset.}
-  \label{fig:mixed_allcases}
-\end{sidewaysfigure}
+\subsubsection*{EUROFORGEN AIMset}
 
-\begin{figure*}[htb]
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[width=0.45\textwidth]{deviations_nonmixed_EUROFORGEN.pdf}
+  \end{center}
+  \caption{\label{fig:nonmixed_EUROFORGEN} For all non-admixed samples
+    from the 1000 genomes dataset, we computed IA from the admixture
+    and recent-admixture model. The distance to the true IA is
+    computed as in \eqref{eq:error}.}
+\end{figure}
+
+\begin{center}
+  \begin{turn}{270}%[htbp]
+    \begin{minipage}{\textheight}
+      \includegraphics[width=\textwidth]{deviations_mixed_allcases_EUROFORGEN.pdf}
+      \captionof{figure}{For all cases of second generation admixed individuals, we
+        compare estimation accuracy of IA using the EUROFORGEN AIMset.}
+      \label{fig:mixed_allcases_EUROFORGEN}
+    \end{minipage}
+  \end{turn}  
+\end{center}
+       
+\subsubsection*{Kidd AIMset}
+For the Kidd AIMset, recent-admixture produces an error in the
+non-admixed samples (see also Figure~\ref{fig:nonmixed_Kidd}), which
+is smaller than the error for the admixture-model in 1394 out of 2157
+cases, so the hypothesis that the error is worse for recent-admixture
+can be rejected ($p<10^{-34}$). For first order admixed samples, 2381
+out of 3000 cases have a smaller error under recent-admixture (which
+gives $p<10^{-241}$); see also
+Figure~\ref{fig:mixed_cases_Kidd}.A. Last, for second-generation
+admixed individuals, recent-admixture is more accurate in 16116 out of
+27500 cases ($p<10^{-180}$); see also
+Figures~\ref{fig:mixed_cases_Kidd}.B and
+\ref{fig:mixed_allcases_Kidd}.
+
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[width=0.45\textwidth]{deviations_nonmixed_Kidd.pdf}
+  \end{center}
+  \caption{\label{fig:nonmixed_Kidd} Same as in
+    Figure~\ref{fig:nonmixed_EUROFORGEN}, but for the Kidd AIMset.}
+\end{figure}
+
+
+
+\begin{figure}[H]
   \hspace{3cm} (A) \hspace{8cm} (B)
   \begin{center}
     \parbox[b]{0.45\textwidth}{\includegraphics[width=0.45\textwidth]{deviations_mixed_Kidd.pdf}\vspace{2cm}}
@@ -1128,32 +1195,37 @@ and~\ref{fig:mixed_allcases_Kidd}.
     \parbox[b]{0.45\textwidth}{\includegraphics[width=0.45\textwidth]{deviations_mixed_cases_Kidd.pdf}}
   \end{center}
   \caption{\label{fig:mixed_cases_Kidd} Same as in
-    Figure~\ref{fig:mixed_cases}, but using the Kidd AIMset.}
-\end{figure*}
+    Figure~\ref{fig:mixed_cases_EUROFORGEN}, but using the Kidd
+    AIMset.}
+\end{figure}
 
-\begin{sidewaysfigure}
-  \centering
-  \includegraphics[width=\textwidth]{deviations_mixed_allcases_Kidd.pdf}
-  \caption{Same as in Figure~\ref{fig:mixed_allcases}, but using the
-    Kidd AIMset.}
-  \label{fig:mixed_allcases_Kidd}
-\end{sidewaysfigure}
-
-\begin{table}
+\begin{table}[H]
   \centering
   \input{power_table_Kidd.tex}
   \caption{Same as Table~\ref{tab:power}, but using the Kidd AIMset.}
   \label{tab:power_Kidd}
 \end{table}
 
-\begin{figure*}[htb]
+\begin{center}
+  \begin{turn}{270}%[htbp]
+    \begin{minipage}{\textheight}
+      \includegraphics[width=\textwidth]{deviations_mixed_allcases_Kidd.pdf}
+      \captionof{figure}{Same as in
+        Figure~\ref{fig:mixed_allcases_EUROFORGEN}, but using the Kidd
+        AIMset.}
+      \label{fig:mixed_allcases_Kidd}
+    \end{minipage}
+  \end{turn}
+\end{center}
+
+\begin{figure}[H]
   \begin{center}
     \includegraphics[width=0.45\textwidth]{roc-curve-Kidd.pdf}
   \end{center}
-  \caption{Same as in Figure~\ref{fig:ROC}, but using the Kidd
-    AIMset.}
+  \caption{Same as in Figure~\ref{fig:ROC_EUROFORGEN}, but using the
+    Kidd AIMset.}
   \label{fig:ROC_Kidd} 
-\end{figure*}
+\end{figure}
 
 \end{document}
 
