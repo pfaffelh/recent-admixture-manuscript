@@ -1,0 +1,31 @@
+\begin{thebibliography}{1}
+
+\bibitem{Alexander2009}
+D.~H. Alexander, J.~Novembre, and K.~Lange.
+\newblock Fast model-based estimation of ancestry in unrelated individuals.
+\newblock {\em Genome Research}, 19:1655--1664, 2009.
+
+\bibitem{Chakraborty1986}
+R.~Chakraborty.
+\newblock {Gene Admixture in Human Populations: Models and Predictions}.
+\newblock {\em Yearbook of Physical Anthropology}, 29:1--43, 1986.
+
+\bibitem{Hanis1986}
+C.~L. Hanis, R.~Chakraborty, R.~E. Ferrell, and W.~J. Schull.
+\newblock {Individual Admixture Estimates: Disease Associations and Individual
+  Risk of Diabetes and Gallbladder Disease Among Mexican-Americans in Starr
+  County, Texas}.
+\newblock {\em American Journal of Physical Anthropology}, 70:433--441, 1986.
+
+\bibitem{Pritchard2000}
+J.~Pritchard, M.~Stephens, and P.~Donnelly.
+\newblock {Inference of population structure using multilocus genotype data}.
+\newblock {\em Genetics}, 155:945--954, 2000.
+
+\bibitem{Tang2005}
+H.~Tang, J.~Peng, P.~Wang, and N.~Risch.
+\newblock Estimation of individual admixture: Analytical and study design
+  considerations.
+\newblock {\em Genet Epidemiol.}, 28:289--301, 2005.
+
+\end{thebibliography}

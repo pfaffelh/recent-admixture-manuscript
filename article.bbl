@@ -1,0 +1,135 @@
+\begin{thebibliography}{10}
+
+\bibitem{Auton2015}
+{1000 Genomes Project Consortium}, Adam Auton, Lisa~D. Brooks, Richard~M.
+  Durbin, Erik~P. Garrison, Hyun~Min Kang, Jan~O. Korbel, Jonathan~L. Marchini,
+  Shane McCarthy, Gil~A. McVean, and Gon{\c{c}}alo~R. Abecasis.
+\newblock A global reference for human genetic variation.
+\newblock {\em Nature}, 526(7571):68--74, 2015.
+
+\bibitem{Alexander2009}
+D.~H. Alexander, J.~Novembre, and K.~Lange.
+\newblock Fast model-based estimation of ancestry in unrelated individuals.
+\newblock {\em Genome Research}, 19:1655--1664, 2009.
+
+\bibitem{Chakraborty1986}
+R.~Chakraborty.
+\newblock {Gene Admixture in Human Populations: Models and Predictions}.
+\newblock {\em Yearbook of Physical Anthropology}, 29:1--43, 1986.
+
+\bibitem{Cheung2018}
+Elaine Y.~Y. Cheung, Michelle~Elizabeth Gahan, and Dennis McNevin.
+\newblock Prediction of biogeographical ancestry in admixed individuals.
+\newblock {\em Forensic Science International. Genetics}, 36:104--111, 2018.
+
+\bibitem{Eduardoff2016}
+M.~Eduardoff, T.~E. Gross, C.~Santos, M.~de~la Puente, D.~Ballard, C.~Strobl,
+  C.~Børsting, N.~Morling, L.~Fusco, C.~Hussing, B.~Egyed, L.~Souto,
+  J.~Uacyisrael, D-Syndercombe Court, A~Carracedo, M.~V. Lareu, P.~M.
+  Schneider, W.~Parson, C.~Phillips, EUROFORGEN-NoE Consortium, W.~Parson, and
+  C.~Phillips.
+\newblock {Inter-laboratory evaluation of the EUROFORGEN Global
+  ancestry-informative SNP panel by massively parallel sequencing using the Ion
+  PGM™}.
+\newblock {\em Forensic Science International. Genetics}, 23:178--189, 2016.
+
+\bibitem{Fawcett2006}
+T.~Fawcett.
+\newblock {An introduction to ROC analysis}.
+\newblock {\em Pattern Recognition Letters}, 27:861--874, 2006.
+
+\bibitem{Hanis1986}
+C.~L. Hanis, R.~Chakraborty, R.~E. Ferrell, and W.~J. Schull.
+\newblock {Individual Admixture Estimates: Disease Associations and Individual
+  Risk of Diabetes and Gallbladder Disease Among Mexican-Americans in Starr
+  County, Texas}.
+\newblock {\em American Journal of Physical Anthropology}, 70:433--441, 1986.
+
+\bibitem{Kelleher2016}
+Jerome Kelleher, Alison~M. Etheridge, and Gilean McVean.
+\newblock Efficient coalescent simulation and genealogical analysis for large
+  sample sizes.
+\newblock {\em PLoS Computational Biology}, 12(5):e1004842, 2016.
+
+\bibitem{Kidd2017}
+K.~Kidd, U.~Soundararajana, H.~Rajeevana, A.~J. Pakstisa, K.~N. Moorec, and
+  J.~D. Ropero-Millerc.
+\newblock The redesigned forensic research/reference on genetics-knowledge
+  base, frog-kb.
+\newblock {\em Forensic Science International. Genetics}, 33:33--37, 2017.
+
+\bibitem{Kidd2014}
+Kenneth~K. Kidd, William~C. Speed, Andrew~J. Pakstis, Manohar~R. Furtado, Rixun
+  Fang, Abeer Madbouly, Martin Maiers, Mridu Middha, Fran{\c{c}}oise~R.
+  Friedlaender, and Judith~R. Kidd.
+\newblock Progress toward an efficient panel of {SNPs} for ancestry inference.
+\newblock {\em Forensic Science International. Genetics}, 10:23--32, 2014.
+
+\bibitem{McNevin2019}
+D.~McNevin.
+\newblock Forensic inference of biogeographical ancestry from genotype: The
+  genetic ancestry lab.
+\newblock {\em WIREs Forensic Science}, e1356:1--26, 2019.
+
+\bibitem{Pfaffelhuber2019}
+P.~Pfaffelhuber, F.~Grundner-Culemann, V.~Lipphardt, and F.~Baumdicker.
+\newblock {How to choose sets of ancestry informative markers: A supervised
+  feature selection approach}.
+\newblock {\em Forensic Science International. Genetics}, page minor revision,
+  2019.
+
+\bibitem{Phillips2014}
+C.~Phillips, W.~Parson, B.~Lundsberg, C.~Santos, A.~Freire-Aradas, M.~Torres,
+  M.~Eduardoff, C.~B{\o}rsting, P.~Johansen, M.~Fondevila, N.~Morling,
+  P.~Schneider, {EUROFORGEN-NoE Consortium}, A.~Carracedo, and M.~V. Lareu.
+\newblock {Building a forensic ancestry panel from the ground up: The
+  EUROFORGEN Global AIM-SNP set.}
+\newblock {\em Forensic Science International. Genetics}, 11:13--25, 2014.
+
+\bibitem{Snipper2007}
+C.~Phillips, A.~Salas, J.~J. Sánchez, M.~Fondevila, A.~Gómez-Tato,
+  J.~Álvarez Dios, M.~Calaza, M.~Casares de~Cal, D.~Ballard, M.~V. Lareu, A..
+  Carracedo, and {The SNPforID Consortium}.
+\newblock {Inferring ancestral origin using a single multiplex assay of
+  ancestry-informative marker SNPs}.
+\newblock {\em Forensic Science International. Genetics}, 1:273--280, 2007.
+
+\bibitem{Phillips2016}
+Chris Phillips, Carla Santos, Manuel Fondevila, Ángel Carracedo, and
+  Maria~Victoria Lareu.
+\newblock {Inference of Ancestry in Forensic Analysis I: Autosomal
+  Ancestry-Informative Marker Sets}.
+\newblock In {\em Forensic {DNA} Typing Protocols}, volume 1420 of {\em Methods
+  in Molecular Biology}, pages 233--253. Springer, New York, 2016.
+
+\bibitem{Prestes2016}
+P.~R. Prestes, R.~J. Mitchell, R.~Daniel, J.~J. Sanchez, and R.~A.H. van
+  Oorschot.
+\newblock Predicting biogeographical ancestry in admixed individuals -- values
+  and limitations of using uniparental and autosomal markers.
+\newblock {\em Australian Journal of Forensic Sciences}, 48:10--23, 2015.
+
+\bibitem{Pritchard2000}
+J.~Pritchard, M.~Stephens, and P.~Donnelly.
+\newblock {Inference of population structure using multilocus genotype data}.
+\newblock {\em Genetics}, 155:945--954, 2000.
+
+\bibitem{Tang2005}
+H.~Tang, J.~Peng, P.~Wang, and N.~Risch.
+\newblock Estimation of individual admixture: Analytical and study design
+  considerations.
+\newblock {\em Genet Epidemiol.}, 28:289--301, 2005.
+
+\bibitem{Tvedebrink2018a}
+T.~Tvedebrink, P.~S. Eriksen, H.~S. Mogensen, and N.~Morling.
+\newblock Genogeographer -- a tool for genogeographic inference.
+\newblock {\em Forensic Science International: Genetics Supplement Series},
+  6:e463--e465, 2018a.
+
+\bibitem{Wahlund1928}
+S.~Wahlund.
+\newblock Zusammensetzung von populationen und korrelationserscheinungen vom
+  standpunkt der vererbungslehre aus betrachtet.
+\newblock {\em Hereditas}, 11:65--106, 1928.
+
+\end{thebibliography}

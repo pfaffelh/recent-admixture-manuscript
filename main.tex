@@ -1,7 +1,11 @@
 \documentclass[12pt]{article}
 \usepackage[utf8]{inputenc}
-\usepackage{chapterbib}
-\usepackage[sectionbib,numbers]{natbib}
+\usepackage{multibbl}
+\usepackage{hyperref}
+\newbibliography{article}
+\newbibliography{SI}
+
+%\usepackage[sectionbib,numbers]{natbib}
 \usepackage{eurosym}
 \usepackage{float}
 \usepackage{amstext,amsthm}
@@ -9,8 +13,7 @@
 \usepackage{amssymb,mathtools}
 \usepackage[nointegrals]{wasysym} % enthaelt iint-Def die aber auch in amsmath definiert sind
 \usepackage{mathrsfs}
-\usepackage{hyperref}
-\usepackage{refcheck}
+%\usepackage{refcheck}
 \usepackage{graphicx}
 \usepackage[figuresleft]{rotating}
 \usepackage{rotating, float, caption}
@@ -30,7 +33,7 @@
 \newtheorem{estimator}{Estimator}[section]
 \pagestyle{headings}
 
-\setlength{\bibsep}{0pt}
+% \setlength{\bibsep}{0pt}
 
 \setlength{\textheight}{230mm}
 \setlength{\topmargin}{-15mm} 
@@ -47,7 +50,7 @@
 %%\setlength{\oddsidemargin}{0.28in} 
 %%\setlength{\evensidemargin}{0.28in}
 
-\addtolength{\bibsep}{1.5mm}
+%\addtolength{\bibsep}{1.5mm}
 %%\bibpunct{(}{)}{,}{a}{}{,}
 
 %%\RequirePackage{ae,mathpple}
@@ -89,6 +92,17 @@
 
 \maketitle
 
+{\color{blue}
+{\sc todo}
+\begin{enumerate}
+\item What are we doing with the Tvedebrink-tests?
+  % assigns first
+  % generation admixed individuals wrongly to admixed populations (FS)
+\item Local ancestry with tsinfer;
+\item Analyse data from Denise;
+\end{enumerate}
+}
+
 \begin{abstract}
   \noindent
   For inference of individual genetic histories, admixture barplots
@@ -115,20 +129,19 @@
 \end{abstract}
 
 \section{Introduction}
-
 Inference of the geographical ancestry of a trace using genetic
 markers is today a well-established research field in forensic
-genetics (see e.g.\ \cite{Phillips2016, Eduardoff2016,
+genetics (see e.g.\ \cite{article}{Phillips2016, Eduardoff2016,
   Kidd2017}). Either the trace is classified into one of several
 groups of different origin (e.g.\ Africa, Europe, East Asia, Native
-America, and Oceania; see e.g.\ \cite{Snipper2007, Pfaffelhuber2019},
+America, and Oceania; see e.g.\ \cite{article}{Snipper2007, Pfaffelhuber2019},
 or it is assumed that it consists of a mixture of ancestral genetic
 material originating in several groups. For this task, {\sc structure}
-\cite{Pritchard2000} has become the de-facto standard to estimate
+\cite{article}{Pritchard2000} has become the de-facto standard to estimate
 individual ancestry (IA) proportions of a trace among several
 continental groups. This Bayesian approach using MCMC was complemented
 by the faster, likelihood based approach, implemented in the software
-{\sc admixture} \cite{Alexander2009}; see also \cite{Tang2005} for the
+{\sc admixture} \cite{article}{Alexander2009}; see also \cite{article}{Tang2005} for the
 same model.
 
 When using {\sc structure} or {\sc admixture} for estimating
@@ -146,7 +159,7 @@ $A$ and $B$, say, and an allele which separates perfectly between the
 two continents. Then, the individual will certainly be a heterozygote
 at this marker. This increase in frequency for heterozygotes under
 admixture is known for a long time and usually called the Wahlund
-effect \cite{Wahlund1928}.  However, {\sc structure} and {\sc
+effect \cite{article}{Wahlund1928}.  However, {\sc structure} and {\sc
   admixture} will estimate that the chance for some allele to come
 from $A$ and $B$ to be 50\%, which is then also be the estimated
 probability for a heterozygote at the locus (due to the assumption of
@@ -154,7 +167,7 @@ independence of allelic states in the admixture model).
 
 In general, {\sc structure} (and {\sc admixture}) are able to give
 accurate estimates of IA also in the case of recent-admixture.  As
-observed in \cite{Cheung2018}, a newly developed Genetic Distance
+observed in \cite{article}{Cheung2018}, a newly developed Genetic Distance
 Algorithm preforms better than {\sc structure} for recently admixed
 individuals up to second generation only if all four grand-parents
 come from different populations. However, {\sc structure} may lead to
@@ -178,10 +191,10 @@ parents comes from $A$ and $B$, though. Then, with the estimate of
 PIA, the estimated probability for a heterozygote is~1 in the example.
 
 The excess of heterozygotes was recently used to detect recent
-admixture using statistical tests. For example, \cite{McNevin2019}
+admixture using statistical tests. For example, \cite{article}{McNevin2019}
 uses a statistical test by simply counting the number of heterozygous
 positions in an individual in order to infer recent admixture. A
-different approach is used by \cite{Tvedebrink2018a,
+different approach is used by \cite{article}{Tvedebrink2018a,
   Tvedebrink2018a}. Here, likelihood-ratio tests were developed which
 test the null-hypothesis of non-admixture and recent (first
 generation) admixture versus the alternative that the studied sample
@@ -194,35 +207,46 @@ hypothesis, however, is that the studied sample shows recent admixture
 of populations within the reference database.
 
 
-xxx Tvedebrink assigns first generation admixed individuals wrongly to admixed populations (FS)
-
 \section{Materials and Methods}
-\sloppy More details on the derivations in the admixture and
+We start by briefly recalling the admixture model, which is the basis
+for the widely used sofware {\sc structure} \cite{article}{Pritchard2000}, {\sc
+  admixture} \cite{article}{Alexander2009} and {\sc frappe} \cite{article}{Tang2005}.
+Afterwards, we introduce a new model, called the recent-admixture
+model. More details on the derivations in the admixture and
 recent-admiture model can be found in the SI. Moreover, the
 implementation of our methods can be downloaded from \url{
-  https://github.com/pfaffelh/recent-admixture}, and is described in
-detail in the SI.
-
-xxx Cite \cite{Hanis1986}
-
+  https://github.com/pfaffelh/recent-admixture}. For both, the
+adxmiture and recent-admixture model, we assume to have reference
+database of $M$ bi-allelic markers from $K$ populations. However, from
+this reference database, we only need to known allele frequencies,
+i.e.\ by $p_{mk}$, the frequency of allele~1 at marker $m$ in
+population $k$ for all $m=1,...,M$ and $k=1,...,K$. We have a trace
+with $G_m \in \{0,1,2\}$ copies of allele~1 at marker $m$ for
+$m=1,...,M$.  We will assume throughout that the allele frequencies
+$p_{mk}$ are given and will not be changed by analysing the
+trace. This is important since in currently used software {\sc
+  structure}, {\sc admixuture} and {\sc frappe}, mostly in
+non-forensic use, it is frequently the case that many new individuals
+are studied, and allele frequencies are updated. For forensic use,
+when analysing several traces at once, this would imply that the
+results for the ancestry of trace~1 depend not only on the reference
+data, but also on the data for traces~2, 3,... which seems
+inappropriate. Hence, we do not make the computational overload of
+updating allele frequencies, which would also lead to increased
+runtimes and take the allele frequencies as given in the reference
+database. With other words, we will follow the approach of
+\cite{article}{Chakraborty1986} and \cite{article}{Hanis1986} for analysing our models.
 
 \subsection{The admixture model}
-We briefly recall the admixture model, which is the basis for the
-sofware {\sc structure} \cite{Pritchard2000}, {\sc admixture}
-\cite{Alexander2009} and {\sc frappe} \cite{Tang2005}.  Here and
-below, we assume to have reference database of $M$ bi-allelic markers
-from $K$ populations. We denote by $p_{mk}$ the frequency of allele~1
-at marker $m$ in population $k$. We have a trace with
-$G_m \in \{0,1,2\}$ copies of allele~1 at marker $m$ for
-$m=1,...,M$. Assuming that each allele observed in the trace comes
-from population $k$ with probability $q_k$, the probability to observe
-allele~1 at marker $m$ is
+Assuming that each allele observed in the trace comes from population
+$k$ with probability $q_k$, the probability to observe allele~1 at
+marker $m$ is
 \begin{align}
   \label{eq:beta}
   \beta_m(q) := \sum_k p_{mk} q_k,  
 \end{align}
-and the log-likelihood of $q = (q_k)_{k=1,...,K}$ is (see also~(S1) in
-the SI)
+and the log-likelihood of $q = (q_k)_{k=1,...,K}$ is (see
+also~\eqref{Seq:lik} in the SI)
 \begin{align}\label{eq:logLadmixture}
   \ell(q|G) = \sum_{m=1}^M \log\Big(\binom{2}{G_m} \beta_m(q)^{G_m}(1-\beta_m(q))^{2-G_m}\Big).
 \end{align}
@@ -238,14 +262,14 @@ This can be done numerically by iterating
 $q_{n+1} = (f_k(q_n))_{k=1,...,K}$ until convergence. (In our
 implementation, we continue the iteration until
 $|q_{n+1} - q_n|< 10^{-6}$.) We note that this approach is essentially
-the same as in the EM-algorithm from \cite{Tang2005}, but combining
-the expectation and maximization steps. In addition, although
-maximizing \eqref{eq:logLadmixture} could also be handled using a
-Newton method as in \cite{Alexander2009}, this approach has the
-advantage that $q_n$'s are positive in all steps, and the sum of all
-entries in $q_n$ is always~1. Moreover, the iteration is
-computationally fast if only a small or moderat number of alleles is
-considered.
+the same as in the EM-algorithm from \cite{article}{Tang2005}, but combining
+the expectation and maximization steps, since we do not update
+allelefrequencies. In addition, although maximizing
+\eqref{eq:logLadmixture} could also be handled using a Newton method
+as in \cite{article}{Alexander2009}, this approach has the advantage that
+$q_n$'s are positive in all steps, and the sum of all entries in $q_n$
+is always~1. Moreover, the iteration is computationally fast if only a
+small or moderate number of alleles is considered.
 
 \subsection{The recent-admixture model}
 When mother and father of an individual come with their own vectors of
@@ -279,8 +303,8 @@ $f(q,q') = (f_k(q, q'))_{k=1,...,K}$ with (see
     \displaystyle\frac{(1-p_{mk})}{1-\beta_m(q')}, & \text{ if }g=0. \end{cases}
 \end{align}
 In our implementation, we iteratively compute
-$q_{n+1}^P = f(q_n^M, q_n^P)$ and
-$q_{n+1}^M = f(\tilde q_{n+1}^P, q_n^M)$ until convergence.
+$q_{n+1}^P = f(q_n^M, q_n^P)$ and $q_{n+1}^M = f(q_{n+1}^P, q_n^M)$
+until convergence.
 
 \subsection{Obtaining admixed individuals in silico}
 \label{S:insilico}
@@ -302,7 +326,7 @@ into one of seven categories. Writing up the ancestries of the four
 grand-parents {\it Mother of mother/father of mother$\times$mother of
   father/father of father}, we have the following distinguishable
 cases for second generation admixed individuals (the full list of all
-resulting 55 cases is given in the SI; note that \cite{Cheung2018}
+resulting 55 cases is given in the SI; note that \cite{article}{Cheung2018}
 come up with only 35 cases, since they do not distinguish between
 maternal and paternal ancestry, e.g.\ they count
 AFR/AFR$\times$EAS/EAS and AFR/EAS$\times$AFR/EAS as one case):
@@ -340,7 +364,7 @@ $1,...,K$. Then, for a non-admixed individual, we have
 $q_k^{\text{\sc true}} = 1$ for some $k$, and for an admixed
 individual with parents from populations $k$ and $k'$ we have
 $q_k^{\text{\sc true}} =q_{k'}^{\text{\sc true}} = 0.5$, and similarly
-for individuals with grandparents from three or four different
+for individuals with grandparents from two up to four different
 populations. Computing the estimation error, i.e.\ the {\em distance
   to the true IA} for the admixture model, results in
 \begin{align}
@@ -361,14 +385,18 @@ hypothesis $H_0: q^M = q^P$ against $H_1: q^M\neq q^P$. For this, we
 take the estimators $\hat q$ of $q$ from iteration of
 \eqref{eq:fixed}, and $\hat q^M, \hat q^P$ of $q^M$ and $q^P$ from
 iteration of \eqref{eq:fixedRecent} and compute
-$\Delta\ell := \ell(\hat q^M, \hat q^P|G) - \ell(\hat q|G)$ with
+\begin{align}
+  \label{eq:DeltaEll}
+  \Delta\ell := \ell(\hat q^M, \hat q^P|G) - \ell(\hat q|G)
+\end{align}
+with
 $\ell(q^M, q^P|G)$ from \eqref{eq:logLrecentadmixture} and $\ell(q|G)$
 from \eqref{eq:logLadmixture}. If $\Delta \ell >x$ for some $x$ (which
 needs to be specified), the recent-admixture model fits significantly
 better and we reject $H_0$. If $\Delta \ell \leq x$, we accept
-$H_0$. In order to find $x$, we fix a $p$-value (1\%, say), and take
+$H_0$. In order to find $x$, we fix a $p$-value (0.01, say), and take
 $x$ to be the $p$-quantile of the empirical distribution for data in
-the reference database. (This means, if $p=1\%$ and the reference
+the reference database. (This means, if $p=0.01$ and the reference
 dataset contains 1000 samples, we compute all values for $\Delta\ell$
 for all samples, and set $x$ to be the 10th-smallest value we
 obtained.)
@@ -378,18 +406,18 @@ obtained.)
 \url{ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/release/20130502/}, as
 well as information on the sampling locations from
 \url{ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/release/20130502/integrated_call_samples_v3.20130502.ALL.panel}
-\cite{Auton2015}. This is data from 661 individuals from Africa (AFR),
+\cite{article}{Auton2015}. This is data from 661 individuals from Africa (AFR),
 347 Admixed Americans (AMR), 504 East Asians (EAS), 503 Europeans
 (EUR) and 489 South Asians (SAS). The dataset comes with approximately
 80 million SNPs. However, we use only a few of them known as the
-EUROFORGEN AIMset \cite{Phillips2014} and Kidd AIMset \cite{Kidd2014},
+EUROFORGEN AIMset \cite{article}{Phillips2014} and Kidd AIMset \cite{article}{Kidd2014},
 respectively. The former comes with 128 SNPs, and we ignore seven
 tri-allelic SNPs (rs17287498, rs2069945, rs2184030, rs433342,
 rs4540055, rs5030240, rs12402499), since our methods currently rely on
 bi-allelic SNPs. It was designed to distinguish Africa, Europe, East
 Asia, Native America, and Oceania, but was shown to perform well on
 the 1000 genomes dataset, also for distinguishing South Asia, even
-when ignoring the tri-allelic SNPs \cite{Pfaffelhuber2019}.  The
+when ignoring the tri-allelic SNPs \cite{article}{Pfaffelhuber2019}.  The
 latter comes with 55 bi-allelic SNPs and was introduced as a global
 AIMset differentiating between 73 populations. We note that this
 AIMset is part of the Verogen MiSeq FGx™ Forensic Genomics Solution.
@@ -399,23 +427,23 @@ AIMset is part of the Verogen MiSeq FGx™ Forensic Genomics Solution.
 \subsection{Some showcases from simulations}
 We simulated genome-wide data from a sample, taken from a population
 genetic model with three islands, $A$, $B$ and $C$, using
-\cite{Kelleher2016}. Migration is such that only $A, B$ and $B, C$ are
+\cite{article}{Kelleher2016}. Migration is such that only $A, B$ and $B, C$ are
 connected, but not $A, C$. We used a migration rate of 10 diploid
 individuals per connected islands (in both directions) per
 generation. More precisely, we simulate a sample of 400 individuals
 per island, each with 20~recombining chromosomes, each with about
 2.5$\cdot 10^4$ SNPs. From these $\sim 5\cdot 10^5$ SNPs, we use the
-step-wise approach from \cite{Pfaffelhuber2019} to look for~10
+step-wise approach from \cite{article}{Pfaffelhuber2019} to look for~10
 Ancestry Informative Markers (AIMs). When using a naive Bayes approach
-as in {\sc snipper} \cite{Snipper2007}, this AIMset gives a vanishing
+as in {\sc snipper} \cite{article}{Snipper2007}, this AIMset gives a vanishing
 misclassification error for the task of classifying the 3$\times$400
 simulated, non-admixed individuals.
 
 Subsequently, we used the admixture and recent-admixture model to
-estimate IA (and PIA) for both, non-admixed and recently admixed
-individuals. The latter were obtained as described in
-Section~\ref{S:insilico}. We observe that the admixture model fails to
-give accurate estimates for IA in $A\times C$-recently-admixed
+estimate IA (and PIA) for both, non-admixed and recently (first
+generation) admixed individuals. The latter were obtained as described
+in Section~\ref{S:insilico}. We observe that the admixture model fails
+to give accurate estimates for IA in $A\times C$-recently-admixed
 individuals for two reasons. First, it correctly predicts that the
 individual is $A\times C$-admixed, but overestimates one of the two
 ancestral proportions. Second, and more severely, it confounds the
@@ -433,9 +461,9 @@ true IAs. Figure~\ref{Sfig:sim3} displays these errors in all cases
 including non-admixed individuals, and all three cases of
 recent-admixture. Interestingly, binomial tests with the alternative
 that the recent-admixture model gives smaller errors show significant
-results in all but one case ($A, B, C$: $<0.002$,
-$A\times B, A\times C$: $<0.004$, $B\times C$: $0.23$). This shows
-that on average the recent-admixture model performs better thatn the
+results in all but one case ($A, C, A\times C$: $p<0.001$,
+$B: p=0.001$, $A\times B: p=0.004$, $B\times C$: $p=0.23$). This shows
+that on average the recent-admixture model performs better than the
 admixture model, even on non-admixed samples.
 
 \begin{figure}
@@ -545,7 +573,7 @@ admixture model, even on non-admixed samples.
     $A\leftrightarrow B$ and $B\leftrightarrow C$ exchange migrants
     (but not $A\not\leftrightarrow C$), admixture has two sources of
     errors when estimating IA for a recently admixed individual from
-    $A\times /C$. In individual~1, $C$ is overrepresented in the IA-vector
+    $A\times C$. In individual~1, $C$ is overrepresented in the IA-vector
     $q$. In individual~2, admixture gives the greatest fraction of
     ancestry to island $B$, since allele frequencies in $B$ are
     between $A$ and $C$. In both cases, the IA in terms of the
@@ -558,7 +586,7 @@ admixture model, even on non-admixed samples.
 For comparing the accuracy of the admixture and recent-admixture
 model, we extended our analysis of the simuated data to the 1000
 genomes dataset. We excluded all Admixed Americans (AMRs) since they
-are known to have an admixed background \cite{Eduardoff2016,
+are known to have an admixed background \cite{article}{Eduardoff2016,
   Pfaffelhuber2019} and do not form a well-defined own group. As the
 true IA, we use the continental origins as described in the dataset,
 i.e.\ we have AFR (African), EAS (East-Asia), EUR (European) and SAS
@@ -577,18 +605,20 @@ resulting errors for the admixture and recent-admixture model are
 almost identical. Overall, recent-admixture has a smaller error in
 1364 out of 2157 cases, i.e.\ th hypothesis that the error for
 recent-admixture is at least as large as for admixture can be rejected
-(binomial test, $p<10^{-34}$). In the second case,
-Figure~\ref{fig:mixed_cases_EUROFORGEN}(A) shows clearly that errors
-for recent-admixture are smaller for all pairs of continents. More
-precisely, in 2279 out of 3000 individuals, recent-admixture is more
-accurate ($p<10^{-186}$). Third, for second-generation admixed
-individuals, Figure~\ref{fig:mixed_cases_EUROFORGEN}(B) displays
-errors in the cases (A)--(G), and shows that again, recent-admixture
-is more accurate. Here, recent-admixture outperforms admixture in
-15761 out of 27500 cases (resulting in $p<10^{-130}$). A full list
-of~55 cases is displayed in Figure~\ref{fig:mixed_allcases_EUROFORGEN}
-in the SI. The corresponding results for the Kidd AIMset are similar
-and found in the SI.
+(binomial test, $p<0.001$. % $p<10^{-34}$).
+In the second case, Figure~\ref{fig:mixed_cases_EUROFORGEN}(A) shows
+clearly that errors for recent-admixture are smaller for all pairs of
+continents. More precisely, in 2279 out of 3000 individuals,
+recent-admixture is more accurate ($p<0.001$). % $p<10^{-186}$).
+Third, for second-generation admixed individuals,
+Figure~\ref{fig:mixed_cases_EUROFORGEN}(B) displays errors in the
+cases (A)--(G), and shows that again, recent-admixture is more
+accurate. Here, recent-admixture outperforms admixture in 15761 out of
+27500 cases (resulting in $p<0.001$) % $ p < 10^{-130}$).
+A full list of~55 cases is displayed in
+Figure~\ref{fig:mixed_allcases_EUROFORGEN} in the SI. The
+corresponding results for the Kidd AIMset are similar and found in the
+SI.
 
 \begin{figure*}[htb]
   \hspace{3cm} (A) \hspace{8cm} (B)
@@ -601,8 +631,7 @@ and found in the SI.
     admixed samples (A) and second generation admixed samples (B), we
     computed IA from the admixture and recent-admixture model. The
     distance to the true IA is computed as in \eqref{eq:error}. The
-    cases in (B) are as described above. xxx add $p$-values xxx put a
-    figure for the non-admixed scenario in the SI.}
+    cases in (B) are as described above. }
 \end{figure*}
 
 \subsection{Power of the Likelihood-ratio test for recent admixture}
@@ -612,9 +641,9 @@ obtain the power of the test for all cases of recent
 admixture. Displaying the false positives (i.e.\ positively tested
 non-admixed) against true positives (i.e.\ positively tested admixed)
 in cases (B)--(G) for all possible values of $p$, we obtain the
-Receiver-Operation-Characteristic (ROC) curve (xxx ref). The optimal
-curve nearly hits~0 false positives with~100\% true positives and has
-an AUC (Area Under the Curve) of~1. As we see in
+Receiver-Operation-Characteristic (ROC) curve \cite{article}{Fawcett2006}. The
+optimal curve nearly hits~0 false positives with~100\% true positives
+and has an AUC (Area Under the Curve) of~1. As we see in
 Figure~\ref{fig:ROC_EUROFORGEN}, the power of the test differs with
 the kind of admixture. For first generation admixed (case (B)), one
 non-admixed parent (case (E)) and all grand-parents from different
@@ -626,9 +655,9 @@ parents are (case (C)), power drops even more. In fact, the latter
 case is not recent-admixture as in our definition, since $q^M = q^P$
 should technically hold. For the overall performance of the test, we
 give some examples in Table~\ref{tab:power}, in particular the power
-at $p=1\%$ and AUC in all cases. Results for the EUROFORGEN AIMset are
-marginalle better than for the Kidd AIMset, which are given in the SI
-in Figure~\ref{fig:ROC_Kidd} and Table~\ref{tab:power_Kidd}.
+at $p=0.001$ and AUC in all cases. Results for the EUROFORGEN AIMset
+are marginally better than for the Kidd AIMset, which are given in the
+SI in Figure~\ref{fig:ROC_Kidd} and Table~\ref{tab:power_Kidd}.
 
 \begin{figure*}[htb]
   \begin{center}
@@ -646,12 +675,9 @@ in Figure~\ref{fig:ROC_Kidd} and Table~\ref{tab:power_Kidd}.
   \caption{Using the same data as in Figure~\ref{fig:ROC_EUROFORGEN},
     we e.g.\ see that the test for recent admixture turns out to have
     a $p$-value below~1\% in 94\% cases of first generation admixed
-    individuals. xxx add false positives to x-axis, add true positives
-    to y-axis.}
+    individuals.}
   \label{tab:power}
 \end{table}
-
-xxx compare with Tvedebrink
 
 \subsection{Recent admixture in the 1000 genomes dataset}
 From the 1000 genomes dataset, we highlight individuals which give
@@ -663,7 +689,7 @@ AIMsets. There are six Africans from population ASW (Americans from
 Southwest USA), and two from South Asia, one from GIH (Gujarati Indian
 from Houston, Texas) and one from BEB (Bengali from Bangladesh). We
 note that it is known that the ASW population is admixed
-\cite{Eduardoff2016}, but until now, it has not been tested if
+\cite{article}{Eduardoff2016}, but until now, it has not been tested if
 admixture is recent.
 
 \begin{itemize}
@@ -693,29 +719,38 @@ individuals, we examined local ancestry in the genome. xxx
   \input{outlier.tex}
   \caption{The most extreme individuals in the 1000 genomes dataset in
     terms of a signal for recent admixture. For all individuals, we
-    give IA from the admixture model (ad), given by $q$, the
-    recent-admixture model (r-ad)
-    $q^M, q^P, q^{MP} = \tfrac 12 (q^M + q^P)$, for the analysis with
-    the EUROFORGEN and Kidd AIMset. Difference in log-likelihoods for
-    both models is given by $\Delta\ell$. Colors are AFR
+    give IA from the admixture model (ad), given by $q$, and the
+    recent-admixture model (r-ad), given by
+    $q^{MP} = \tfrac 12 (q^M + q^P)$. In this case, we also give PIA,
+    given by $q^M, q^P$. We use both, the EUROFORGEN and Kidd
+    AIMset. Difference in log-likelihoods for both models is given by
+    $\Delta\ell$; see \eqref{eq:DeltaEll}. Colors are AFR
     \crule[red]{.5cm}{.3cm}, EAS \crule[blue]{.5cm}{.3cm}, EUR
-    \crule[green]{.5cm}{.3cm}, SAS \crule[yellow]{.5cm}{.3cm}.  xxx
-    explain $\Delta\ell$, order recent-admixture barplots.}
+    \crule[green]{.5cm}{.3cm}, SAS \crule[yellow]{.5cm}{.3cm}.  }
   \label{fig:1000r-ad}
 \end{figure}
 
 \subsection{Runtimes} 
-The result is that the analysis is fast. E.g.\ the
+The result is that the analysis is fast. In particular, it scales
+linearly with the number of analysed traces. E.g.\ once allele
+frequencies for all AIMs from the reference dataset are given,the
 $500\cdot 55 = 27500$ individuals which need to be analysed for
 Figure~\ref{fig:mixed_cases_EUROFORGEN}, and which are created in
-silico, takes about five hours on a standard laptop computer using the
-statistical language R.
-
+silico, takes about 1.5 seconds per individuals on a standard laptop
+computer using the statistical language R.
 
 \section{Discussion}
 xxx add references, write some more paragraphs
 
-xxx Mention \cite{Prestes2016}.
+xxx Mention \cite{article}{Prestes2016}.
+
+We only need allele frequencies. These could e.g. be looked up in
+Frog-kb. No full reference dataset is necessary.
+
+
+
+
+
 
 We address the inference of recent admixture in estimating individual
 admixture (IA), when data from Ancestry Informative Markers is
@@ -767,13 +802,16 @@ frequencies would mean that the trace can alter ancestral allelic
 frequencies.
 
 
-
-\bibliographystyle{chicago} \bibliography{BGA}
+\bibliographystyle{article}{plain}
+\bibliography{article}{BGA}{References}
+%\bibliographystyle{chicago} \bibliography{BGA}
 
 \newpage
 \setcounter{page}{1}
 \setcounter{section}{0}
 \setcounter{figure}{0}
+\setcounter{table}{0}
+\setcounter{equation}{0}
 \thispagestyle{empty}
 
 \begin{center}
@@ -795,41 +833,45 @@ frequencies.
 
 \renewcommand{\theequation}{S\arabic{equation}}
 \renewcommand{\thefigure}{S\arabic{figure}}
-\renewcommand{\thetable}{S\arabic{table}}s
+\renewcommand{\thetable}{S\arabic{table}}
 \renewcommand{\thesection}{S\arabic{section}}
 
 
 \section{Theory}
 We write down the admixture model and derive a method to estimate
 Individual Admixture (IA) in the case when allele frequencies within
-populations are not updated. In addition, we write down the
-recent-admixture model, where an individual is allowed to have parents
-with different admixture proportions. We take the following notation
-for the reference database:
+populations are not updated. In addition, we give the recent-admixture
+model, where an individual is allowed to have parents with different
+admixture proportions. We take the following notation for the
+reference database:
 \begin{align*}
   K: & \text{ number of ancestral populations,}
   \\ M: & \text{ number of markers,}
   \\ p_{mk}: & \text{ frequency of allele 1 at (bi-allelic) marker $m$ in population $k$.}
 \end{align*}
-In addition, we consider one additional diploid genome
-$(G_{m1}, G_{m2})_{m=1,...,M}$, or $(G_m)_{m=1,...,M}$ with
+In addition, we consider one additional diploid genome (called the
+trace) $(G_{m1}, G_{m2})_{m=1,...,M}$, or $(G_m)_{m=1,...,M}$ with
 $G_m = G_{m1} + G_{m2}$ if phase is not known. The goal is to estimate
 admixture proportions $(q_k)_{k=1,...,K}$ (or
 $(q^M_{k})_{k=1,...,K}, (q^P_{k})_{k=1,...,K}$) of this additional
-genome.
+genome.  Recall that we take the approach from
+\cite{SI}{Chakraborty1986} and \cite{SI}{Hanis1986} and do
+not update $p_{mk}$'s during the analysis.
 
 \subsection{The admixture model}
-In Tang et al (2005) and elsewhere, the main goal is to maximize the
-log-likelihood (see also (1) and (2) of Tang et~al)
-$$ \ell(q|G) = \sum_{m=1}^M \sum_{a=1,2} \log\Big(\sum_{k=1}^K \alpha_{mak}q_k\Big),$$
+In \cite{SI}{Alexander2009}, \cite{SI}{Pritchard2000},
+\cite{SI}{Tang2005} and elsewhere, the main goal is to maximize the
+log-likelihood (see also (1) and (2) of \cite{SI}{Tang2005})
+\begin{align*}
+  \ell(q|G) = \sum_{m=1}^M \sum_{a=1,2} \log\Big(\sum_{k=1}^K \alpha_{mak}q_k\Big),  
+\end{align*}
 where
 $$\alpha_{mak} := \begin{cases} p_{mk}, & \text{ if }G_{ma}=1,\\ 1-p_{mk}, & \text{ if }G_{ma}=0.\end{cases}$$
 is the frequency of the observed allele in copy $a$ of marker $m$ in
 population $k$. (Note that $e^{\ell(q|G)}$ is the probabiltiy of
 observing $(G_{ma})_{m=1,...,M; a=1,2}$, if every allele is picked
-independently from population $k$with probability $q_k$.)
-
-Assuming that phase is not known, and with
+independently from population $k$with probability $q_k$.) Assuming
+that phase is not known, and with
 \begin{align}
   \label{eq:amkl}
   \alpha_{mkl}:= \alpha_{m1k}\alpha_{m2l} = \begin{cases}
@@ -839,9 +881,9 @@ Assuming that phase is not known, and with
     0, \end{cases}
 \end{align}
 note that the log-likelihood can as well be written as
-\begin{align}
+\begin{align*}
   \ell(q|G) = \sum_{m=1}^M \log\Big(\sum_{k,l=1}^K \alpha_{mkl}q_kq_l\Big).
-\end{align}
+\end{align*}
 We set $\beta_m(q) := \sum_{k=1}^K p_{mk}q_k$ and analyse the last sum
 by distinguishing the case $G_m=2$, where
 \begin{align*}
@@ -855,15 +897,16 @@ by distinguishing the case $G_m=2$, where
   & = \Big(1-\sum_{k=1}^kp_{mk}q_k\Big)^2 = (1-\beta_m(q))^2,
 \end{align*}
 such that
-\begin{align}
+\begin{align}  \label{Seq:lik}
   \ell(q|G) = \sum_{m=1}^M \log\Big(\binom{2}{G_m} \beta_m(q)^{G_m}(1-\beta_m(q))^{2-G_m}\Big)
 \end{align}
 
 \begin{lemma}\label{l1}
   The maximum of $q\mapsto \ell(q|G)$ under the constraint
   $\sum_{k=1}^K q_k = 1$ solves
-  \begin{align}\label{eq:0}\tag{$\ast$}
-    \frac{1}{M}\sum_{m=1}^M \sum_{l=1}^K \frac{\alpha_{mkl}q_l}{\sum_{k',l'=1}^K \alpha_{mk'l'}q_{k'}q_{l'}} = 1, \qquad k=1,...,K.
+  \begin{align}\label{eq:0}
+    \frac{1}{M}\sum_{m=1}^M \sum_{l=1}^K \frac{\alpha_{mkl}q_l}{\sum_{k',l'=1}^K
+    \alpha_{mk'l'}q_{k'}q_{l'}} = 1, \qquad k=1,...,K.
   \end{align}
 \end{lemma}
 
@@ -902,8 +945,8 @@ such that
     \begin{align*}
       \frac{1}{2M} \sum_{m=1}^M \Big(G_m \frac{p_{mk}}{\beta_m} + (2-G_m)\frac{1-p_{mk}}{1-\beta_m}\Big) = 1
     \end{align*}
-  \item In order to find a solution of \eqref{eq:0}, we reformulate as
-    the fixed point equation
+    In order to find a solution, we reformulate as the fixed point
+    equation
     \begin{align}\label{eqSI:fixed}
       q_k = f_k(q) \text{ for }f_k(q) =
       \frac{1}{2M} \sum_{m=1}^M \Big(G_m \frac{p_{mk}}{\beta_m} + (2-G_m)\frac{1-p_{mk}}{1-\beta_m}\Big)q_k,
@@ -914,29 +957,28 @@ such that
   \end{enumerate}
 \end{remark}
 
-\begin{proof}
+\begin{proof}[Proof of Lemma~\ref{l1}]
   We use the theory of Lagrange multipliers, since we need to maximize
-  $\ell$ over $q$ under the constraint $\sum_k q_k=1$.
-  Since
+  $\ell$ over $q$ under the constraint $\sum_k q_k=1$.  Since
   \begin{align*}
     \frac{\partial \ell(q|G)}{\partial q_k} & = \sum_{m=1}^M \sum_{l=1}^K \frac{\alpha_{mkl}q_l}{\sum_{k',l'=1}^K
                                               \alpha_{mk'l'}q_{k'}q_{l'}},
   \end{align*}
   we have to solve the system of equations
-  \begin{align}\label{eq:1}
+  \begin{align*}
     \lambda & = \sum_{m=1}^M \sum_{l=1}^K \frac{\alpha_{mkl}q_l}{\sum_{k',l'=1}^K \alpha_{mk'l'}q_{k'}q_{l'}}, \qquad k=1,...,K,
-    \\\label{eq:2}
+    \\
     1 & = \sum_{k=1}^K q_k.
-  \end{align}
-  It is easy to eliminate $\lambda$, since using \eqref{eq:2} gives
+  \end{align*}
+  It is easy to eliminate $\lambda$, since the last equation gives
   \begin{align*}
     \lambda & = \lambda \sum_{k=1}^K q_k = \sum_{m=1}^M \sum_{k,l=1}^K
               \frac{\alpha_{mkl}q_kq_l}{\sum_{k',l'=1}^K \alpha_{mk'l'}q_{k'}q_{l'}} = M.
   \end{align*}
   So, we are left with finding $q = (q_k)_{k=1,...,K}$ such that
-  \begin{align}\label{eq:1}
+  \begin{align*}
     \frac{1}{M}\sum_{m=1}^M \sum_{l=1}^K \frac{\alpha_{mkl}q_l}{\sum_{k',l'=1}^K \alpha_{mk'l'}q_{k'}q_{l'}} = 1, \qquad k=1,...,K.
-  \end{align}
+  \end{align*}
 \end{proof}
 
 
@@ -946,19 +988,14 @@ For the recent-admixture-version, we want to estimate
 $q^M=(q^M_{k})_{k=1,...,K}, q^P=(q^P_{k})_{k=1,...,K}$, where
 $q^M_{k}$ and $q^P_k$ are the fractions of the genomes of the mother
 and father, respectively, which come from population $k$.  This
-assumption implies that the log-likelihood changes to
+assumption implies that the log-likelihood is
 $$ \ell(q^M, q^P|G) = \sum_{m=1}^M  \log\Big(\sum_{k,l=1}^K \alpha_{mkl}q_{k}^M q_l^P\Big),$$
-where $\alpha_{mkl}$ is given as in \eqref{eq:amkl}.
-
-As is apparent from the log-Likelihood function, the recent-admixture
-model generalizes the admixture model. Put differently, choosing
+where $\alpha_{mkl}$ is given as in \eqref{eq:amkl}.  As is apparent
+from the log-Likelihood function, the recent-admixture model
+generalizes the admixture model. Put differently, choosing
 $q^M = q^P = q$ in the recent-admixture model gives the admixture
-model. This will later pave the way to write down a likelihood ratio
-test. With the Akaike Information Criterion, we vote for the
-recent-admixture model if the difference in the log-likelihood is at
-least $2\cdot 4 = 8.$
-
-We note that again, the log-likelihood can be written differently, 
+model. We note that again, the log-likelihood can be written
+differently,
 \begin{equation}
   \begin{aligned}\label{eqSI:logLrecentadmixture}
     \ell(q^M, q^P|G) & = \sum_{m=1}^M  \log\Big( 1_{G_m=2} \beta_m(q^M) \beta_m(q^P)
@@ -968,31 +1005,14 @@ We note that again, the log-likelihood can be written differently,
   \end{aligned}
 \end{equation}
 
-\begin{lemma}\label{l1}
-  The maximum of $q\mapsto \ell(q^P, q^M,G)$ under the constraint
-  $\sum_{k=1}^K q_k^M = \sum_{k=1}^K q_k^P = 1$ solves
-  \begin{align}\label{eq:0recent}\tag{$\ast$}
+\begin{lemma}\label{l2}
+  The maximum of $(q^M, q^P)\mapsto \ell(q^M, q^P,G)$ under the
+  constraint $\sum_{k=1}^K q_k^M = \sum_{k=1}^K q_k^P = 1$ solves
+  \begin{align}\label{eq:0recent}
     \frac{1}{M}\sum_{m=1}^M \sum_{l=1}^K  \frac{\alpha_{mkl}q_l^M}{\sum_{k',l'=1}^K \alpha_{mk'l'}q^M_{k'}q^P_{l'}}
     = \frac{1}{M}\sum_{m=1}^M \sum_{l=1}^K\frac{\alpha_{mkl}q_l^P}{\sum_{k',l'=1}^K \alpha_{mk'l'}q^P_{k'}q^M_{l'}} = 1, \qquad k=1,...,K.
   \end{align}
 \end{lemma}
-
-Again, we have a closer look at the left hand side of
-\eqref{eq:0recent}. For $\beta_m(q) := \sum_k p_{mk} q_k$, we have for
-$G_m=2$
-\begin{align*}
-  \sum_{l=1}^K  \frac{\alpha_{mkl}q_l^M}{\sum_{k',l'=1}^K \alpha_{mk'l'}q^M_{k'}q^P_{l'}}
-  &
-    = \frac{p_{mk} \beta_m(q^M)}{\beta_m(q^M)\beta_m(q^P)} = \frac{p_{mk}}{\beta_m(q^P)},
-    \intertext{for $G_m=1$}
-    \sum_{l=1}^K  \frac{\alpha_{mkl}q_l^M}{\sum_{k',l'=1}^K \alpha_{mk'l'}q^M_{k'}q^P_{l'}}
-  &
-    = \frac{p_{mk} (1-\beta_m(q^M)) + (1-p_{mk})\beta_m(q^M)}{\beta_m(q^M)(1-\beta_m(q^P)) + (1-\beta_m(q^M))\beta_m(q^P)}
-    \intertext{and for $G_m=0$}
-    \sum_{l=1}^K  \frac{\alpha_{mkl}q_l^M}{\sum_{k',l'=1}^K \alpha_{mk'l'}q^M_{k'}q^P_{l'}}
-  &
-    = \frac{(1-p_{mk})(1- \beta_m(q^M))}{(1-\beta_m(q^M))(1-\beta_m(q^P))} = \frac{1-p_{mk}}{1-\beta_m(q^P)}.
-\end{align*}
 
 % \begin{align*}
 %   & p_{mk}\Big(\frac{1-\beta_m(q^M)}{\beta_m(q^M)(1-\beta_m(q^P)) + (1-\beta_m(q^M))\beta_m(q^P)}
@@ -1010,10 +1030,26 @@ $G_m=2$
     i.e.\ if $(q^M, q^P)$ solve \eqref{eq:0recent}, another solution
     is given by $(q^P, q^M)$.
   \item Again, we can turn \eqref{eq:0recent} into fixed point
-    equations. Here, we suggest to iteratively compute
+    equations. To derive it, we again have a closer look at the left
+    hand side of \eqref{eq:0recent}. For
+    $\beta_m(q) := \sum_k p_{mk} q_k$, we have for $G_m=2$
+    \begin{align*}
+      \sum_{l=1}^K  \frac{\alpha_{mkl}q_l^M}{\sum_{k',l'=1}^K \alpha_{mk'l'}q^M_{k'}q^P_{l'}}
+      &
+        = \frac{p_{mk} \beta_m(q^M)}{\beta_m(q^M)\beta_m(q^P)} = \frac{p_{mk}}{\beta_m(q^P)},
+        \intertext{for $G_m=1$}
+        \sum_{l=1}^K  \frac{\alpha_{mkl}q_l^M}{\sum_{k',l'=1}^K \alpha_{mk'l'}q^M_{k'}q^P_{l'}}
+      &
+        = \frac{p_{mk} (1-\beta_m(q^M)) + (1-p_{mk})\beta_m(q^M)}{\beta_m(q^M)(1-\beta_m(q^P)) + (1-\beta_m(q^M))\beta_m(q^P)}
+        \intertext{and for $G_m=0$}
+        \sum_{l=1}^K  \frac{\alpha_{mkl}q_l^M}{\sum_{k',l'=1}^K \alpha_{mk'l'}q^M_{k'}q^P_{l'}}
+      &
+        = \frac{(1-p_{mk})(1- \beta_m(q^M))}{(1-\beta_m(q^M))(1-\beta_m(q^P))} = \frac{1-p_{mk}}{1-\beta_m(q^P)}.
+    \end{align*}
+    So, we suggest to iteratively compute
     \begin{align}\label{eqSI:fixedRecent}
       \tilde q^P & = f(q^M, q^P) \text{ and } \tilde q^M = f(\tilde q^P, q^M)
-                   \intertext{for $f(q, q') = (f_k(q, q'))_{k=1,...,K}$ with}
+                   \intertext{for $f(q, q') = (f_k(q, q'))_{k=1,...,K}$ with} \notag
                    f_k(q, q') & := \frac{1}{M}\sum_{m=1}^M \Big(1_{G_m=2} \frac{p_{mk}}{\beta_m(q')}
       \\ \notag & \qquad \qquad \qquad + 1_{G_m=1} \frac{(p_{mk} (1-\beta_m(q))
                   + (1-p_{mk})\beta_m(q))}{\beta_m(q)(1-\beta_m(q'))
@@ -1024,22 +1060,22 @@ $G_m=2$
   \end{enumerate}
 \end{remark}
 
-\begin{proof}
+\begin{proof}[Proof of Lemma~\ref{l2}]
   Again, we use Lagrange multipliers. Since
   \begin{align*}
-    \frac{\partial \ell(q^P, q^M|G)}{\partial q^P_k}
+    \frac{\partial \ell(q^M, q^P|G)}{\partial q^P_k}
     & = \sum_{m=1}^M \sum_l \frac{\alpha_{mak}q_l^M}{\sum_{k',l'} \alpha_{mk'l'}q^P_{k'}q^M_{k'}},
     \\
-    \frac{\partial \ell(q^P, q^M|G)}{\partial q^M_k}
+    \frac{\partial \ell(q^M, q^P|G)}{\partial q^M_k}
     & = \sum_{m=1}^M \sum_l \frac{\alpha_{mak}q_l^P}{\sum_{k',l'} \alpha_{mk'l'}q^P_{k'}q^M_{k'}},
   \end{align*}
   we have to solve the system of equations
-  \begin{align}\label{eq:1}
+  \begin{align*}
     \lambda & = \sum_{m=1}^M \sum_l \frac{\alpha_{mak}q_l^M}{\sum_{k',l'} \alpha_{mk'l'}q^P_{k'}q^M_{k'}}, \qquad k=1,...,K,\\
     \rho & = \sum_{m=1}^M \sum_l \frac{\alpha_{mak}q_l^P}{\sum_{k',l'} \alpha_{mk'l'}q^P_{k'}q^M_{k'}}, \qquad k=1,...,K,
-    \\\label{eq:2}
+    \\
     1 & = \sum_{k=1}^K q^P_k = \sum_{k=1}^K q^M_k.
-  \end{align}
+  \end{align*}
   It is easy to eliminate $\lambda$ and $\rho$, since
   \begin{align*}
     \lambda & = \lambda \sum_{k=1}^K q^P_k = \sum_{m=1}^M \sum_{k,l}
@@ -1049,17 +1085,11 @@ $G_m=2$
            \frac{\alpha_{mkl}q^P_kq_l^M}{\sum_{k',l'} \alpha_{mk'l'}q^P_{k'}q_{l'}^M} = M.    
   \end{align*}
   So, we are left with finding $q^P$ and $q^M$ such that
-  \begin{align}\label{eq:1}
+  \begin{align*}
     \frac{1}{M}\sum_{m=1}^M \frac{\alpha_{mkl}q_l^P}{\sum_{k',l'}^K \alpha_{mk'l'}q^P_{k'} q^M_{l'}} & = 1, \qquad k=1,...,K,
     \\ \frac{1}{M}\sum_{m=1}^M \frac{\alpha_{mkl}q_l^M}{\sum_{k',l'}^K \alpha_{mk'l'}q^P_{k'} q^M_{l'}} & = 1, \qquad k=1,...,K.
-  \end{align}
+  \end{align*}
 \end{proof}
-
-\section{Description of downloadable software}
-Our methods are based on R-scripts and are available via \url{
-  https://github.com/pfaffelh/recent-admixture}.
-
-xxx
 
 \newpage
 
@@ -1095,42 +1125,45 @@ cases, depending on the origin of the grand-parents.  When data from
 four populations (AFR, EAS, EUR, SAS; see below) is available, we have
 the following cases:
 \begin{itemize}
-\item[(A)] 4 non-admixed cases with IA 100:0: AFR/AFR$\times$AFR/AFR,
-  EAS/EAS$\times$EAS/EAS, \\ EUR/EUR$\times$EUR/EUR,
-  SAS/SAS$\times$SAS/SAS;
+\item[(A)] 4 non-admixed cases with IA 100:0: \\
+  AFR/AFR$\times$AFR/AFR, EAS/EAS$\times$EAS/EAS,
+  EUR/EUR$\times$EUR/EUR, SAS/SAS$\times$SAS/SAS;
 \item[(B)] 6 admixed cases with admixture ratio 50:50, where both
-  parents are non-admixed: AFR/AFR$\times$EAS/EAS,
-  AFR/AFR$\times$EUR/EUR, AFR/AFR$\times$SAS/SAS/EAS,
-  EAS$\times$EUR/EUR, EAS/EAS$\times$SAS/SAS, EUR/EUR$\times$SAS/SAS;
+  parents are non-admixed:\\
+  AFR/AFR$\times$EAS/EAS, AFR/AFR$\times$EUR/EUR,
+  AFR/AFR$\times$SAS/SAS, EAS/EAS$\times$EUR/EUR,
+  EAS/EAS$\times$SAS/SAS, EUR/EUR$\times$SAS/SAS;
 \item[(C)] 6 admixed cases with admixture ratio 50:50, where both
-  parents are admixed: AFR/EAS$\times$AFR/EAS, AFR/EUR$\times$AFR/EUR,
+  parents are admixed:\\
+  AFR/EAS$\times$AFR/EAS, AFR/EUR$\times$AFR/EUR,
   AFR/SAS$\times$AFR/SAS, EAS/EUR$\times$EAS/EUR,
-  EAS/SAS$\times$EAS/SAS, EUR/SAS/ EUR/SAS;
-\item[(D)] 12 admixed cases with admixture ratio 75:25:
-  AFR/AFR$\times$AFR/EAS, AFR/AFR$\times$AFR/EUR,
-  AFR/AFR$\times$AFR/SAS, EAS/EAS$\times$EAS/AFR,
-  EAS/EAS$\times$EAS/EUR, EAS/EAS$\times$EAS/SAS,
-  EUR/EUR$\times$EUR/AFR, EUR/EUR$\times$EUR/EAS,
-  EUR/EUR$\times$EUR/SAS, SAS/SAS$\times$SAS/AFR,
-  SAS/SAS$\times$SAS/EAS, SAS/SAS$\times$SAS/EUR;
+  EAS/SAS$\times$EAS/SAS, EUR/SAS$\times$EUR/SAS;
+\item[(D)] 12 admixed cases with admixture ratio 75:25:\\
+  AFR/AFR$\!\times$AFR/EAS, AFR/AFR$\times$AFR/EUR,
+  AFR/AFR$\!\times$AFR/SAS, EAS/EAS$\times$EAS/AFR,
+  EAS/EAS$\!\times$EAS/EUR, EAS/EAS$\times$EAS/SAS,
+  EUR/EUR$\!\times$EUR/AFR, EUR/EUR$\times$EUR/EAS,
+  EUR/EUR$\!\times$EUR/SAS, SAS/SAS$\times$SAS/AFR,
+  SAS/SAS$\!\times$SAS/EAS, SAS/SAS$\times$SAS/EUR;
 \item[(E)] 12 second generation admixed with admixture ratio 50:25:25,
-  where one parent is non-admixed: AFR/AFR$\times$EAS/EUR,
-  AFR/AFR$\times$EAS/SAS, AFR/AFR$\times$EUR/SAS,
-  EAS/EAS$\times$AFR/EUR, EAS/EAS$\times$AFR/SAS,
-  EAS/EAS$\times$EUR/SAS, EUR/EUR$\times$AFR/EAS,
-  EUR/EUR$\times$AFR/SAS, EUR/EUR$\times$EAS/SAS,
-  SAS/SAS$\times$AFR/EAS, SAS/SAS$\times$AFR/EUR,
-  SAS/SAS$\times$EAS/EUR;
+  where one parent is non-admixed:\\
+  AFR/AFR$\times$EAS/EUR, AFR/AFR$\times$EAS/SAS,
+  AFR/AFR$\times$EUR/SAS, EAS/EAS$\times$AFR/EUR,
+  EAS/EAS$\times$AFR/SAS, EAS/EAS$\times$EUR/SAS,
+  EUR/EUR$\times$AFR/EAS, EUR/EUR$\times$AFR/SAS,
+  EUR/EUR$\times$EAS/SAS, SAS/SAS$\times$AFR/EAS,
+  SAS/SAS$\times$AFR/EUR, SAS/SAS$\times$EAS/EUR;
 \item[(F)] 12 second generation admixed with admixture ratio 50:25:25,
-  where both parents are admixed: AFR/EAS$\times$AFR/EUR,
-  AFR/EAS$\times$AFR/SAS, AFR/EUR$\times$AFR/SAS,
-  EAS/AFR$\times$EAS/EUR, EAS/AFR$\times$EAS/SAS,
-  EAS/EUR$\times$EAS/SAS, EUR/AFR$\times$EUR/EAS,
-  EUR/AFR$\times$EUR/SAS, EUR/EAS$\times$EUR/SAS,
-  SAS/AFR$\times$SAS/EAS, SAS/AFR$\times$SAS/EUR,
-  SAS/EAS$\times$SAS/EUR;
+  where both parents are admixed:\\
+  AFR/EAS$\times$AFR/EUR, AFR/EAS$\times$AFR/SAS,
+  AFR/EUR$\times$AFR/SAS, EAS/AFR$\times$EAS/EUR,
+  EAS/AFR$\times$EAS/SAS, EAS/EUR$\times$EAS/SAS,
+  EUR/AFR$\times$EUR/EAS, EUR/AFR$\times$EUR/SAS,
+  EUR/EAS$\times$EUR/SAS, SAS/AFR$\times$SAS/EAS,
+  SAS/AFR$\times$SAS/EUR, SAS/EAS$\times$SAS/EUR;
 \item[(G)] 3 second generation admixed with admixture ratio
-  25:25:25:25: AFR/EAS$\times$EUR/SAS, AFR/EUR$\times$EAS/SAS,
+  25:25:25:25:\\
+  AFR/EAS$\times$EUR/SAS, AFR/EUR$\times$EAS/SAS,
   AFR/SAS$\times$EAS/EUR;
 \end{itemize}
 As can be seen in Figure~\ref{fig:mixed_allcases_EUROFORGEN}, the
@@ -1168,13 +1201,13 @@ For the Kidd AIMset, recent-admixture produces an error in the
 non-admixed samples (see also Figure~\ref{fig:nonmixed_Kidd}), which
 is smaller than the error for the admixture-model in 1394 out of 2157
 cases, so the hypothesis that the error is worse for recent-admixture
-can be rejected ($p<10^{-34}$). For first order admixed samples, 2381
-out of 3000 cases have a smaller error under recent-admixture (which
-gives $p<10^{-241}$); see also
-Figure~\ref{fig:mixed_cases_Kidd}.A. Last, for second-generation
-admixed individuals, recent-admixture is more accurate in 16116 out of
-27500 cases ($p<10^{-180}$); see also
-Figures~\ref{fig:mixed_cases_Kidd}.B and
+can be rejected ($p<0.001$). % $ p < 10^{-34}$).
+For first order admixed samples, 2381 out of 3000 cases have a smaller
+error under recent-admixture (which gives $p<0.001$; %$p<10^{-241}$);
+see also Figure~\ref{fig:mixed_cases_Kidd}.A. Last, for
+second-generation admixed individuals, recent-admixture is more
+accurate in 16116 out of 27500 cases ($p<0.001$); % $p<10^{-180}$);
+see also Figures~\ref{fig:mixed_cases_Kidd}.B and
 \ref{fig:mixed_allcases_Kidd}.
 
 \begin{figure}[H]
@@ -1226,6 +1259,9 @@ Figures~\ref{fig:mixed_cases_Kidd}.B and
     Kidd AIMset.}
   \label{fig:ROC_Kidd} 
 \end{figure}
+
+\bibliographystyle{SI}{plain}
+\bibliography{SI}{BGA}{References}
 
 \end{document}
 
