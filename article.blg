@@ -3,44 +3,44 @@ Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: article.aux
 The style file: plain.bst
 Database file #1: BGA.bib
-You've used 20 entries,
+You've used 21 entries,
             2118 wiz_defined-function locations,
-            645 strings with 8909 characters,
-and the built_in function-call counts, 9246 in all, are:
-= -- 885
-> -- 646
+            650 strings with 9030 characters,
+and the built_in function-call counts, 9529 in all, are:
+= -- 915
+> -- 659
 < -- 3
-+ -- 258
-- -- 236
-* -- 784
-:= -- 1584
-add.period$ -- 61
-call.type$ -- 20
-change.case$ -- 178
++ -- 263
+- -- 240
+* -- 802
+:= -- 1634
+add.period$ -- 64
+call.type$ -- 21
+change.case$ -- 183
 chr.to.int$ -- 0
-cite$ -- 20
-duplicate$ -- 263
-empty$ -- 535
-format.name$ -- 236
-if$ -- 1819
+cite$ -- 21
+duplicate$ -- 274
+empty$ -- 556
+format.name$ -- 240
+if$ -- 1876
 int.to.chr$ -- 0
-int.to.str$ -- 20
-missing$ -- 20
-newline$ -- 103
-num.names$ -- 40
-pop$ -- 145
+int.to.str$ -- 21
+missing$ -- 21
+newline$ -- 108
+num.names$ -- 42
+pop$ -- 148
 preamble$ -- 1
-purify$ -- 158
+purify$ -- 162
 quote$ -- 0
-skip$ -- 191
+skip$ -- 199
 stack$ -- 0
-substring$ -- 572
-swap$ -- 60
+substring$ -- 587
+swap$ -- 61
 text.length$ -- 3
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 80
+type$ -- 84
 warning$ -- 0
-while$ -- 79
-width$ -- 22
-write$ -- 224
+while$ -- 83
+width$ -- 23
+write$ -- 235

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.10.18)  2 DEC 2019 00:27
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.10.18)  15 JUL 2020 14:55
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -958,6 +958,9 @@ Package: ulem 2012/05/18
 Package: times 2005/04/12 PSNFSS-v9.2a (SPQR) 
 ) (./main.aux
 
+LaTeX Warning: Label `Sfig:sim2' multiply defined.
+
+
 LaTeX Warning: Label `Alexander2009' multiply defined.
 
 
@@ -975,26 +978,26 @@ LaTeX Warning: Label `Tang2005' multiply defined.
 )
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 85.
-LaTeX Font Info:    ... okay on input line 85.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 85.
-LaTeX Font Info:    ... okay on input line 85.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 85.
-LaTeX Font Info:    ... okay on input line 85.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 85.
-LaTeX Font Info:    ... okay on input line 85.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 85.
-LaTeX Font Info:    ... okay on input line 85.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 85.
-LaTeX Font Info:    ... okay on input line 85.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 85.
-LaTeX Font Info:    ... okay on input line 85.
-LaTeX Font Info:    Try loading font information for OT1+ptm on input line 85.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 89.
+LaTeX Font Info:    ... okay on input line 89.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 89.
+LaTeX Font Info:    ... okay on input line 89.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 89.
+LaTeX Font Info:    ... okay on input line 89.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 89.
+LaTeX Font Info:    ... okay on input line 89.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 89.
+LaTeX Font Info:    ... okay on input line 89.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 89.
+LaTeX Font Info:    ... okay on input line 89.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 89.
+LaTeX Font Info:    ... okay on input line 89.
+LaTeX Font Info:    Try loading font information for OT1+ptm on input line 89.
  (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1ptm.fd
 File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
 )
 \AtBeginShipoutBox=\box46
-Package hyperref Info: Link coloring OFF on input line 85.
+Package hyperref Info: Link coloring OFF on input line 89.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
@@ -1004,9 +1007,9 @@ Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
 \c@section@level=\count143
 )
-LaTeX Info: Redefining \ref on input line 85.
-LaTeX Info: Redefining \pageref on input line 85.
-LaTeX Info: Redefining \nameref on input line 85.
+LaTeX Info: Redefining \ref on input line 89.
+LaTeX Info: Redefining \pageref on input line 89.
+LaTeX Info: Redefining \nameref on input line 89.
 
 (./main.out) (./main.out)
 \@outlinefile=\write6
@@ -1047,110 +1050,121 @@ Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
 
 ABD: EveryShipout initializing macros
-LaTeX Font Info:    Try loading font information for U+msa on input line 94.
+LaTeX Font Info:    Try loading font information for U+msa on input line 98.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 94.
+LaTeX Font Info:    Try loading font information for U+msb on input line 98.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Try loading font information for U+wasy on input line 94.
+LaTeX Font Info:    Try loading font information for U+wasy on input line 98.
 
 (/usr/share/texlive/texmf-dist/tex/latex/wasysym/uwasy.fd
 File: uwasy.fd 2003/10/30 v2.0 Wasy-2 symbol font definitions
 )
-LaTeX Font Info:    Try loading font information for U+rsfs on input line 94.
+LaTeX Font Info:    Try loading font information for U+rsfs on input line 98.
 
 (/usr/share/texlive/texmf-dist/tex/latex/jknapltx/ursfs.fd
 File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
 )
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.95> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 106.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 110.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <17.28> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 131.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 135.
  [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2]
-LaTeX Font Info:    Try loading font information for OT1+pcr on input line 218.
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 244.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <14.4> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 240.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 266.
  [3] [4]
-Underfull \hbox (badness 2096) in paragraph at lines 338--340
+Underfull \hbox (badness 2096) in paragraph at lines 364--366
 []\OT1/ptm/m/n/12 6 ad-mixed cases with ad-mix-ture ra-tio 50:50, where both pa
 r-ents are ad-mixed, e.g.
  []
 
 
-Underfull \hbox (badness 3713) in paragraph at lines 344--346
+Underfull \hbox (badness 3713) in paragraph at lines 370--372
 []\OT1/ptm/m/n/12 12 ad-mixed with ad-mix-ture ra-tio 50:25:25, where both par-
 ents are ad-mixed, e.g.
  []
 
 [5]
-Underfull \hbox (badness 2941) in paragraph at lines 405--424
+Underfull \hbox (badness 2941) in paragraph at lines 431--450
 \OT1/ptm/m/n/12 We down-loaded 1000 Genomes data (phase 3) from []$\OT1/pcr/m/n
 /12 ftp : / / ftp . 1000genomes . ebi .
  []
 
 
-Underfull \hbox (badness 2772) in paragraph at lines 405--424
+Underfull \hbox (badness 2772) in paragraph at lines 431--450
 \OT1/pcr/m/n/12 ac . uk / vol1 / ftp / release / 20130502/$[]\OT1/ptm/m/n/12 , 
 as well as in-for-ma-tion on the sam-pling lo-
  []
 
-[6]
-Overfull \hbox (4.67644pt too wide) in paragraph at lines 474--474
+[6] [7]
+Overfull \hbox (4.67644pt too wide) in paragraph at lines 570--570
 \OML/cmm/m/it/12 q[]; q[]$ 
  []
 
 
-Overfull \hbox (4.67644pt too wide) in paragraph at lines 512--512
+Overfull \hbox (4.67644pt too wide) in paragraph at lines 570--570
 []\OML/cmm/m/it/12 ; []$ 
  []
 
+<abc_baryplot2.pdf, id=221, 433.62pt x 433.62pt>
+File: abc_baryplot2.pdf Graphic file (type pdf)
+<use abc_baryplot2.pdf>
+Package pdftex.def Info: abc_baryplot2.pdf  used on input line 573.
+(pdftex.def)             Requested size: 145.11052pt x 145.11307pt.
+<abc_StructurePlot.pdf, id=222, 722.7pt x 433.62pt>
+File: abc_StructurePlot.pdf Graphic file (type pdf)
+<use abc_StructurePlot.pdf>
+Package pdftex.def Info: abc_StructurePlot.pdf  used on input line 594.
+(pdftex.def)             Requested size: 459.51051pt x 275.70955pt.
 
-Overfull \hbox (4.67644pt too wide) in paragraph at lines 550--550
-[]\OML/cmm/m/it/12 ; []$ 
+Overfull \hbox (24.18633pt too wide) in paragraph at lines 594--594
+[][] 
  []
 
-[7]
-<deviations_mixed_EUROFORGEN.pdf, id=223, 578.16pt x 433.62pt>
+[8 <./abc_baryplot2.pdf>]
+<deviations_mixed_EUROFORGEN.pdf, id=244, 578.16pt x 433.62pt>
 File: deviations_mixed_EUROFORGEN.pdf Graphic file (type pdf)
 <use deviations_mixed_EUROFORGEN.pdf>
-Package pdftex.def Info: deviations_mixed_EUROFORGEN.pdf  used on input line 62
-6.
+Package pdftex.def Info: deviations_mixed_EUROFORGEN.pdf  used on input line 75
+8.
 (pdftex.def)             Requested size: 217.6621pt x 163.24228pt.
-<deviations_mixed_cases_EUROFORGEN.pdf, id=224, 578.16pt x 578.16pt>
+<deviations_mixed_cases_EUROFORGEN.pdf, id=245, 578.16pt x 578.16pt>
 File: deviations_mixed_cases_EUROFORGEN.pdf Graphic file (type pdf)
 <use deviations_mixed_cases_EUROFORGEN.pdf>
 Package pdftex.def Info: deviations_mixed_cases_EUROFORGEN.pdf  used on input l
-ine 628.
+ine 760.
 (pdftex.def)             Requested size: 217.6621pt x 217.65637pt.
- [8]
-<roc-curve-EUROFORGENE.pdf, id=241, 433.62pt x 433.62pt>
+ [9 <./abc_StructurePlot.pdf>]
+<roc-curve-EUROFORGENE.pdf, id=266, 433.62pt x 433.62pt>
 File: roc-curve-EUROFORGENE.pdf Graphic file (type pdf)
 <use roc-curve-EUROFORGENE.pdf>
-Package pdftex.def Info: roc-curve-EUROFORGENE.pdf  used on input line 664.
+Package pdftex.def Info: roc-curve-EUROFORGENE.pdf  used on input line 796.
 (pdftex.def)             Requested size: 217.6621pt x 217.663pt.
- (./power_table_EUROFORGEN.tex) [9 <./deviations_mixed_EUROFORGEN.pdf> <./devia
+
+(./power_table_EUROFORGEN.tex) [10 <./deviations_mixed_EUROFORGEN.pdf> <./devia
 tions_mixed_cases_EUROFORGEN.pdf>]
-LaTeX Font Info:    Try loading font information for OMS+ptm on input line 696.
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 828.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omsptm.fd
 File: omsptm.fd 
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 696.
- (./outlier.tex
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 828.
+ [11 <./roc-curve-EUROFORGENE.pdf>] (./outlier.tex
 Overfull \hbox (4.67644pt too wide) in paragraph at lines 54--54
 \OML/cmm/m/it/12 q[]; q[]$ 
  []
@@ -1232,72 +1246,71 @@ Overfull \hbox (4.67644pt too wide) in paragraph at lines 431--431
 
 )
 
-LaTeX Warning: Float too large for page by 25.33669pt on input line 731.
+LaTeX Warning: Float too large for page by 25.33669pt on input line 863.
 
-[10 <./roc-curve-EUROFORGENE.pdf>] [11] (./article.bbl [12] [13]) [14]pdfTeX wa
-rning (ext4): destination with the same identifier (name{section.1}) has been a
-lready used, duplicate ignored
+[12] [13] (./article.bbl [14] [15]) [16]pdfTeX warning (ext4): destination with
+ the same identifier (name{section.1}) has been already used, duplicate ignored
+
 <to be read again> 
                    \relax 
-l.840 \section{Theory}
+l.972 \section{Theory}
                       pdfTeX warning (ext4): destination with the same identifi
 er (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.886 \end{align*}
-                   [1]
+l.1018 \end{align*}
+                    [1]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 904.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1036.
 pdfTeX warning (ext4): destination with the same identifier (name{page.2}) has 
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.943     \end{align*}
-                       [2]pdfTeX warning (ext4): destination with the same iden
-tifier (name{page.3}) has been already used, duplicate ignored
+l.1075     \end{align*}
+                        [2]pdfTeX warning (ext4): destination with the same ide
+ntifier (name{page.3}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.992 $$
-         \ell(q^M, q^P|G) = \sum_{m=1}^M  \log\Big(\sum_{k,l=1}^K \alpha_{mk...
+l.1124 $$
+          \ell(q^M, q^P|G) = \sum_{m=1}^M  \log\Big(\sum_{k,l=1}^K \alpha_{m...
 [3]pdfTeX warning (ext4): destination with the same identifier (name{page.4}) h
 as been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1059     \end{align}
+l.1191     \end{align}
                        [4]pdfTeX warning (ext4): destination with the same iden
 tifier (name{page.5}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1094 \newpage
+l.1226 \newpage
                 [5]pdfTeX warning (ext4): destination with the same identifier 
 (name{section.2}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1096 \section{Additional results}
+l.1228 \section{Additional results}
                                    pdfTeX warning (ext4): destination with the 
 same identifier (name{subsection.2.1}) has been already used, duplicate ignored
 
 <to be read again> 
                    \relax 
-l.1098 ...section{Some showcases from simulations}
+l.1230 ...section{Some showcases from simulations}
                                                   
-<abc_StructurePlot.pdf, id=341, 722.7pt x 433.62pt>
 File: abc_StructurePlot.pdf Graphic file (type pdf)
 <use abc_StructurePlot.pdf>
-Package pdftex.def Info: abc_StructurePlot.pdf  used on input line 1102.
+Package pdftex.def Info: abc_StructurePlot.pdf  used on input line 1234.
 (pdftex.def)             Requested size: 459.51051pt x 275.70955pt.
 
-Overfull \hbox (24.18633pt too wide) in paragraph at lines 1102--1102
+Overfull \hbox (24.18633pt too wide) in paragraph at lines 1234--1234
 [][] 
  []
 
-<deviations_abc.pdf, id=344, 867.24pt x 433.62pt>
+<deviations_abc.pdf, id=374, 867.24pt x 433.62pt>
 File: deviations_abc.pdf Graphic file (type pdf)
 <use deviations_abc.pdf>
-Package pdftex.def Info: deviations_abc.pdf  used on input line 1111.
+Package pdftex.def Info: deviations_abc.pdf  used on input line 1243.
 (pdftex.def)             Requested size: 314.39998pt x 157.20142pt.
 
-Overfull \hbox (72.55156pt too wide) in paragraph at lines 1111--1111
+Overfull \hbox (72.55156pt too wide) in paragraph at lines 1243--1243
 [][] 
  []
 
@@ -1305,43 +1318,43 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.6}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1118 \newpage
-                [6 <./abc_StructurePlot.pdf> <./deviations_abc.pdf>]pdfTeX warn
-ing (ext4): destination with the same identifier (name{subsection.2.2}) has bee
-n already used, duplicate ignored
+l.1250 \newpage
+                [6 <./deviations_abc.pdf>]pdfTeX warning (ext4): destination wi
+th the same identifier (name{subsection.2.2}) has been already used, duplicate 
+ignored
 <to be read again> 
                    \relax 
-l.1120 \subsection{Estimation accuracy}
+l.1252 \subsection{Estimation accuracy}
                                        
-<deviations_nonmixed_EUROFORGEN.pdf, id=365, 578.16pt x 433.62pt>
+<deviations_nonmixed_EUROFORGEN.pdf, id=390, 578.16pt x 433.62pt>
 File: deviations_nonmixed_EUROFORGEN.pdf Graphic file (type pdf)
 <use deviations_nonmixed_EUROFORGEN.pdf>
 Package pdftex.def Info: deviations_nonmixed_EUROFORGEN.pdf  used on input line
- 1180.
+ 1312.
 (pdftex.def)             Requested size: 217.6621pt x 163.24228pt.
 pdfTeX warning (ext4): destination with the same identifier (name{page.7}) has 
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1187 
+l.1319 
         [7]
-<deviations_mixed_allcases_EUROFORGEN.pdf, id=373, 2168.1pt x 578.16pt>
+<deviations_mixed_allcases_EUROFORGEN.pdf, id=399, 2168.1pt x 578.16pt>
 File: deviations_mixed_allcases_EUROFORGEN.pdf Graphic file (type pdf)
 <use deviations_mixed_allcases_EUROFORGEN.pdf>
 Package pdftex.def Info: deviations_mixed_allcases_EUROFORGEN.pdf  used on inpu
-t line 1191.
+t line 1323.
 (pdftex.def)             Requested size: 654.41338pt x 174.50797pt.
 
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 1193.
+(caption)                particular \caption on input line 1325.
 See the caption package documentation for explanation.
 
 pdfTeX warning (ext4): destination with the same identifier (name{page.8}) has 
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1197 \end{center}
+l.1329 \end{center}
                     [8 <./deviations_nonmixed_EUROFORGEN.pdf>]
 Overfull \vbox (6.0pt too high) has occurred while \output is active []
 
@@ -1349,50 +1362,50 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.9}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1197 \end{center}
+l.1329 \end{center}
                     [9 <./deviations_mixed_allcases_EUROFORGEN.pdf>]
-<deviations_nonmixed_Kidd.pdf, id=397, 578.16pt x 433.62pt>
+<deviations_nonmixed_Kidd.pdf, id=424, 578.16pt x 433.62pt>
 File: deviations_nonmixed_Kidd.pdf Graphic file (type pdf)
 <use deviations_nonmixed_Kidd.pdf>
-Package pdftex.def Info: deviations_nonmixed_Kidd.pdf  used on input line 1215.
+Package pdftex.def Info: deviations_nonmixed_Kidd.pdf  used on input line 1347.
 
 (pdftex.def)             Requested size: 217.6621pt x 163.24228pt.
-<deviations_mixed_Kidd.pdf, id=400, 578.16pt x 433.62pt>
+<deviations_mixed_Kidd.pdf, id=427, 578.16pt x 433.62pt>
 File: deviations_mixed_Kidd.pdf Graphic file (type pdf)
 <use deviations_mixed_Kidd.pdf>
-Package pdftex.def Info: deviations_mixed_Kidd.pdf  used on input line 1226.
+Package pdftex.def Info: deviations_mixed_Kidd.pdf  used on input line 1358.
 (pdftex.def)             Requested size: 217.6621pt x 163.24228pt.
-<deviations_mixed_cases_Kidd.pdf, id=401, 578.16pt x 578.16pt>
+<deviations_mixed_cases_Kidd.pdf, id=428, 578.16pt x 578.16pt>
 File: deviations_mixed_cases_Kidd.pdf Graphic file (type pdf)
 <use deviations_mixed_cases_Kidd.pdf>
-Package pdftex.def Info: deviations_mixed_cases_Kidd.pdf  used on input line 12
-28.
+Package pdftex.def Info: deviations_mixed_cases_Kidd.pdf  used on input line 13
+60.
 (pdftex.def)             Requested size: 217.6621pt x 217.65637pt.
 
 (./power_table_Kidd.tex)pdfTeX warning (ext4): destination with the same identi
 fier (name{page.10}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1241 
+l.1373 
         [10 <./deviations_nonmixed_Kidd.pdf> <./deviations_mixed_Kidd.pdf> <./d
 eviations_mixed_cases_Kidd.pdf>]
-<deviations_mixed_allcases_Kidd.pdf, id=430, 2168.1pt x 578.16pt>
+<deviations_mixed_allcases_Kidd.pdf, id=456, 2168.1pt x 578.16pt>
 File: deviations_mixed_allcases_Kidd.pdf Graphic file (type pdf)
 <use deviations_mixed_allcases_Kidd.pdf>
 Package pdftex.def Info: deviations_mixed_allcases_Kidd.pdf  used on input line
- 1245.
+ 1377.
 (pdftex.def)             Requested size: 654.41338pt x 174.50797pt.
 
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 1248.
+(caption)                particular \caption on input line 1380.
 See the caption package documentation for explanation.
 
 pdfTeX warning (ext4): destination with the same identifier (name{page.11}) has
  been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1252 \end{center}
+l.1384 \end{center}
                     [11]
 Overfull \vbox (6.0pt too high) has occurred while \output is active []
 
@@ -1400,12 +1413,12 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.12}) has
  been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1252 \end{center}
+l.1384 \end{center}
                     [12 <./deviations_mixed_allcases_Kidd.pdf>]
-<roc-curve-Kidd.pdf, id=446, 433.62pt x 433.62pt>
+<roc-curve-Kidd.pdf, id=471, 433.62pt x 433.62pt>
 File: roc-curve-Kidd.pdf Graphic file (type pdf)
 <use roc-curve-Kidd.pdf>
-Package pdftex.def Info: roc-curve-Kidd.pdf  used on input line 1256.
+Package pdftex.def Info: roc-curve-Kidd.pdf  used on input line 1388.
 (pdftex.def)             Requested size: 217.6621pt x 217.663pt.
  (./SI.bblpdfTeX warning (ext4): destination with the same identifier (name{cit
 e.Alexander2009}) has been already used, duplicate ignored
@@ -1436,30 +1449,30 @@ l.25 \bibitem{Tang2005}
 fier (name{page.13}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1266 \end{document}
+l.1398 \end{document}
                       [13 <./roc-curve-Kidd.pdf>]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1266.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1266.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1398.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1398.
  (./main.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1266.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1266.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1398.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1398.
 
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: B90C17098DAE41573254B36BB2B25C37;1474.
+(rerunfilecheck)             Checksum: 12917C19D4B150C31BD234DC048BB9D6;1554.
 
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1266.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1398.
  ) 
 Here is how much of TeX's memory you used:
- 18610 strings out of 492982
- 340015 string characters out of 6134895
- 461505 words of memory out of 5000000
- 21691 multiletter control sequences out of 15000+600000
+ 18671 strings out of 492982
+ 341174 string characters out of 6134895
+ 466073 words of memory out of 5000000
+ 21746 multiletter control sequences out of 15000+600000
  41110 words of font info for 96 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 55i,16n,54p,878b,639s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 55i,16n,68p,1035b,771s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist
@@ -1474,10 +1487,10 @@ exlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-di
 st/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/
 urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri
 8a.pfb>
-Output written on main.pdf (27 pages, 447584 bytes).
+Output written on main.pdf (29 pages, 489333 bytes).
 PDF statistics:
- 527 PDF objects out of 1000 (max. 8388607)
- 444 compressed objects within 5 object streams
- 93 named destinations out of 1000 (max. 500000)
- 241 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 553 PDF objects out of 1000 (max. 8388607)
+ 465 compressed objects within 5 object streams
+ 98 named destinations out of 1000 (max. 500000)
+ 254 words of extra memory for PDF output out of 10000 (max. 10000000)
 

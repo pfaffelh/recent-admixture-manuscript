@@ -120,11 +120,16 @@ H.~Tang, J.~Peng, P.~Wang, and N.~Risch.
   considerations.
 \newblock {\em Genet Epidemiol.}, 28:289--301, 2005.
 
-\bibitem{Tvedebrink2018a}
+\bibitem{Tvedebrink2019}
+T.~Tvedebrink and P.~S. Eriksen.
+\newblock Inference of admixed ancestry with ancestry informative markers.
+\newblock {\em Forensic Science International. Genetics}, 42:147--153, 2019.
+
+\bibitem{Tvedebrink2018}
 T.~Tvedebrink, P.~S. Eriksen, H.~S. Mogensen, and N.~Morling.
-\newblock Genogeographer -- a tool for genogeographic inference.
-\newblock {\em Forensic Science International: Genetics Supplement Series},
-  6:e463--e465, 2018a.
+\newblock Weight of the evidence of genetic investigations of ancestry
+  informative markers.
+\newblock {\em Theoretical Population Biology}, 120:1--10, 2018.
 
 \bibitem{Wahlund1928}
 S.~Wahlund.
