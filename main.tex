@@ -5,6 +5,10 @@
 \newbibliography{article}
 \newbibliography{SI}
 
+% Usage of multibbl:
+% bibtex artile
+% bibtex SI
+
 %\usepackage[sectionbib,numbers]{natbib}
 \usepackage{eurosym}
 \usepackage{float}
@@ -86,7 +90,7 @@
 \title{\LARGE Inference of recent admixture using genotype data}
 
 \author{\sc Peter Pfaffelhuber, Elisabeth Huss, Franz Baumdicker, \\
-  \sc Denise Syndercombe Court, Fabian Staubach}
+  \sc Sabine Lutz-Bonengel, Fabian Staubach}
 
 \date{\today}
 
@@ -134,15 +138,16 @@ markers is today a well-established research field in forensic
 genetics (see e.g.\ \cite{article}{Phillips2016, Eduardoff2016,
   Kidd2017}). Either the trace is classified into one of several
 groups of different origin (e.g.\ Africa, Europe, East Asia, Native
-America, and Oceania; see e.g.\ \cite{article}{Snipper2007, Pfaffelhuber2019},
-or it is assumed that it consists of a mixture of ancestral genetic
-material originating in several groups. For this task, {\sc structure}
-\cite{article}{Pritchard2000} has become the de-facto standard to estimate
-individual ancestry (IA) proportions of a trace among several
-continental groups. This Bayesian approach using MCMC was complemented
-by the faster, likelihood based approach, implemented in the software
-{\sc admixture} \cite{article}{Alexander2009}; see also \cite{article}{Tang2005} for the
-same model.
+America, and Oceania; see e.g.\ \cite{article}{Snipper2007,
+  Pfaffelhuber2019}, or it is assumed that it consists of a mixture of
+ancestral genetic material originating in several groups. For this
+task, {\sc structure} \cite{article}{Pritchard2000} has become the
+de-facto standard to estimate individual ancestry (IA) proportions of
+a trace among several continental groups. This Bayesian approach using
+MCMC was complemented by the faster, likelihood based approach,
+implemented in the software {\sc admixture}
+\cite{article}{Alexander2009}; see also \cite{article}{Tang2005} for
+the same model.
 
 When using {\sc structure} or {\sc admixture} for estimating
 continental (or other scales of geography) IA of a trace, allelic
@@ -166,45 +171,66 @@ probability for a heterozygote at the locus (due to the assumption of
 independence of allelic states in the admixture model).
 
 In general, {\sc structure} (and {\sc admixture}) are able to give
-accurate estimates of IA also in the case of recent-admixture.  As
-observed in \cite{article}{Cheung2018}, a newly developed Genetic Distance
-Algorithm preforms better than {\sc structure} for recently admixed
-individuals up to second generation only if all four grand-parents
-come from different populations. However, {\sc structure} may lead to
-wrong conclusions in some situations. E.g., it might happen that a
-individual, recently admixed from two distant populations, is
-estimated to come mainly from some intermediate location.
-{\color{blue} xxx Make a good case, e.g. Philippino and Italian
-  located in Afghanistan.}
+accurate estimates of IA also in the case of recent-admixture. As
+observed in \cite{article}{Cheung2018}, {\sc structure} outperforms a
+newly developed Genetic Distance Algorithm preforms in almost all
+cases of recent admixture (except for the case when all four
+grand-parents come from different populations). However, {\sc
+  structure} does not reveal all relevant information in the data in
+the case of recent admixture, since e.g.\ an IA of 50\% $A$ and 50\%
+$B$ either indicates two parents with these IAs or a recent admixture
+event of one individual from $A$ and one from $B$.
 
-Our goal is to make use of the Wahlund effect for (i) improving
-estimates of IA and (ii) detecting recent admixture.  In particular,
-we extend the likelihood-model behind {\sc structure} or {\sc
-  admixture} in order to account for recent admixture. In the
-resulting recent-admixture-model, IA consists of two vectors, one for
-each parent. We will call this pair of vectors Parental Individual
-Admixture, PIA. So, in the above example, the recent-admixture-model
-would estimate father and mother to have IAs as 100\% $A$ and 100\%
-$B$, respectively, due to the excess of heterozygotes.  Since we are
-using only autosomal markers, we cannot distinguish which of the
-parents comes from $A$ and $B$, though. Then, with the estimate of
-PIA, the estimated probability for a heterozygote is~1 in the example.
+Our goal is to be able to distinguish these cases by making use of the
+Wahlund effect, which will also result in better estimates of IA. So,
+we aim for (i) improving estimates of IA and (ii) detecting recent
+admixture. In particular, we extend the likelihood-model behind {\sc
+  structure} or {\sc admixture} in order to account for recent
+admixture. In the resulting recent-admixture-model, IA consists of two
+vectors, one for each parent. We will call this pair of vectors
+Parental Individual Admixture, PIA. So, in the above example, the
+recent-admixture-model would estimate father and mother to have IAs as
+100\% $A$ and 100\% $B$, respectively, due to the excess of
+heterozygotes.  Since we are using only autosomal markers, we cannot
+distinguish which of the parents comes from $A$ and $B$, though. Then,
+with the estimate of PIA, the estimated probability for a heterozygote
+is~1 in the example. Let us mention that in some occasions, {\sc
+  STRUCTURE} draws wrong conclusions on DNA of recently admixed
+individuals. We see in simulations, that a recently admixed from two
+distant populations is estimated to come mainly from some intermediate
+location.
 
 The excess of heterozygotes was recently used to detect recent
-admixture using statistical tests. For example, \cite{article}{McNevin2019}
-uses a statistical test by simply counting the number of heterozygous
-positions in an individual in order to infer recent admixture. A
-different approach is used by \cite{article}{Tvedebrink2018a,
-  Tvedebrink2018a}. Here, likelihood-ratio tests were developed which
-test the null-hypothesis of non-admixture and recent (first
-generation) admixture versus the alternative that the studied sample
-is not represented in the reference database. We complement this test
-by observing that the adxmixture model is a special case of the
-recent-admixture model, if the IA of both parents is the same. This
-paves the way to give a likelihood-ratio-test for recent admixture,
-with equality of the parental IAs as null-hypothesis. The alternative
-hypothesis, however, is that the studied sample shows recent admixture
-of populations within the reference database.
+admixture using statistical tests. For example,
+\cite{article}{McNevin2019} uses a statistical test by simply counting
+the number of heterozygous positions in an individual in order to
+infer recent admixture. A different approach is used by
+\cite{article}{Tvedebrink2018, Tvedebrink2019}. Here,
+likelihood-ratio tests were developed which test the null-hypothesis
+of non-admixture and recent (first generation) admixture versus the
+alternative that the studied sample is not represented in the
+reference database. We complement this test by observing that the
+adxmixture model is a special case of the recent-admixture model, if
+the IA of both parents is the same. This paves the way to give a
+likelihood-ratio-test for recent admixture, with equality of the
+parental IAs as null-hypothesis. The alternative hypothesis, however,
+is that the studied sample shows recent admixture of populations
+within the reference database.
+
+As a showcase, we present data from a (female) individual whose DNA
+was collected during a study in Freiburg, Germany. She self-reported
+to have a mother from Germany and a father from Germany and a mother
+from the Philippines. Here, when using a classification tool such as
+{\sc Snipper}, her DNA is classified as South-East-Asian (with
+reference samples from India, Pakistan etc). While the admixture model
+correctly estimates ancestral proportions from Europe, East-Asia and
+Oceania, the recent-admixture model clearly identifies a recently
+admixed genome. In addition, the mt-DNA xxx.
+
+
+
+
+
 
 
 \section{Materials and Methods}
@@ -262,14 +288,14 @@ This can be done numerically by iterating
 $q_{n+1} = (f_k(q_n))_{k=1,...,K}$ until convergence. (In our
 implementation, we continue the iteration until
 $|q_{n+1} - q_n|< 10^{-6}$.) We note that this approach is essentially
-the same as in the EM-algorithm from \cite{article}{Tang2005}, but combining
-the expectation and maximization steps, since we do not update
-allelefrequencies. In addition, although maximizing
+the same as in the EM-algorithm from \cite{article}{Tang2005}, but
+combining the expectation and maximization steps, since we do not
+update allele frequencies. In addition, although maximizing
 \eqref{eq:logLadmixture} could also be handled using a Newton method
-as in \cite{article}{Alexander2009}, this approach has the advantage that
-$q_n$'s are positive in all steps, and the sum of all entries in $q_n$
-is always~1. Moreover, the iteration is computationally fast if only a
-small or moderate number of alleles is considered.
+as in \cite{article}{Alexander2009}, this approach has the advantage
+that $q_n$'s are positive in all steps, and the sum of all entries in
+$q_n$ is always~1. Moreover, the iteration is computationally fast if
+only a small or moderate number of alleles is considered.
 
 \subsection{The recent-admixture model}
 When mother and father of an individual come with their own vectors of
@@ -401,7 +427,7 @@ dataset contains 1000 samples, we compute all values for $\Delta\ell$
 for all samples, and set $x$ to be the 10th-smallest value we
 obtained.)
 
-\subsection{Human data}
+\subsection{Reference data}
 \sloppy We downloaded 1000 Genomes data (phase 3) from
 \url{ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/release/20130502/}, as
 well as information on the sampling locations from
@@ -421,6 +447,8 @@ when ignoring the tri-allelic SNPs \cite{article}{Pfaffelhuber2019}.  The
 latter comes with 55 bi-allelic SNPs and was introduced as a global
 AIMset differentiating between 73 populations. We note that this
 AIMset is part of the Verogen MiSeq FGx™ Forensic Genomics Solution.
+
+\subsection{A sample from Freiburg xxx}
 
 \section{Results}
 
@@ -461,16 +489,33 @@ true IAs. Figure~\ref{Sfig:sim3} displays these errors in all cases
 including non-admixed individuals, and all three cases of
 recent-admixture. Interestingly, binomial tests with the alternative
 that the recent-admixture model gives smaller errors show significant
-results in all but one case ($A, C, A\times C$: $p<0.001$,
-$B: p=0.001$, $A\times B: p=0.004$, $B\times C$: $p=0.23$). This shows
-that on average the recent-admixture model performs better than the
-admixture model, even on non-admixed samples.
+results in all but one case ($A, B, A\times B, A\times C, B\times C$:
+$p<0.001$, $C: p=0.14$). This shows that on average the
+recent-admixture model performs better than the admixture model, even
+on non-admixed samples.
 
 \begin{figure}
-  \centering
-  % mixed A/C 177
-  \begin{tabular}{l|l|r|}\cline{2-3}
-    \rule[-3ex]{0cm}{7ex} & \parbox{1.8cm}{true}
+  \parbox[t]{0.2\textwidth}{  
+    \hspace{1cm} (A)
+
+  ~
+  
+  \begin{tikzpicture}[every node/.style={circle}]
+    \node[fill = blue, inner sep=.01cm] (n1) at (1,2.5)   {\color{white}$\;A\;\,$};
+    \node[fill = green, inner sep=.01cm] (n2) at (2,2.5) {$\;B\;\,$};
+    \node[fill = yellow, inner sep=.01cm] (n3) at (3,2.5) {$\;C\;\,$};
+    \foreach \from/\to in
+    {n1/n2,n2/n3}
+    \draw[<->] (\from) -- (\to);
+  \end{tikzpicture}
+  }   \parbox[t]{0.42\textwidth}{  
+    \hspace{2.8cm} (B)
+
+  ~
+
+  % seed 210, mixed A x C 202
+  \begin{tabular}{|l|r|}\hline
+    \rule[-3ex]{0cm}{7ex} \parbox{1.8cm}{true}
     \hspace{0cm} \parbox{1cm}{\hfill $q^{MP}$ \ $q^M, q^P$}
     & \parbox{2cm}{\begin{tikzpicture} 
         \draw[fill=blue] (0cm, 0cm) rectangle (1cm, .4cm);
@@ -492,95 +537,182 @@ admixture model, even on non-admixed samples.
     \end{tikzpicture}
     }
     \\ \hline\hline
-    \parbox{.3cm}{
-    \begin{sideways}
-      \phantom{a}1
-    \end{sideways}}
-    \rule[-1ex]{0cm}{4ex} & admixture \hspace{1cm} \parbox{.5cm}{$\hat q$ \\[-1.3ex] \mbox{}}
+    \rule[-1ex]{0cm}{4ex} admixture \hspace{1cm} \parbox{.5cm}{$\hat q$ \\[-1.3ex] \mbox{}}
     &  \begin{tikzpicture} 
-      \draw[fill=blue] (0cm, 0cm) rectangle (0.428cm, .4cm);
-      \draw[fill=green] (0.428cm, 0cm) rectangle (0.428cm, .4cm);
-      \draw[fill=yellow] (0.428cm, 0cm) rectangle (2cm, .4cm);
+      \draw[fill=blue] (0cm, 0cm) rectangle (0.334cm, .4cm);
+      \draw[fill=green] (0.334cm, 0cm) rectangle (1.632cm, .4cm);
+      \draw[fill=yellow] (1.632cm, 0cm) rectangle (2cm, .4cm);
       \draw[fill=black] (2cm, 0cm) rectangle (2cm, .4cm);
     \end{tikzpicture}
-    \\ \cline{2-3}
-    \parbox{.3cm}{
-    \begin{sideways}
-      \phantom{a}Individual
-    \end{sideways}}
-    \rule[-3ex]{0cm}{7ex} & \parbox{1.8cm}{recent-\\admixture}
+    \\ \hline
+    \rule[-3ex]{0cm}{7ex} \parbox{1.8cm}{recent-\\admixture}
     \hspace{0cm} \parbox{1cm}{\hfill $\hat q^{MP}$ \\[1ex]  $\hat q^M, \hat q^P$}
     & \parbox{2cm}{\begin{tikzpicture} 
-        \draw[fill=blue] (0cm, 0cm) rectangle (0.998cm, .4cm);
-        \draw[fill=green] (0.998cm, 0cm) rectangle (1cm, .4cm);
-        \draw[fill=yellow] (1cm, 0cm) rectangle (2cm, .4cm);
+        \draw[fill=blue] (0cm, 0cm) rectangle (0.848cm, .4cm);
+        \draw[fill=green] (0.848cm, 0cm) rectangle (1.208cm, .4cm);
+        \draw[fill=yellow] (1.208cm, 0cm) rectangle (2cm, .4cm);
         \draw[fill=black] (2cm, 0cm) rectangle (2cm, .4cm);
       \end{tikzpicture}
     \\[-1.3ex]\begin{tikzpicture} 
-      \draw[fill=blue] (0cm, 0cm) rectangle (1.998cm, .2cm);
-      \draw[fill=green] (1.998cm, 0cm) rectangle (2cm, .2cm);
+      \draw[fill=blue] (0cm, 0cm) rectangle (1.696cm, .2cm);
+      \draw[fill=green] (1.696cm, 0cm) rectangle (2cm, .2cm);
       \draw[fill=yellow] (2cm, 0cm) rectangle (2cm, .2cm);
       \draw[fill=black] (2cm, 0cm) rectangle (2cm, .2cm);
     \end{tikzpicture}
     \\[-2ex]\begin{tikzpicture} 
       \draw[fill=blue] (0cm, 0cm) rectangle (0cm, .2cm);
-      \draw[fill=green] (0cm, 0cm) rectangle (0cm, .2cm);
-      \draw[fill=yellow] (0cm, 0cm) rectangle (2cm, .2cm);
+      \draw[fill=green] (0cm, 0cm) rectangle (0.414cm, .2cm);
+      \draw[fill=yellow] (0.414cm, 0cm) rectangle (2cm, .2cm);
       \draw[fill=black] (2cm, 0cm) rectangle (2cm, .2cm);
     \end{tikzpicture}
     }\\ \hline
-    \hline
-    \parbox{.3cm}{
-    \begin{sideways}
-      \phantom{a}2
-    \end{sideways}}
-    \rule[-1ex]{0cm}{4ex} & admixture \hspace{1cm} \parbox{.5cm}{$\hat q$ \\[-1.3ex] \mbox{}}
-    & \begin{tikzpicture} 
-      \draw[fill=blue] (0cm, 0cm) rectangle (0.342cm, .4cm);
-      \draw[fill=green] (0.342cm, 0cm) rectangle (1.114cm, .4cm);
-      \draw[fill=yellow] (1.114cm, 0cm) rectangle (2cm, .4cm);
-      \draw[fill=black] (2cm, 0cm) rectangle (2cm, .4cm);
-    \end{tikzpicture}
-    \\ \cline{2-3}
-    \rule[-3ex]{0cm}{7ex}
-    \parbox{.3cm}{
-    \begin{sideways}
-      \phantom{a}Individual
-    \end{sideways}} & \parbox{1.8cm}{recent-\\admixture} \hspace{0cm}
-  \parbox{1cm}{\hfill $\hat q^{MP}$ \\[1ex] $\hat q^M, \hat q^P$} &
-  \parbox{2cm}{\begin{tikzpicture} \draw[fill=blue] (0cm, 0cm)
-      rectangle (0.882cm, .4cm); \draw[fill=green] (0.882cm, 0cm)
-      rectangle (1cm, .4cm); \draw[fill=yellow] (1cm, 0cm) rectangle
-      (2cm, .4cm); \draw[fill=black] (2cm, 0cm) rectangle (2cm, .4cm);
-    \end{tikzpicture}
-    \\[-1.3ex]\begin{tikzpicture} 
-      \draw[fill=blue] (0cm, 0cm) rectangle (1.764cm, .2cm);
-      \draw[fill=green] (1.764cm, 0cm) rectangle (2cm, .2cm);
-      \draw[fill=yellow] (2cm, 0cm) rectangle (2cm, .2cm);
-      \draw[fill=black] (2cm, 0cm) rectangle (2cm, .2cm);
-    \end{tikzpicture}
-    \\[-2ex]\begin{tikzpicture} 
-      \draw[fill=blue] (0cm, 0cm) rectangle (0cm, .2cm);
-      \draw[fill=green] (0cm, 0cm) rectangle (0cm, .2cm);
-      \draw[fill=yellow] (0cm, 0cm) rectangle (2cm, .2cm);
-      \draw[fill=black] (2cm, 0cm) rectangle (2cm, .2cm);
-    \end{tikzpicture}
-    }\\ \hline 
   \end{tabular}
-  \caption{Colors indicate IA from islands A \crule[blue]{.5cm}{.3cm},
-    B \crule[green]{.5cm}{.3cm} and C
-    \crule[yellow]{.5cm}{.3cm}. Here, in the model where only
-    $A\leftrightarrow B$ and $B\leftrightarrow C$ exchange migrants
-    (but not $A\not\leftrightarrow C$), admixture has two sources of
-    errors when estimating IA for a recently admixed individual from
-    $A\times C$. In individual~1, $C$ is overrepresented in the IA-vector
-    $q$. In individual~2, admixture gives the greatest fraction of
-    ancestry to island $B$, since allele frequencies in $B$ are
-    between $A$ and $C$. In both cases, the IA in terms of the
-    combined vector $q^{MP} = (q^M + q^P)/2$ from the recent-admixture
-    model gives more accurate estimates.}
+  }   \parbox[t]{0.32\textwidth}{  
+    \hspace{2cm}(C)
+
+  \includegraphics[width=0.3\textwidth]{abc_baryplot2.pdf}}
+  
+\caption{(A) Illustration of the population model for the
+  simulations. Islands $A, B$ and $B, C$ are connected trough 10
+  migrants per generation, but $A, C$ is not directly connected. (B)
+  When estimating IA and PIA, an $A\times C$ admixed individual is
+  found to have most of its ancestry in $B$ when using admixture,
+  since allele frequencies in $B$ are between $A$ and $C$.  However,
+  recent-admixture correctly predicts two parents of different
+  ancestry, one mostly $A$, the other mostly $C$. (C) When trying to
+  classify individuals into $A$, $B$ or $C$, blue dots correspond to
+  (non-admixed) individuals from $A$, yellow dots to $C$ and black
+  dots to $A\times C$ individuals. Altough all non-admixed individuals
+  are correctly assigned, admixed individuals are mostly not even
+  assigned to $A$ or $C$. The individual from (B) is indicated by the
+  arrow and is assigned to $B$ with probability almost 100\%.}
   \label{fig:sim1}
 \end{figure}
+
+\begin{figure}[H]
+  \begin{center}
+    \parbox[b]{0.9\textwidth}{\includegraphics[width=0.95\textwidth]{abc_StructurePlot.pdf}\vspace{-2cm}}
+  \end{center}
+  \caption{\label{Sfig:sim2} Structure barplot for all 400 recently
+    $A\times C$-admixed individuals. The arrow indicates the
+    individual from Figure~\ref{fig:sim1}(B).}
+\end{figure}
+
+% \begin{figure}
+%   \centering
+%   % mixed A/C 177
+%   \begin{tabular}{l|l|r|}\cline{2-3}
+%     \rule[-3ex]{0cm}{7ex} & \parbox{1.8cm}{true}
+%     \hspace{0cm} \parbox{1cm}{\hfill $q^{MP}$ \ $q^M, q^P$}
+%     & \parbox{2cm}{\begin{tikzpicture} 
+%         \draw[fill=blue] (0cm, 0cm) rectangle (1cm, .4cm);
+%         \draw[fill=green] (1cm, 0cm) rectangle (1cm, .4cm);
+%         \draw[fill=yellow] (1cm, 0cm) rectangle (2cm, .4cm);
+%         \draw[fill=black] (2cm, 0cm) rectangle (2cm, .4cm);
+%       \end{tikzpicture}
+%     \\[-1.3ex]\begin{tikzpicture} 
+%       \draw[fill=blue] (0cm, 0cm) rectangle (2cm, .2cm);
+%       \draw[fill=green] (2cm, 0cm) rectangle (2cm, .2cm);
+%       \draw[fill=yellow] (2cm, 0cm) rectangle (2cm, .2cm);
+%       \draw[fill=black] (2cm, 0cm) rectangle (2cm, .2cm);
+%     \end{tikzpicture}
+%     \\[-2ex]\begin{tikzpicture} 
+%       \draw[fill=blue] (0cm, 0cm) rectangle (0cm, .2cm);
+%       \draw[fill=green] (0cm, 0cm) rectangle (0cm, .2cm);
+%       \draw[fill=yellow] (0cm, 0cm) rectangle (2cm, .2cm);
+%       \draw[fill=black] (2cm, 0cm) rectangle (2cm, .2cm);
+%     \end{tikzpicture}
+%     }
+%     \\ \hline\hline
+%     \parbox{.3cm}{
+%     \begin{sideways}
+%       \phantom{a}1
+%     \end{sideways}}
+%     \rule[-1ex]{0cm}{4ex} & admixture \hspace{1cm} \parbox{.5cm}{$\hat q$ \\[-1.3ex] \mbox{}}
+%     &  \begin{tikzpicture} 
+%       \draw[fill=blue] (0cm, 0cm) rectangle (0.428cm, .4cm);
+%       \draw[fill=green] (0.428cm, 0cm) rectangle (0.428cm, .4cm);
+%       \draw[fill=yellow] (0.428cm, 0cm) rectangle (2cm, .4cm);
+%       \draw[fill=black] (2cm, 0cm) rectangle (2cm, .4cm);
+%     \end{tikzpicture}
+%     \\ \cline{2-3}
+%     \parbox{.3cm}{
+%     \begin{sideways}
+%       \phantom{a}Individual
+%     \end{sideways}}
+%     \rule[-3ex]{0cm}{7ex} & \parbox{1.8cm}{recent-\\admixture}
+%     \hspace{0cm} \parbox{1cm}{\hfill $\hat q^{MP}$ \\[1ex]  $\hat q^M, \hat q^P$}
+%     & \parbox{2cm}{\begin{tikzpicture} 
+%         \draw[fill=blue] (0cm, 0cm) rectangle (0.998cm, .4cm);
+%         \draw[fill=green] (0.998cm, 0cm) rectangle (1cm, .4cm);
+%         \draw[fill=yellow] (1cm, 0cm) rectangle (2cm, .4cm);
+%         \draw[fill=black] (2cm, 0cm) rectangle (2cm, .4cm);
+%       \end{tikzpicture}
+%     \\[-1.3ex]\begin{tikzpicture} 
+%       \draw[fill=blue] (0cm, 0cm) rectangle (1.998cm, .2cm);
+%       \draw[fill=green] (1.998cm, 0cm) rectangle (2cm, .2cm);
+%       \draw[fill=yellow] (2cm, 0cm) rectangle (2cm, .2cm);
+%       \draw[fill=black] (2cm, 0cm) rectangle (2cm, .2cm);
+%     \end{tikzpicture}
+%     \\[-2ex]\begin{tikzpicture} 
+%       \draw[fill=blue] (0cm, 0cm) rectangle (0cm, .2cm);
+%       \draw[fill=green] (0cm, 0cm) rectangle (0cm, .2cm);
+%       \draw[fill=yellow] (0cm, 0cm) rectangle (2cm, .2cm);
+%       \draw[fill=black] (2cm, 0cm) rectangle (2cm, .2cm);
+%     \end{tikzpicture}
+%     }\\ \hline
+%     \hline
+%     \parbox{.3cm}{
+%     \begin{sideways}
+%       \phantom{a}2
+%     \end{sideways}}
+%     \rule[-1ex]{0cm}{4ex} & admixture \hspace{1cm} \parbox{.5cm}{$\hat q$ \\[-1.3ex] \mbox{}}
+%     & \begin{tikzpicture} 
+%       \draw[fill=blue] (0cm, 0cm) rectangle (0.342cm, .4cm);
+%       \draw[fill=green] (0.342cm, 0cm) rectangle (1.114cm, .4cm);
+%       \draw[fill=yellow] (1.114cm, 0cm) rectangle (2cm, .4cm);
+%       \draw[fill=black] (2cm, 0cm) rectangle (2cm, .4cm);
+%     \end{tikzpicture}
+%     \\ \cline{2-3}
+%     \parbox{.3cm}{
+%     \begin{sideways}
+%       \phantom{a}Individual
+%     \end{sideways}} 
+%     \rule[-3ex]{0cm}{7ex}& \parbox{1.8cm}{recent-\\admixture} \hspace{0cm}
+%   \parbox{1cm}{\hfill $\hat q^{MP}$ \\[1ex] $\hat q^M, \hat q^P$} &
+%   \parbox{2cm}{\begin{tikzpicture} \draw[fill=blue] (0cm, 0cm)
+%       rectangle (0.882cm, .4cm); \draw[fill=green] (0.882cm, 0cm)
+%       rectangle (1cm, .4cm); \draw[fill=yellow] (1cm, 0cm) rectangle
+%       (2cm, .4cm); \draw[fill=black] (2cm, 0cm) rectangle (2cm, .4cm);
+%     \end{tikzpicture}
+%     \\[-1.3ex]\begin{tikzpicture} 
+%       \draw[fill=blue] (0cm, 0cm) rectangle (1.764cm, .2cm);
+%       \draw[fill=green] (1.764cm, 0cm) rectangle (2cm, .2cm);
+%       \draw[fill=yellow] (2cm, 0cm) rectangle (2cm, .2cm);
+%       \draw[fill=black] (2cm, 0cm) rectangle (2cm, .2cm);
+%     \end{tikzpicture}
+%     \\[-2ex]\begin{tikzpicture} 
+%       \draw[fill=blue] (0cm, 0cm) rectangle (0cm, .2cm);
+%       \draw[fill=green] (0cm, 0cm) rectangle (0cm, .2cm);
+%       \draw[fill=yellow] (0cm, 0cm) rectangle (2cm, .2cm);
+%       \draw[fill=black] (2cm, 0cm) rectangle (2cm, .2cm);
+%     \end{tikzpicture}
+%     }\\ \hline 
+%   \end{tabular}
+%   \caption{Colors indicate IA from islands A \crule[blue]{.5cm}{.3cm},
+%     B \crule[green]{.5cm}{.3cm} and C
+%     \crule[yellow]{.5cm}{.3cm}. Here, in the model where only
+%     $A\leftrightarrow B$ and $B\leftrightarrow C$ exchange migrants
+%     (but not $A\not\leftrightarrow C$), admixture has two sources of
+%     errors when estimating IA for a recently admixed individual from
+%     $A\times C$. In individual~1, $C$ is overrepresented in the IA-vector
+%     $q$. In individual~2, admixture gives the greatest fraction of
+%     ancestry to island $B$, since allele frequencies in $B$ are
+%     between $A$ and $C$. In both cases, the IA in terms of the
+%     combined vector $q^{MP} = (q^M + q^P)/2$ from the recent-admixture
+%     model gives more accurate estimates.}
+%   \label{fig:sim1}
+% \end{figure}
 
 \subsection{Estimation accuracy}
 For comparing the accuracy of the admixture and recent-admixture
