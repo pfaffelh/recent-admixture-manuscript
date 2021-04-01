@@ -1,0 +1,279 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{amstext,amsthm}
+\usepackage{amsmath}
+\usepackage{amssymb,mathtools}
+\usepackage[nointegrals]{wasysym} % enthaelt iint-Def die aber auch in amsmath definiert sind
+\usepackage{mathrsfs}
+% \usepackage{refcheck}
+\usepackage{graphicx}
+\usepackage[figuresleft]{rotating}
+\usepackage{rotating, float, caption}
+\newcommand{\dickm}[1]{\text{\boldmath ${#1}$}}
+
+
+\usepackage{tikz,color,a4wide,tabularx}
+\usetikzlibrary{shapes.geometric}
+%\usepackage{enumerate}
+
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{corollary}[proposition]{Corollary}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}[section]
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{remark}{Remark}[section]
+\newtheorem{example}{Example}[section]
+\newtheorem{estimator}{Estimator}[section]
+\pagestyle{headings}
+
+% \setlength{\bibsep}{0pt}
+
+\setlength{\textheight}{230mm}
+\setlength{\topmargin}{-15mm} 
+\setlength{\textwidth}{17cm} 
+\setlength{\oddsidemargin}{-3mm}
+\setlength{\columnseprule}{.1pt}
+\setlength{\columnsep}{20pt}
+
+\def\blstr{1.1}
+\renewcommand{\baselinestretch}{\blstr}
+\def\blstrtable{1.55}
+\def\blstrcode{1.2}  
+%\renewcommand{\labelenumi}{\alph{enumi})}
+%%\setlength{\oddsidemargin}{0.28in} 
+%%\setlength{\evensidemargin}{0.28in}
+
+%\addtolength{\bibsep}{1.5mm}
+%%\bibpunct{(}{)}{,}{a}{}{,}
+
+%%\RequirePackage{ae,mathpple}
+%%\renewcommand{\rmdefault}{ppl}
+%%\renewcommand{\sfdefault}{aess}
+%%\renewcommand{\ttdefault}{aett}
+\newcommand{\Rpackage}[1]{{\normalfont\fontseries{b}\selectfont #1}}
+
+%\usepackage{a4}
+\usepackage[normalem]{ulem}
+\usepackage{color}
+\newcommand\crule[3][black]{\textcolor{#1}{\rule{#2}{#3}}}
+
+\newcommand{\dirk}[3]{\textcolor{red}{\sout{#1}\textcolor{blue}{#2}}{\begin{marginpar}{\raggedright\color{red} Dirk:\tiny {#3}}\end{marginpar}}}
+\newcommand{\peter}[3]{\textcolor{red}{\sout{#1}\textcolor{blue}{#2}}{\begin{marginpar}{\raggedright\color{green} Peter:\tiny {#3}}\end{marginpar}}}
+
+
+\DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}
+\newcommand{\smallu}{\mathpzc{u}}
+\newcommand{\smallx}{\mathpzc{x}}
+\newcommand{\smally}{\mathpzc{y}}
+\newcommand{\smallz}{\mathpzc{z}}
+\newcommand{\ind}[1]{\mathbbm{1}_{\{#1\}}} %Definition Indikatorfunktion
+\newcommand{\indset}[1]{\mathbbm{1}_{#1}} %Definition Indikatorfunktion
+\providecommand{\abs}[1]{\lvert#1\rvert}
+\providecommand{\norm}[1]{\lVert#1\rVert}
+
+\usepackage{xcolor}
+\definecolor{colAMR}{RGB}{255,0,0}
+\definecolor{colAFR}{RGB}{255,191,0}
+\definecolor{colEUR}{RGB}{128,255,0}
+\definecolor{colEAS}{RGB}{255,0,191}
+\definecolor{colSAS}{RGB}{0,255,255}
+\definecolor{colMEA}{RGB}{0,64,255}
+\definecolor{colOCE}{RGB}{128,0,255}
+\definecolor{colSIB}{RGB}{0,255,64}
+
+
+
+\usepackage{times}
+%%\RequirePackage[T1]{fontenc}
+
+\begin{document}
+\title{\LARGE Answers to the issues raised by the referees on \\
+  Inference of recent admixture using genotype data}
+
+\maketitle
+
+\noindent We thank both reviewers for their careful reading of the
+manuscript. Below are some clarifications. New text in the manuscript as well as our answers below are in
+{\color{blue}blue}.
+
+\subsection*{Reviewer 1}
+\begin{enumerate}
+\item The paper claims to do a significance test, but this is not
+  apparent. And should be further justified. I believe this can be
+  done along the lines in the attached document.
+  \\
+  {\color{blue}Thanks for pushing us into this direction. We have now further studied the LR-statistics for recent admixture and are able to report $p$-values. As described in MatMet, we found out that doing this based on simulation was more appropriate than the asymptotic LR-theory you suggested.}
+\item Intro\\
+  p1 l8: ADMIXTURE should be succeeded by [8]. I guess.\\
+  p2 l20: [15,15]:=[15,25]\\
+  p2 l3,4: I am not acquainted with the word leverage. But probably OK.
+  \\ {\color{blue} Changed, and exchanged one instance of leverage.}
+\item
+  Mat and met\\
+  p3 l2: I would add the R-package LEA.  \\ {\color{blue}Done.}
+  Section 2.1\\
+  is unfriendly. It is a good practice to distinguish between vectors
+  and numbers - where vectors are typically in bold. In particular
+  $q_k$ vs $\dickm{q_n}$ should be distinguishable. But also
+  $\dickm{G}$, where I have a good guess of the meaning. \\
+  It is also a bit overconfident to claim that the maximum is reached
+  by the sketched algorithm. Do you prove that it converges? And in
+  case of convergence - can we rule out, that we reach a saddle
+  point/local maximum?  At least you need to argue, that you have some
+  empirical evidence supporting that the algorithm seems to work.  \\
+  {\color{blue}We refrain from using bold letters for vectors, since
+    this is (i) not standard in all fields and (ii) rather an
+    editorial decision. (Nothing is said about this in the authors
+    guidelines of FSI:G. If the editor decides this is the way to go,
+    we will alter our notation.)\\You are right, we have no formal proof of convergence to a global maximum. We spelled this out more carefully now. At least, in all our numerical examples,
+    convergence always happened.}
+\item
+  Section 2.4\\
+  (6): This is not a common way to evaluate the distance between
+  distributions. Usually Kullbach-Leibler or Brier is the choice. What
+  is the motivation for this particular choice? It should be explicit
+  that e.g $q_k$ is an estimate, typically by the notation $\hat q_k$. Which leads to my next point.
+  \\ {\color{blue} We use here the total variation distance, as e.g.\ Cheung et al (2019) did in [20]. Kullback-Leibler is not symmetric, hence not a metric. The $L^2$-distance usually referred to as Brier distance, could as well be used, but we do not see why larger differences should have bigger weights.}
+\item Why don’t you consider an information criterion? E.g AIC(Akaike). E.q for the admixture model $$ -2(\log(\hat q) - \log(q_{TRUE}))) + (K - 1)$$
+  and recent
+  $$-2(\log(\hat q^M, \hat q^P) - log(q^M_{TRUE}, q^P_{TRUE})) - 2(K - 1).$$
+  This is the standard way to compare models.
+  \\ {\color{blue} There are some things to discuss here; see also the next point. In particular, we make the point that the recent-admixture model as well gives an estimate of individual admixture, simply by averaging the individual admixture of the parents. Concerning model selection, we first show here that this averaging gives more precise estimates on average, although the number of parameters is the same as in the admixture model. Second, for model selection of individual traces, we argue below that AIC is too conservative and depends on the true $q$. We therefore use a $p$-value obtained by simulation in order to distinguish models; see the next point.}
+\item
+  Section 2.5\\
+  This is the Achilles heel of the paper. Later on you claim to do a test, which you clearly renounce on in this section. Why?? Standard asymptotic theory says that $-2 \log(\Delta \ell)$ has a chisquare  distribution with $(K-1)$ degrees of freedom. That should have been  investigated. E.g. by simulation. If the approximation is bad, there is still an alternative.  $-2 \log(\Delta \ell)$ is a sum of $M$ independent contributions, so it is an obvious alternative to do a Wald test.  \\ {\color{blue} Thanks for this comment. We now discussed the translation of likelihood-ratios to $p$-values in depth. Here is a summary what changed in the manuscript: As a matter of fact, the asymptotic theory you mention is too conservative, which would hence not give us any power to detect recent admixture. Therefore, we now resort to simulate $p$-values as follows: For a trace, we estimate $q$ and $(q^M, q^P)$, and simulate (under $H_0$) individuals with the estimated $q$ (which should be close to the true $q$). For these simulated individuals, we compute $\Delta\ell$ and compute the $p$-value as the frequency of values for $\Delta\ell$, which are greater than the value for the trace. (In fact, as described in the new text in Section 2.5, we report $p=1$ if $q^M$ and $q^P$ are too similar, and use another factor 2 in the reported frequency when computing the $p$-value.) As we show with simulations, this almost always leads to a conservative test (e.g.\ less than 5\% of individuals having a $p$-value less than $5\%$). We stress that this procedure also takes into account, that $\Delta\ell$ depends on (the true) $q$, which the asymptotic theory also does not account for. Figure S9 is new and shows the conservativity of the $p$-value in most cases.}
+\item Section 3\\
+  I am not confident with the conclusions. I would like to see analyses based on information criterion and significance tests and not arbitrary numbers.  E.g. in section 3.5, where “highly significant results” are reported. On p10 l9: “The likelihood ratio test indicates that ..”. What test? If you consider the logLRT test   statistic it seems to be 6.747? Which is insignificant in a chisquare with 3 degrees of freedom. Maybe this approximate distribution is inappropriate, but this really needs to be investigated.
+  \\  {\color{blue}See the answer to the last question above. }
+\item Section 3.3\\
+  I dont like the comparison of errors. A more general model is expected to have a lower error. Again, I would prefer e.g AIC.
+  \\
+  {\color{blue} Of course, a more general model should have a smaller error. However, the comparison here is different, since we combine $q^M$ and $q^P$ to their average in the recent-admixture model, so the number of parameters is in fact the same for both models. }
+\item   
+  Section 3.4\\
+  As described in MM??
+  \\ {\color{blue} Materials and Methods}
+\item Section S1\\
+  p1 l3: probabilitiy I was really annoyed by all the $\alpha$’s and would stick to the apparant model (S2), where I would be more
+  explicit and use $q\cdot p_m$ instead of $\beta_m(q)$. But maybe the
+  notation serves its right in the RA(recent admixed) model.
+  \\ {\color{blue}As the other reviewer noticed, there was some inconsistency in the $\alpha$'s, which we corrected. }
+  \item 
+  Section S2.1\\
+  Hard to evaluate. RA should perform better as it has $(K-1)$ more degrees of freedom. But is it a significantly better performance?
+  \\ {\color{blue} At least, the errors are smaller. We do not claim any significantly better performance here, but note that and how the admixture model can get things wrong in this example.}
+\end{enumerate}
+
+\subsection*{Reviewer 2}
+\begin{enumerate}
+\item The authors mention biogeographic ancestry (BGA) multiple times and present it as their main motivation for their work. However, it is nowhere explictly defined in the manuscript. The authors need to define what exactly they consider as their aim. Is it a classication problem with a predefined set of classes (i.e. ancestry groups) or is it a refined modelling of ancestry proportions from a given (or yet to be inferred) set of ancestry classes?
+  \\
+  {\color{blue} Correct. The second paragraph of the introduction was meant to discuss exactly this point. We rephrased the   corresponding sentences to make this even clearer. In addition, we added a sentence to the only instance of a classification task in the manuscript, which is in Section 3.1.}
+\item The mathematical apparatus is well developed, in sufficient detail and without any obvious mistakes. Given the readership of the journal, it may be helpful to move formulas (1)-(5) to the Supporting Information and instead give a non-technical description of the main ideas of both the 'admixture' approach and the 'recent-admixture' approach in the main text. Besides, it should be made clear that formula (1) refers to a haploid system (i.e. a  single chromosome), where (2) refers to the diploid genotypes of independent markers.
+  \\
+  {\color{blue} We have moved (1)--(5) to the SI, and rather give an informal explanation here.  \\
+  We added haploid versus diploid calculations in (1) and (2).}
+\item Minor issues with the mathematical notation are: (a) The side condition of $\sum_k^K q_k = 1$ should be mentioned with formula (1). (b) The notation of $\alpha_{mkl}$ in formula (S1) is confusing with the simulatenous use of $\alpha_{m1k}$ and $\alpha_{m2l}$. Perhaps using $\alpha^1_{mk}$ and $\alpha^2_{ml}$ would make the notation easier to read.
+  \\
+  {\color{blue} Ok, done.}
+\item Furthermore, the assumptions made for the modelling should be spelled explicitly out, both in the main text and the appendix. This includes the use of autosomal data only, random mating between individuals, no linkage disequilibrium between markers, but also homogeneity within ancestry groups; perhaps even more.
+  \\
+  {\color{blue} We added some sentences at the beginning of  Section~2.}
+\item The authors use a particular distance measure (section 3.2) to compare methods in their simulations. However, it is nowhere  introduced, just cited. Given the central role of this measure, the authors should introduce their quality measure explicitly in the manuscript and give an interpretation and examples for it.
+  \\
+  {\color{blue} We now cite [20] for this $L^1$-distance measure; see above (6).}
+\item A fundamental issue not with the mathematical approach of recent-admixture itself but its application and interpretation is the assumption of homogeneity within ancestry groups. The authors use Hardy-Weinberg proportions in their approach and interpret any deviation from it as evidence for past admixture between individuals
+  from different ancestry groups. However, the 1000 Genomes groups are
+  not necessarily so homogenic. At least the African (AFR) and South
+  Asian (SAS) groups feature substantial internal heterogeneity and
+  clinal allele frequency changes. The question is then if the
+  proposed method picks up effects of past admixture or just group
+  heterogeneity. This affects in particular the results presented in
+  Figure 2. Furthermore, the proposed method could actually infer
+  admixture where no admixture has taken place, i.e. result in
+  false-positive results, just due to internally heterogenous ancestry
+  groups. The authors need to discuss this and should also perform
+  simulations that can differentiate between these two effects.
+  \\
+  {\color{blue} In the new Section~3.5 we study hidden structure as a confounding factor. You are right that we basically use a deviation from Hardy-Weinberg in the LR test for recent admixture. However, the deviation is towards an excess of heterozygotes, while hidden structure (i.e.\ group heterogeneity) leads to an excess of homozygotes.)}
+\item A further issue that has not been appropriately addressed is the
+  choice of the number of ancestral groups ($K$). An inherent
+  limitation of the admixture model is the need to choose a value for
+  $K$ before the analysis. Since the true value is usually unknown,
+  this renders the application of the admixture model explorative. It
+  is unclear how misspecifications of $K$ affect the
+  'recent-admixture' model. The authors should either present
+  theoretical evidence that this is not an issue or perform
+  simulations that their approach is robust against the choice of $K$.
+  \\
+  {\color{blue} We stress that in our application, $K$ cannot be
+    chosen. The reason is that the reference database just has $K$
+    different origins of their samples. Since we are only dealing with
+    the analysis of a single {\em trace}, we are not doing a classical
+    analysis with {\sc STRUCTURE}. We added some lines and a reference
+    to the discussion.}
+\item The simulation results from section 3.1 are not very
+  convincing. The authors look at only 10 ancestry-informative
+  markers, while at the same time assuming a 'sky-rocketing' human
+  migration rate of 2.5\%. For a population of 10 millions, this would
+  imply a generational influx of 250,000 individuals. No wonder the
+  performance is rather poor. The authors should repeat this
+  simulation with more realistic, justified values.
+  \\
+  {\color{blue} Ok, there are some misunderstandings here. We take a
+    {\it sample} of 400 individuals per deme, where the actual
+    population size is way bigger. In fact, assuming a genome-wide
+    per-generation mutation rate of $\mu \approx 0.01$ (i.e.\ looking
+    only at a part of the human genome), we take
+    $\theta = 4N\mu = 1000$, leading to $N\approx 2.5\cdot 10^4$
+    (diploid) individuals. (This $\theta$ produces the amount of SNPs
+    reported in the paper.) So, the probability that a single
+    (diploid) individual migration in one generation is
+    $\approx 0.0004$. All this comes with the standard setting in
+    population genetics and coalescent theory. Note that the
+    classification task using the 10 AIMs found in this dataset
+    manages to classify all individuals correctly, which also
+    indicates that the migration rate is not too large. \\ We added
+    some explanations in the text.}
+\item In the Discussion (p.\  13), the authors claim that STRUCTURE would represent the gold-standard in BGA inference. This is simply
+  not true. Again, the authors are not clear if they pursue a
+  classification-like approach (categories) or the estimation of
+  ancestry proportions. These are two different concepts. The authors
+  need to clarify the aim of their manuscript.
+  \\
+  {\color{blue} We weakened the formulation {\em gold-standard} to {\em more sophisticated}. \\ We added the a discussion of the distinction between
+    (all-or-nothing) classifiers and mixed membership models. .}
+\item The authors distinguish between paternal and maternal ancestry
+  in their in silico data generation of admixed individuals (section
+  2.3 p. 4-5). Since the presented method considers only autosomal
+  data, it is not clear why this distinction is necessary. Please
+  clarify.
+  \\
+  {\color{blue}We added some explanatory lines to the text of Section~2.2. }
+
+\end{enumerate}
+
+\color{blue}
+\subsection*{Additional changes}
+While revising the text, we made the following changes the reviewers did not ask for:
+\begin{enumerate}
+    \item We redid the power analysis of the LR test, wich leads to the ROC curve in Figures 3 and S8. In the old version, the {\em false positives} on the $x$-axis were only non-admixed samples. However, for a fairer comparison of false versus true positives, we now compare recently admixed individuals (true positives, $y$-axis) to anciently admixed individuals with the same IA (false positives, $x$-axis).
+\item Since the newly reported $p$-values in total give eight results for the 1000 genomes dataset, we add all details for these individuals in the SI.
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
+
